@@ -18,6 +18,7 @@ CHANGELOG 30/03/2013 v1:
  Changelog Victor:
  -Ja estan corregits els bugs de actualizar/crear propietari.
  -Inmobles ja s'inserta be.
+ -Conceptes estan implementats,falta que es mostren be, i acabar de conectar amb la igu
  
  
  

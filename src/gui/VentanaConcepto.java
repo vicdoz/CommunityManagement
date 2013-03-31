@@ -191,7 +191,7 @@ public class VentanaConcepto extends javax.swing.JFrame {
 			
 		}else{		
 			if(editMode==1){
-				cAux.setCodigo(Integer.parseInt(codigo));
+				cAux.setCodigo(codigo);
 				cAux.setDescripcion(descripcion); 				
 				try {
 					ControladorConcepto.getControladorConcepto().actualizarConcepto(cAux);
@@ -204,7 +204,7 @@ public class VentanaConcepto extends javax.swing.JFrame {
 				VentanaFacturas.tablaConc.repaint();
 			}else{				
 				Concepto c = new Concepto();
-				c.setDescripcion(descripcion);	 c.setCodigo(Integer.parseInt(codigo));
+				c.setDescripcion(descripcion);	 c.setCodigo(codigo);
 				try {					
 					ControladorConcepto.getControladorConcepto().nuevoConcepto(c);
 					VentanaFacturas.modeloConc.addConcepto(c);
