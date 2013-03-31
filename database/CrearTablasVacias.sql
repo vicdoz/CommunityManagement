@@ -32,7 +32,7 @@ CREATE TABLE Propietario (
      , Poblacion CHAR(50)
      , Telefono CHAR(9)
      , Observaciones CHAR(50)
-     , FechaAlta DATE
+     , FechaAlta CHAR(20)
      , Entidad INTEGER
      , NumeroCuenta INTEGER
      , PRIMARY KEY (idPropietario)

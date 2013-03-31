@@ -1,0 +1,5 @@
+bin
+bin/
+hsqldb/*
+.project
+*.classpath
