@@ -75,12 +75,22 @@ public class VentanaInmuebleDetalle extends javax.swing.JFrame {
 		initGUI();
 	}
 	@SuppressWarnings("static-access")
+	public VentanaInmuebleDetalle(ModeloTablaInmueble mod,Comunidad c,Inmueble i) {
+		super();
+		this.modelo=mod;
+		initGUI();
+		comunidad=c;
+		InAux=i;
+	}
+	@SuppressWarnings("static-access")
 	public VentanaInmuebleDetalle(ModeloTablaInmueble mod,Comunidad c) {
 		super();
 		this.modelo=mod;
 		initGUI();
 		comunidad=c;
+	
 	}
+	
 	public VentanaInmuebleDetalle(int row, Inmueble i) {
 		super();
 		editMode=1;
@@ -92,7 +102,7 @@ public class VentanaInmuebleDetalle extends javax.swing.JFrame {
 		String idProp=i.getPropietario().getIdPropietario()+"";
 		String idCom=i.getComunidad().getIdComunidad()+"";
 		propTextField.setText(idProp);		ComTextField.setText(idCom);	
-		
+		InAux=i;
 		this.rowAux=row;
 	}
 
@@ -232,13 +242,15 @@ public class VentanaInmuebleDetalle extends javax.swing.JFrame {
 				javax.swing.JOptionPane.showMessageDialog(null, "Por favor introduzca un ID de Comunidad correcto");
 			}else{
 			
-				if(editMode==1){			
+				if(editMode==1){	
+					
 					InAux.setEscalera(Escalera); 	InAux.setPiso(Piso); 
 					InAux.setPuerta(Puerta);		InAux.setComunidad(comunidad);				
 					InAux.setComunidad(ControladorComunidad.getControladorComunidad().getComunidadPorId(idCom));
 					InAux.setPropietario(ControladorPropietario.getControladorPropietario().getPropietarioPorId(idProp));
 					
 					try {			
+						
 						ControladorInmueble.getControladorInmueble().actualizarInmueble(InAux);					
 						VentanaComunidad.modeloInm.updateRow(rowAux,InAux);		
 						VentanaComunidad.modeloInm.fireTableDataChanged();

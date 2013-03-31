@@ -76,4 +76,5 @@ public class ControladorInmueble implements InterfaceControladorInmueble  {
 	}
 
 
+
 }

@@ -7,12 +7,15 @@ TODO list:
 		- La comunitat no deu d'existir (comprobar NOM)		
 	
 BUGS:
-	- No es pot actualitzar un inmoble, falla al DAOHibernate.
-	- No es pot crear / actualitzar un propietari, falla la hora.
-	
+
 	
 CHANGELOG 30/03/2013 v1:
  - Modificats alguns recuperaX por getX
  - Creada la interfaç VentanaFacturas en la que es podrà donar d'alta Factures i conceptes
  - Creades les classes ModeloTablaFactura i ModeloTablaConcepto. 
+ 
+ Changelog Victor:
+ -Ja estan corregits els bugs de actualizar/crear propietari.
+ -Inmobles ja s'inserta be.
+ 
  
