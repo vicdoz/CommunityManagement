@@ -29,9 +29,17 @@ public class ControladorPropietario implements InterfaceControladorPropietario  
 
 	@Override
 	public void ActualizarPropietario(Propietario p) throws DAOExcepcion {
-		// TODO Auto-generated method stub	
-	}
-
+        // TODO Auto-generated method stub
+        this.miDaoPropietario = new PropietarioDAOHibernateImp();
+        try {
+                miDaoPropietario.actualizarPropietario(p);
+                int indexP = this.ListaPropietarios.indexOf(p);
+    			 this.ListaPropietarios.set(indexP, p);
+        } catch (Exception e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+        }
+	 }
 
 	@Override
 	public void BorrarPropietario(int clave) throws DAOExcepcion {
@@ -80,18 +88,7 @@ public class ControladorPropietario implements InterfaceControladorPropietario  
 			throw e;
 		}
 	}
-	 public void actualizarPropietario(Propietario p) throws DAOExcepcion {
-         // TODO Auto-generated method stub
-         this.miDaoPropietario = new PropietarioDAOHibernateImp();
-         try {
-                 miDaoPropietario.actualizarPropietario(p);
-                 int indexP = this.ListaPropietarios.indexOf(p);
-     			 this.ListaPropietarios.set(indexP, p);
-         } catch (Exception e) {
-                 // TODO Auto-generated catch block
-                 e.printStackTrace();
-         }
-	 }
+	
 	public void borrarPropietario(Propietario p) throws DAOExcepcion {
 		// TODO Auto-generated method stub
 		this.miDaoPropietario = new PropietarioDAOHibernateImp();
