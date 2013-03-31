@@ -76,7 +76,7 @@ public class VentanaConcepto extends javax.swing.JFrame {
 		this.rowAux=row;
 		editMode=1;
 		initGUI();		
-		//codTextField.setText(c.getCodigo());		
+		codTextField.setText(c.getCodigo());		
 		descEditorPane.setText(c.getDescipcion());
 		
 	}
