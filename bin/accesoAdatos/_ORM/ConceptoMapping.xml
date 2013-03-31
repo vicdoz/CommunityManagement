@@ -8,12 +8,5 @@
 		<column name="idConcepto" />
 		<generator class="increment" />
 	</id>
-	<set name="lineas">
-	<key column="idConcepto" />
-	<one-to-many class="negocio.LineaFactura" />
-	</set>
-
-	
-
 </class>
 </hibernate-mapping>

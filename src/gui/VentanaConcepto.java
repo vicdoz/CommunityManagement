@@ -77,14 +77,14 @@ public class VentanaConcepto extends javax.swing.JFrame {
 		editMode=1;
 		initGUI();		
 		//codTextField.setText(c.getCodigo());		
-		descEditorPane.setText(c.getDescripcion());
+		descEditorPane.setText(c.getDescipcion());
 		
 	}
 	
 	private void initGUI() {
 		try {
 			setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-			this.setTitle("Datos Propietario");
+			this.setTitle("Nuevo Concepto");
 			{
 				jContentPane = new JPanel();
 				BorderLayout jPanelLayout = new BorderLayout();
@@ -142,7 +142,7 @@ public class VentanaConcepto extends javax.swing.JFrame {
 									try {
 										guardarDatos();
 									} catch (InmuebleYaExiste e) {
-										System.out.println("Propietario ya existe, Exception in handler");
+										System.out.println("Concepto ya existe, Exception in handler");
 									}
 							}
 						});
@@ -191,17 +191,22 @@ public class VentanaConcepto extends javax.swing.JFrame {
 			
 		}else{		
 			if(editMode==1){
-				//cAux.setCodigo(codigo);
+				cAux.setCodigo(Integer.parseInt(codigo));
 				cAux.setDescripcion(descripcion); 				
-				//ControladorConcepto.getControladorConcepto().ActualizarConcepto(cAux);
+				try {
+					ControladorConcepto.getControladorConcepto().actualizarConcepto(cAux);
+				} catch (DAOExcepcion e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				VentanaFacturas.modeloConc.updateRow(rowAux,cAux);				
 				VentanaFacturas.tablaConc.setModel(VentanaFacturas.modeloConc);
 				VentanaFacturas.tablaConc.repaint();
 			}else{				
 				Concepto c = new Concepto();
-				c.setDescripcion(descripcion);	// c.setCodigo(codigo);
+				c.setDescripcion(descripcion);	 c.setCodigo(Integer.parseInt(codigo));
 				try {					
-					//ControladorConcepto.getControladorConcepto().NuevoConcepto(c);
+					ControladorConcepto.getControladorConcepto().nuevoConcepto(c);
 					VentanaFacturas.modeloConc.addConcepto(c);
 					
 				} catch (Exception e) {	

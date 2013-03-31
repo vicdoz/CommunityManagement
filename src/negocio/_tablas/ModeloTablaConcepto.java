@@ -63,16 +63,16 @@ public class ModeloTablaConcepto extends DefaultTableModel {
 		}
 		
 		public void updateRow(int row,Concepto c){			
-			this.setValueAt(c.getidConcepto(), row, 1);			
-			this.setValueAt(c.getDescripcion(), row, 2);						
+			this.setValueAt(c.getIdConcepto(), row, 1);			
+			this.setValueAt(c.getDescipcion(), row, 2);						
 			
 		}
 		@SuppressWarnings("unchecked")
 		public void addToTabla(Concepto c){
 			Vector v=new Vector();
-			v.add(c.getidConcepto());			v.add(c.getDescripcion());			
+			v.add(c.getIdConcepto());			v.add(c.getDescipcion());			
 						
-			System.out.println("Concepto:"+c.getidConcepto());
+			System.out.println("Concepto:"+c.getIdConcepto());
 			numConceptos++;
 			System.out.println("Fila nueva: "+v);
 			this.addRow(v);			

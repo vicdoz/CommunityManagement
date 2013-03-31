@@ -7,6 +7,7 @@ TODO list:
 		- La comunitat no deu d'existir (comprobar NOM)		
 	
 BUGS:
+- Conceptos que se insertan OK en la BD no se ven bien en la tabla(columnas movidas).
 
 	
 CHANGELOG 30/03/2013 v1:
@@ -17,5 +18,6 @@ CHANGELOG 30/03/2013 v1:
  Changelog Victor:
  -Ja estan corregits els bugs de actualizar/crear propietari.
  -Inmobles ja s'inserta be.
+ 
  
  

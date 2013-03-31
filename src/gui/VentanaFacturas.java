@@ -235,10 +235,10 @@ public class VentanaFacturas extends javax.swing.JFrame {
 										}else{
 											int rowSel = tablaConc.getSelectedRow();
 											Concepto  cAux=modeloConc.getConceptoPorPos(rowSel);
-											int op=OpcionesBorra(cAux.getidConcepto(),"Concepto");
+											int op=OpcionesBorra(cAux.getIdConcepto(),"Concepto");
 											if(op==0){
 												modeloConc.borraConceptoPorPos(tablaConc.getSelectedRow());
-												ChangeStatusBar(IN_BORRADO,cAux.getidConcepto(),null);
+												ChangeStatusBar(IN_BORRADO,cAux.getIdConcepto(),null);
 												
 											}
 										}
@@ -257,7 +257,7 @@ public class VentanaFacturas extends javax.swing.JFrame {
 										}else{
 											int rowSel = tablaConc.getSelectedRow();
 											Concepto cAux = modeloConc.getConceptoPorPos(rowSel);
-											System.out.println(cAux.getidConcepto());
+											System.out.println(cAux.getIdConcepto());
 											VentanaConcepto v=new VentanaConcepto(cAux,tablaConc.getSelectedRow());
 											v.setVisible(true);
 										}
