@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="negocio.Inmueble" table="Inmueble" schema="PUBLIC">
+
+	<id name="idInmueble" type="int">
+		<column name="idInmueble" />
+		<generator class="native" />
+	</id>
+	<property name="escalera" column="escalera"  />
+	<property name="piso" column="piso" />
+	<property name="puerta" column="puerta"  />
+	<property name="porcentaje" column="porcentaje" />	
+
+	<many-to-one name="propietario" class="negocio.Propietario" column="idPropietario"  />
+	<many-to-one name="comunidad"   class="negocio.Comunidad" 	column="idComunidad" />
+
+</class>
+</hibernate-mapping>

@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="negocio.NotaInformativa" table="NotaInformativa" schema="PUBLIC">
+	<id name="idNotaInformativa" type="int">
+		<column name="idNotaInformativa" />
+		<generator class="native" />
+	</id>
+	<set name="listarecibos">
+	<key column="idNotaInformativa" />
+	<one-to-many class="negocio.ReciboInmueble" />
+	</set>
+	<set name="listaFacturas">
+	<key column="idNotaInformativa" />
+	<one-to-many class="negocio.Factura" />
+	</set>
+
+	<many-to-one name="Comunidad" class="negocio.Comunidad" column="Comunidad" />
+	
+
+</class>
+</hibernate-mapping>

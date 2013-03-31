@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD 4.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="negocio.Propietario" table="Propietario" schema="PUBLIC">
+	<id name="idPropietario" type="int">
+		<column name="idPropietario" />
+		<generator class="native" />
+	</id>
+	<property name="nif" column="nif" />
+	<property name="nombre" column="nombre"  />
+	<property name="direccion" column="direccion" />
+	<property name="poblacion" column="poblacion"  />
+	<property name="telefono" column="telefono" />	
+	<property name="observaciones" column="observaciones"  />
+	<property name="fechaalta" column="fechaalta" />
+	<property name="entidad" column="entidad" />
+	<property name="numerocuenta" column="numerocuenta" />	
+	
+	<set name="listaInmuebles">
+		<key column="idPropietario"/>
+		<one-to-many class="negocio.Inmueble" />
+	</set>
+
+		
+
+</class>
+</hibernate-mapping>

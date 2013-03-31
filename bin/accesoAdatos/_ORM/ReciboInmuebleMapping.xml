@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="negocio.ReciboInmueble" table="ReciboInmueble" schema="PUBLIC">
+	<id name="idRecibo" type="int">
+		<column name="idRecibo" />
+		<generator class="native" />
+	</id>
+	<many-to-one name="NotaInformativa" class="negocio.NotaInformativa" column="NotaInformativa" />
+</class>
+</hibernate-mapping>

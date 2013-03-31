@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="negocio.Comunidad" table="Comunidad" schema="PUBLIC">
+		<id name="idComunidad" type="int">
+			<column name="idComunidad" />
+			<generator class="increment" />
+		</id>
+	
+	<property name="calle" column="calle" />
+	<property name="maxRecibosPendientes" column="maxRecibosPendientes"  />
+	<property name="estado" column="estado" />	
+	<property name="Nombre" column="nombre" />
+	<property name="poblacion" column="poblacion" />
+	
+
+		<set name="listaInmuebles"   >
+			<key column="idComunidad"   />
+			<one-to-many class="negocio.Inmueble" />
+		</set>
+
+</class>
+</hibernate-mapping>
