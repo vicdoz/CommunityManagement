@@ -1,0 +1,5 @@
+NOTAS:
+1.-Cambiar la ruta de hsqlsdb por la que corresponda.(Yo lo tengo en mi carpeta de la UPV/IDP/P7
+2.-La relacion presidente, es un atributo en la base de datos( de momento)
+3.-Hibernate
+	3.1:Un inmueble tiene 1 propietario:es un set?
