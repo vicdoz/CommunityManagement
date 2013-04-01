@@ -43,6 +43,7 @@ public class VentanaComunidad extends javax.swing.JFrame {
 	public static int IN_BORRADO=0, NO_FILA=0;
 	public static int IN_EXIS=1;
 	public static int GUARDA=4;
+	private JButton factButton;
 	private JMenuItem InmueblesTodos;
 	private JMenuItem InmueblesDeComunidad;
 	private JMenuItem InmueblesDePropietario;
@@ -197,6 +198,19 @@ public class VentanaComunidad extends javax.swing.JFrame {
 												
 											}
 										}
+									}
+								});
+							}
+							{
+								factButton = new JButton();
+								ComButtonPanel.add(factButton);
+								factButton.setText("Facturas");
+								factButton.addActionListener(new ActionListener() {
+									public void actionPerformed(ActionEvent evt) {
+										System.out.println("factButton.actionPerformed, event="+evt);
+										//TODO add your code for factButton.actionPerformed
+										VentanaFacturas vF = new VentanaFacturas();
+										vF.setVisible(true);
 									}
 								});
 							}

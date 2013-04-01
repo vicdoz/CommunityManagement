@@ -7,14 +7,16 @@ import java.util.Set;
 public class Factura {
 	private int idFactura;
 	private String fechaFactura;
+	private String CIF;
 	
 	private Set<LineaFactura> listaLineas = new HashSet<LineaFactura>();
 	private Comunidad comunidad;
 	private NotaInformativa notainformativa;
 	
 	public Factura(){}
-	public Factura(int numFactura, String fechaFactura) {
+	public Factura(String cif, int numFactura, String fechaFactura) {
 		super();
+		this.CIF = cif;
 		this.idFactura = numFactura;
 		this.fechaFactura = fechaFactura;
 	}
@@ -47,5 +49,11 @@ public class Factura {
 	}
 	public void setFechaFactura(String fechaFactura) {
 		this.fechaFactura = fechaFactura;
+	}
+	public void setCIF(String cIF) {
+		CIF = cIF;
+	}
+	public String getCIF() {
+		return CIF;
 	}
 }

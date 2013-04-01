@@ -47,13 +47,13 @@ public class ModeloTablaFactura extends DefaultTableModel {
 		public Factura getFacturaPorId(int id) {
 			Factura f=new Factura();
 			f = ControladorFactura.getControladorFactura().getFacturaPorId(id);
-			System.out.println("Inmueble con id: "+f.getidFactura()+" recuperado con exito");
+			System.out.println("Factura con id: "+f.getidFactura()+" recuperada con exito");
 			return f ;	
 		}
 		public Factura getFacturaPorPos(int row) {
 			Factura f=new Factura();
 			f = ControladorFactura.getControladorFactura().getFacturaPorPos(row);
-			System.out.println("Inmueble con id: "+f.getidFactura()+" recuperado con exito");
+			System.out.println("Factura con id: "+f.getidFactura()+" recuperada con exito");
 			return f ;
 		}
 		

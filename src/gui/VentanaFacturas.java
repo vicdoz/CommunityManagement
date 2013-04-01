@@ -15,6 +15,9 @@ import java.awt.event.WindowEvent;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
+
+import accesoAdatos._controladores.ControladorFactura;
+
 import java.util.*;
 
 
@@ -104,7 +107,7 @@ public class VentanaFacturas extends javax.swing.JFrame {
 				this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 				this.addWindowListener(new WindowAdapter() {
 					public void windowClosing(WindowEvent e) {
-						Salir();
+						if(Salir()==0)	dispose();
 					}
 				});
 				this.setResizable(true);
@@ -153,7 +156,10 @@ public class VentanaFacturas extends javax.swing.JFrame {
 								addFactButton.setName("addFactButton");
 								addFactButton.addActionListener(new ActionListener() {
 									public void actionPerformed(ActionEvent evt) {
-
+										System.out.println("addFactButton.actionPerformed, event="+evt);
+										//TODO add your code for addFactButton.actionPerformed
+										VentanaFacturaNueva v = new VentanaFacturaNueva();
+										v.setVisible(true);
 									}
 								});
 							}
@@ -165,6 +171,14 @@ public class VentanaFacturas extends javax.swing.JFrame {
 									public void actionPerformed(ActionEvent evt) {
 										System.out.println("editFactButton.actionPerformed, event="+evt);
 										//TODO add your code for editFactButton.actionPerformed
+										if(tablaFact.getRowCount()<1||tablaFact.getSelectedRow()==-1){
+											MuestraMensaje(NO_FILA);										
+										}else{
+											int rowSel = tablaFact.getSelectedRow();
+											Factura fAux = ControladorFactura.getControladorFactura().getFacturaPorPos(rowSel);
+											VentanaFacturaNueva v = new VentanaFacturaNueva(rowSel,fAux);
+											v.setVisible(true);
+										}
 									}
 								});
 							}
@@ -409,14 +423,14 @@ public class VentanaFacturas extends javax.swing.JFrame {
 		return n;
 	}
 	
-	public static void Salir() {
+	public static int Salir() {
 			Object[] options = {"Si", "No"};
 			int n = JOptionPane.showOptionDialog(
 			null, "¿Desea Salir?",
 			"Salir",
 			JOptionPane.YES_NO_CANCEL_OPTION,JOptionPane.QUESTION_MESSAGE,	null,
 			options,options[1]);
-			if(n == 0)		System.exit(0);
+			return n;
 	}
 	public static void MuestraMensaje(int tipo){
 		switch(tipo){

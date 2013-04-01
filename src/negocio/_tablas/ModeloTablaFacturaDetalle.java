@@ -16,11 +16,11 @@ public class ModeloTablaFacturaDetalle extends DefaultTableModel {
 			super(null,
 					new String[] {"Línea","Código Concepto", "Importe"});		
 			numLineas=0;
-			ArrayList<LineaFactura> listaLineas = ControladorLineaFactura.getControladorLineaFactura().GetListaLineaFactura();
+			/*ArrayList<LineaFactura> listaLineas = ControladorLineaFactura.getControladorLineaFactura().GetListaLineaFactura();
 			System.out.println("Tamaño lista"+listaLineas.size());
 			for(LineaFactura lF:listaLineas){						
 				this.addToTabla(lF);
-			}
+			}*/
 		}
 		@Override
 	    public boolean isCellEditable(int row, int column) { //De esta forma no se pueden editar las celdas.
