@@ -13,6 +13,9 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import javax.swing.*;
+
+import accesoAdatos._controladores.ControladorComunidad;
+
 import java.util.*;
 
 
@@ -43,7 +46,9 @@ public class VentanaComunidad extends javax.swing.JFrame {
 	public static int IN_BORRADO=0, NO_FILA=0;
 	public static int IN_EXIS=1;
 	public static int GUARDA=4;
-	private JButton factButton;
+	private JMenuItem ventanaFacturas;
+	private JMenu facturaMenu;
+	private JButton detalleButton;
 	private JMenuItem InmueblesTodos;
 	private JMenuItem InmueblesDeComunidad;
 	private JMenuItem InmueblesDePropietario;
@@ -202,15 +207,22 @@ public class VentanaComunidad extends javax.swing.JFrame {
 								});
 							}
 							{
-								factButton = new JButton();
-								ComButtonPanel.add(factButton);
-								factButton.setText("Facturas");
-								factButton.addActionListener(new ActionListener() {
+								detalleButton = new JButton();
+								ComButtonPanel.add(detalleButton);
+								detalleButton.setText("Detalle");
+								detalleButton.addActionListener(new ActionListener() {
 									public void actionPerformed(ActionEvent evt) {
-										System.out.println("factButton.actionPerformed, event="+evt);
-										//TODO add your code for factButton.actionPerformed
-										VentanaFacturas vF = new VentanaFacturas();
-										vF.setVisible(true);
+										System.out.println("detalleButton.actionPerformed, event="+evt);
+										//TODO add your code for detalleButton.actionPerformed										
+										
+										if(tablaCom.getRowCount()<1||tablaCom.getSelectedRow()==-1){
+											MuestraMensaje(NO_FILA);										
+										}else{
+											int selRow = tablaCom.getSelectedRow();
+											Comunidad c = ControladorComunidad.getControladorComunidad().getComunidadPorPos(selRow);											
+											modeloInm.cargaInmueblesComunidad(c);
+											jTabbedPane1.setSelectedIndex(2);
+										}
 									}
 								});
 							}
@@ -461,6 +473,24 @@ public class VentanaComunidad extends javax.swing.JFrame {
 									//TODO add your code for listaComunidades.actionPerformed
 									ReportComunidades report= new ReportComunidades();
 									report.muestraTodos();
+								}
+							});
+						}
+					}
+					{
+						facturaMenu = new JMenu();
+						jMenuBar1.add(facturaMenu);
+						facturaMenu.setText("Ver Facturas");
+						{
+							ventanaFacturas = new JMenuItem();
+							facturaMenu.add(ventanaFacturas);
+							ventanaFacturas.setText("Facturas Comunidad");
+							ventanaFacturas.addActionListener(new ActionListener() {
+								public void actionPerformed(ActionEvent evt) {
+									System.out.println("ventanaFacturas.actionPerformed, event="+evt);									
+									//TODO add your code for detalleButton.actionPerformed
+									VentanaFacturas vF = new VentanaFacturas();
+									vF.setVisible(true);
 								}
 							});
 						}

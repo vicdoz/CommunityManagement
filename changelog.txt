@@ -1,3 +1,6 @@
+CHANGELOG 02/04/2013-00:08h v2.02:
+ - Modificada la finestra Comunitats per a mostrar només els inmobles d'ixa comunitat.
+
 CHANGELOG 01/04/2013-18:44h v2.01:
  - VentanaFacturas ja afegix i modifica correctament Factures.
  - Creat Formulari per a crear i editar factures.
