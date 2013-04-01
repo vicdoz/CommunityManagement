@@ -98,14 +98,14 @@ public class EJEMPLO_COMPLETO {
 		
 		//Guardamos cambios en BD
 			cp.NuevoPropietario(p);
-			cc.nuevoConcepto(c);
-			cl.nuevoLineaFactura(l);
-			cc1.nuevaCarta(c1);
 			cm.nuevaComunidad(com);
 			ci.nuevoInmueble(i);
 			cni.nuevaNotaInformativa(ni);
-			cri.NuevoReciboInmueble(ri);
 			cf.nuevaFactura(f);
+			cl.nuevoLineaFactura(l);
+			cc1.nuevaCarta(c1);
+			cri.NuevoReciboInmueble(ri);
+		
 		System.out.println("Insertado correctamente");		
 	}
 }
