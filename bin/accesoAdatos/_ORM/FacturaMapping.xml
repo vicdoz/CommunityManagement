@@ -10,7 +10,7 @@
 	</id>
 
 	<set name="listaLineas">
-		<key column="idFactura" />
+		<key column="idLineaFactura" />
 		<one-to-many class="negocio.LineaFactura" />
 	</set>
 	<property name="fechaFactura" column="fechafactura" />

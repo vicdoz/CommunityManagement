@@ -111,7 +111,8 @@ CREATE TABLE ReciboInmueble (
  CREATE TRIGGER trigComunidad AFTER DELETE ON Comunidad 
     delete from inmueble where idcomunidad is null;
  
-
+ CREATE TRIGGER trigFactura AFTER DELETE ON Factura 
+    delete from LineaFactura where idFactura is null;
 
 
 
