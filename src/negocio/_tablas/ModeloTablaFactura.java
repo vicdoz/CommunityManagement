@@ -1,10 +1,12 @@
 package negocio._tablas;
+
 import negocio.*;
+import accesoAdatos._controladores.ControladorFactura;
+import excepciones.*;
 
 import java.util.*;
-
-import excepciones.*;
 import javax.swing.table.DefaultTableModel;
+
 
 @SuppressWarnings("serial")
 public class ModeloTablaFactura extends DefaultTableModel {
@@ -14,11 +16,11 @@ public class ModeloTablaFactura extends DefaultTableModel {
 			super(null,
 					new String[] {"ID","CIF", "Num Factura", "Fecha", "Importe","%IVA", "Total"});		
 			numFacturas=0;
-			/*ArrayList<Comunidad> listaComunidades = ControladorComunidad.getControladorComunidad().GetListaComunidades();
-			System.out.println("Tamaño lista"+listaComunidades.size());
-			for(Comunidad c:listaComunidades){						
-				this.addToTabla(c);
-			}*/
+			ArrayList<Factura> listaFacturas = ControladorFactura.getControladorFactura().GetListaFacturas();
+			System.out.println("Tamaño lista"+listaFacturas.size());
+			for(Factura f:listaFacturas){						
+				this.addToTabla(f);
+			}
 		}
 		@Override
 	    public boolean isCellEditable(int row, int column) { //De esta forma no se pueden editar las celdas.
@@ -32,30 +34,27 @@ public class ModeloTablaFactura extends DefaultTableModel {
 			return numFacturas;
 		}
 		public void borraFacturaPorPos(int row){
-			/*
 			try {
 				int id = Integer.parseInt(this.getValueAt(row, 0).toString());
 				System.out.println("Fila: "+row+" ID:"+id);
-				ControladorComunidad.getControladorComunidad().borrarComunidad(getComunidadPorId(id));
+				ControladorFactura.getControladorFactura().borrarFactura(getFacturaPorId(id));
 			} catch (DAOExcepcion e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-			}*/
+			}
 			this.removeRow(row);
 		}
 		public Factura getFacturaPorId(int id) {
 			Factura f=new Factura();
-			//c = ControladorComunidad.getControladorComunidad().getComunidadPorId(id);
-			//System.out.println("Inmueble con id: "+c.getIdComunidad()+" recuperado con exito");
-			return f ;
-	
+			f = ControladorFactura.getControladorFactura().getFacturaPorId(id);
+			System.out.println("Inmueble con id: "+f.getidFactura()+" recuperado con exito");
+			return f ;	
 		}
 		public Factura getFacturaPorPos(int row) {
 			Factura f=new Factura();
-			//c = ControladorComunidad.getControladorComunidad().getComunidadPorPos(row);
-			//System.out.println("Inmueble con id: "+c.getIdComunidad()+" recuperado con exito");
+			f = ControladorFactura.getControladorFactura().getFacturaPorPos(row);
+			System.out.println("Inmueble con id: "+f.getidFactura()+" recuperado con exito");
 			return f ;
-	
 		}
 		
 		public void updateRow(int row,Factura f){			
@@ -64,16 +63,16 @@ public class ModeloTablaFactura extends DefaultTableModel {
 			this.setValueAt(f.getFechaFactura(), row, 3);			
 			this.setValueAt("Importe", row, 4);			
 			this.setValueAt("%IVA", row, 5);			
-			this.setValueAt("Total", row, 6);
-			
+			this.setValueAt("Total", row, 6);			
 		}
+		
 		@SuppressWarnings("unchecked")
 		public void addToTabla(Factura f){
-			Vector v=new Vector();
+			Vector v=new Vector();			
 			//"ID","CIF", "Num Factura", "Fecha", "Importe","%IVA", "Total"
 			v.add(f.getidFactura());			v.add("CIF");			v.add("Num. Factura");
 			v.add(f.getFechaFactura());			v.add("Importe");		v.add("%IVA");	v.add("Total");				
-			
+		
 			System.out.println("Factura:"+f.getidFactura());
 			numFacturas++;
 			System.out.println("Fila nueva: "+v);

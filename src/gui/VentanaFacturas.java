@@ -13,6 +13,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 import java.util.*;
 
 
@@ -43,6 +45,12 @@ public class VentanaFacturas extends javax.swing.JFrame {
 	public static int IN_BORRADO=0, NO_FILA=0;
 	public static int IN_EXIS=1;
 	public static int GUARDA=4;
+	private JPanel facturaDetallePanel;
+	private JButton delLineaButton;
+	private JButton editLineaButton;
+	private JButton addLineaButton;
+	private JPanel detalleButtonPanel;
+	private JScrollPane detalleScrollPane;
 	private JMenuItem listaFacturaDetalle;
 	private JMenu listaFacturas;
 
@@ -66,9 +74,10 @@ public class VentanaFacturas extends javax.swing.JFrame {
 
 	public static JTable tablaFact;
 	public static JTable tablaConc;
-
+	public static JTable tablaFactDet;
 	public static ModeloTablaFactura modeloFact = new ModeloTablaFactura();
 	public static ModeloTablaConcepto modeloConc = new ModeloTablaConcepto();	
+	public static ModeloTablaFacturaDetalle modeloFactDet = new ModeloTablaFacturaDetalle();
 	
 	/**
 	* Auto-generated main method to display this JFrame
@@ -144,8 +153,7 @@ public class VentanaFacturas extends javax.swing.JFrame {
 								addFactButton.setName("addFactButton");
 								addFactButton.addActionListener(new ActionListener() {
 									public void actionPerformed(ActionEvent evt) {
-										VentanaFacturaDetalle v=new VentanaFacturaDetalle(); 
-										v.setVisible(true);
+
 									}
 								});
 							}
@@ -261,6 +269,66 @@ public class VentanaFacturas extends javax.swing.JFrame {
 											VentanaConcepto v=new VentanaConcepto(cAux,tablaConc.getSelectedRow());
 											v.setVisible(true);
 										}
+									}
+								});
+							}
+						}
+					}
+					{
+						facturaDetallePanel = new JPanel();
+						BorderLayout facturaDetallePanelLayout = new BorderLayout();
+						jTabbedPane1.addTab("Líneas", null, facturaDetallePanel, null);
+						facturaDetallePanel.setLayout(facturaDetallePanelLayout);
+						{
+							detalleScrollPane = new JScrollPane();
+							facturaDetallePanel.add(detalleScrollPane, BorderLayout.CENTER);
+							{
+								tablaFactDet = new JTable(modeloFactDet);
+								tablaFactDet.setModel(modeloFactDet);
+								detalleScrollPane.setViewportView(tablaFactDet);						
+								tablaFactDet.setFillsViewportHeight(true);
+								tablaFactDet.getColumnModel().getColumn(0).setMaxWidth(50);
+							}
+						}
+						{
+							detalleButtonPanel = new JPanel();
+							GridLayout detalleButtonPanelLayout = new GridLayout(6, 1);
+							detalleButtonPanelLayout.setHgap(5);
+							detalleButtonPanelLayout.setVgap(20);
+							detalleButtonPanelLayout.setColumns(1);
+							detalleButtonPanelLayout.setRows(6);
+							facturaDetallePanel.add(detalleButtonPanel, BorderLayout.EAST);
+							detalleButtonPanel.setLayout(detalleButtonPanelLayout);
+							{
+								addLineaButton = new JButton();
+								detalleButtonPanel.add(addLineaButton);
+								addLineaButton.setText("Nueva Linea");
+								addLineaButton.addActionListener(new ActionListener() {
+									public void actionPerformed(ActionEvent evt) {
+										System.out.println("addLineaButton.actionPerformed, event="+evt);
+										//TODO add your code for addLineaButton.actionPerformed
+									}
+								});
+							}
+							{
+								editLineaButton = new JButton();
+								detalleButtonPanel.add(editLineaButton);
+								editLineaButton.setText("Edita Linea");
+								editLineaButton.addActionListener(new ActionListener() {
+									public void actionPerformed(ActionEvent evt) {
+										System.out.println("editLineaButton.actionPerformed, event="+evt);
+										//TODO add your code for editLineaButton.actionPerformed
+									}
+								});
+							}
+							{
+								delLineaButton = new JButton();
+								detalleButtonPanel.add(delLineaButton);
+								delLineaButton.setText("Borrar Linea");
+								delLineaButton.addActionListener(new ActionListener() {
+									public void actionPerformed(ActionEvent evt) {
+										System.out.println("delLineaButton.actionPerformed, event="+evt);
+										//TODO add your code for delLineaButton.actionPerformed
 									}
 								});
 							}

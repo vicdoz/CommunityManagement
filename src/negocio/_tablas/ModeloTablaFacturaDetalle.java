@@ -6,6 +6,8 @@ import java.util.*;
 import excepciones.*;
 import javax.swing.table.DefaultTableModel;
 
+import accesoAdatos._controladores.ControladorLineaFactura;
+
 @SuppressWarnings("serial")
 public class ModeloTablaFacturaDetalle extends DefaultTableModel {
 		
@@ -14,41 +16,39 @@ public class ModeloTablaFacturaDetalle extends DefaultTableModel {
 			super(null,
 					new String[] {"Línea","Código Concepto", "Importe"});		
 			numLineas=0;
-			/*ArrayList<Comunidad> listaComunidades = ControladorComunidad.getControladorComunidad().GetListaComunidades();
-			System.out.println("Tamaño lista"+listaComunidades.size());
-			for(Comunidad c:listaComunidades){						
-				this.addToTabla(c);
-			}*/
+			ArrayList<LineaFactura> listaLineas = ControladorLineaFactura.getControladorLineaFactura().GetListaLineaFactura();
+			System.out.println("Tamaño lista"+listaLineas.size());
+			for(LineaFactura lF:listaLineas){						
+				this.addToTabla(lF);
+			}
 		}
 		@Override
 	    public boolean isCellEditable(int row, int column) { //De esta forma no se pueden editar las celdas.
 		       //all cells false
 		       return false;
 		    }
-		public void addFactura (Factura f) throws InmuebleYaExiste{									
-			this.addToTabla(f);
+		public void addFactura (LineaFactura lF) throws InmuebleYaExiste{									
+			this.addToTabla(lF);
 		}
 		public int getNumFacturas(){
 			return numLineas;
 		}
 		public void borraFacturaPorPos(int row){
-			/*
 			try {
 				int id = Integer.parseInt(this.getValueAt(row, 0).toString());
 				System.out.println("Fila: "+row+" ID:"+id);
-				ControladorComunidad.getControladorComunidad().borrarComunidad(getComunidadPorId(id));
+				ControladorLineaFactura.getControladorLineaFactura().borrarLineaFactura(getLineaFacturaPorId(id));
 			} catch (DAOExcepcion e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-			}*/
+			}
 			this.removeRow(row);
 		}
-		public Factura getFacturaPorId(int id) {
-			Factura f=new Factura();
-			//c = ControladorComunidad.getControladorComunidad().getComunidadPorId(id);
+		public LineaFactura getLineaFacturaPorId(int id) {
+			LineaFactura lF=new LineaFactura();
+			lF = ControladorLineaFactura.getControladorLineaFactura().getLineaFacturaPorId(id);																		
 			//System.out.println("Inmueble con id: "+c.getIdComunidad()+" recuperado con exito");
-			return f ;
-	
+			return lF ;	
 		}
 		public Factura getFacturaPorPos(int row) {
 			Factura f=new Factura();
@@ -58,19 +58,19 @@ public class ModeloTablaFacturaDetalle extends DefaultTableModel {
 	
 		}
 		
-		public void updateRow(int row,Factura f){			
-			this.setValueAt(row, row, 0);			
-			this.setValueAt("Cod. Concepto", row, 1);			
-			this.setValueAt("Importe", row, 2);							
+		public void updateRow(int row,LineaFactura lF){			
+			this.setValueAt(lF.getIdLineaFactura(), row, 0);			
+			this.setValueAt(lF.getConcepto().getCodigo(), row, 1);			
+			this.setValueAt(lF.getImporteLinea(), row, 2);							
 		}
 		@SuppressWarnings("unchecked")
-		public void addToTabla(Factura f){
-			Vector v=new Vector();
-			//"ID","CIF", "Num Factura", "Fecha", "Importe","%IVA", "Total"
-			v.add(f.getidFactura());			v.add("CIF");			v.add("Num. Factura");
-			v.add(f.getFechaFactura());			v.add("Importe");		v.add("%IVA");	v.add("Total");				
-			
-			System.out.println("Factura:"+f.getidFactura());
+		public void addToTabla(LineaFactura lF){
+			Vector v=new Vector();		
+			//"Línea","Código Concepto", "Importe"
+			v.add(lF.getIdLineaFactura());
+			v.add(lF.getConcepto().getCodigo());
+			v.add(lF.getImporteLinea());
+			System.out.println("Factura:"+lF.getIdLineaFactura());
 			numLineas++;
 			System.out.println("Fila nueva: "+v);
 			this.addRow(v);			
