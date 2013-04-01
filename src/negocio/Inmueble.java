@@ -9,8 +9,7 @@ public class Inmueble {
 	private String piso;
 	private String puerta;
 	private float porcentaje;
-	@SuppressWarnings("unchecked")
-	private Set listaRecibos = new HashSet();
+	private Set<ReciboInmueble> listaRecibos = new HashSet<ReciboInmueble>();
 	private Propietario propietario ;
 	private Comunidad comunidad;
 
@@ -30,12 +29,11 @@ public class Inmueble {
 	public void setIdInmueble(int idInmueble) {
 		this.idInmueble = idInmueble;
 	}
-	@SuppressWarnings("unchecked")
-	public Set getListaRecibos() {
+
+	public Set<ReciboInmueble> getListaRecibos() {
 		return listaRecibos;
 	}
-	@SuppressWarnings("unchecked")
-	public void setListaRecibos(Set listaRecibos) {
+	public void setListaRecibos(Set<ReciboInmueble> listaRecibos) {
 		this.listaRecibos = listaRecibos;
 	}
 	public Propietario getPropietario() {
@@ -74,5 +72,6 @@ public class Inmueble {
 	public void setPorcentaje(float porcentaje) {
 		this.porcentaje = porcentaje;
 	}
+
 
 }

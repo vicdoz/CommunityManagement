@@ -163,7 +163,7 @@ public class VentanaFacturas extends javax.swing.JFrame {
 							{
 								delFactButton = new JButton();
 								factButtonPanel.add(delFactButton);
-								delFactButton.setText("Borrar");
+								delFactButton.setText("Borrar factura");
 								delFactButton.addActionListener(new ActionListener() {
 									public void actionPerformed(ActionEvent evt) {
 										//TODO add your code for editFactButton.actionPerformed

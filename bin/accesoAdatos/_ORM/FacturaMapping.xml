@@ -9,12 +9,16 @@
 		<generator class="increment" />
 	</id>
 
-	<set name="idFactura">
+	<set name="listaLineas">
 		<key column="idFactura" />
 		<one-to-many class="negocio.LineaFactura" />
 	</set>
+	<property name="fechaFactura" column="fechafactura" />
+	
+
+					
 	<many-to-one name="comunidad" class="negocio.Comunidad"	column="idComunidad" />
 	<many-to-one name="notainformativa" class= "negocio.NotaInformativa" column="idNotaInformativa" />
-
+	
 </class>
 </hibernate-mapping>

@@ -1,6 +1,8 @@
 package gui;
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -9,6 +11,7 @@ import javax.swing.JTable;
 import javax.swing.WindowConstants;
 import javax.swing.SwingUtilities;
 
+import negocio.Comunidad;
 import negocio._tablas.ModeloTablaFacturaDetalle;
 
 
@@ -89,6 +92,11 @@ public class VentanaFacturaDetalle extends javax.swing.JFrame {
 						addLineasButton = new JButton();
 						factDetButtons.add(addLineasButton);
 						addLineasButton.setText("Nueva Línea");
+						addLineasButton.addActionListener(new ActionListener() {
+							public void actionPerformed(ActionEvent evt) {
+								//TODO
+							}
+						});
 					}
 					{
 						editLineasButton = new JButton();

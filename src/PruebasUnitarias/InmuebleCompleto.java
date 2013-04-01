@@ -9,7 +9,7 @@ import negocio.Inmueble;
 import negocio.Propietario;
 
 
-public class AltaPack {
+public class InmuebleCompleto {
 
 	/**
 	 * @param args

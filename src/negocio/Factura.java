@@ -6,14 +6,14 @@ import java.util.Set;
 
 public class Factura {
 	private int idFactura;
-	private Date fechaFactura;
+	private String fechaFactura;
 	
-	private Set listaLineas = new HashSet();
+	private Set<LineaFactura> listaLineas = new HashSet<LineaFactura>();
 	private Comunidad comunidad;
 	private NotaInformativa notainformativa;
 	
 	public Factura(){}
-	public Factura(int numFactura, Date fechaFactura) {
+	public Factura(int numFactura, String fechaFactura) {
 		super();
 		this.idFactura = numFactura;
 		this.fechaFactura = fechaFactura;
@@ -42,10 +42,10 @@ public class Factura {
 	private void setidFactura(int numFactura) {
 		this.idFactura = numFactura;
 	}
-	public Date getFechaFactura() {
+	public String getFechaFactura() {
 		return fechaFactura;
 	}
-	public void setFechaFactura(Date fechaFactura) {
+	public void setFechaFactura(String fechaFactura) {
 		this.fechaFactura = fechaFactura;
 	}
 }

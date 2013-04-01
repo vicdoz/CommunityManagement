@@ -10,5 +10,6 @@
 	</id>
 	<property name="codigo" column="codigo" />
 	<property name="descripcion" column="descripcion" />
+	
 </class>
 </hibernate-mapping>

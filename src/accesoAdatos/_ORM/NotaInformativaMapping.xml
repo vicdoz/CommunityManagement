@@ -9,15 +9,16 @@
 		<generator class="native" />
 	</id>
 	<set name="listarecibos">
-	<key column="idNotaInformativa" />
-	<one-to-many class="negocio.ReciboInmueble" />
+		<key column="idNotaInformativa" />
+		<one-to-many class="negocio.ReciboInmueble" />
 	</set>
 	<set name="listaFacturas">
-	<key column="idNotaInformativa" />
-	<one-to-many class="negocio.Factura" />
+		<key column="idNotaInformativa" />
+		<one-to-many class="negocio.Factura" />
 	</set>
-
-	<many-to-one name="Comunidad" class="negocio.Comunidad" column="Comunidad" />
+	<property name="fechaCalculo" column="fechacalculo" />
+	<property name="importeNota" column="importeNota" />
+	<many-to-one name="Comunidad" class="negocio.Comunidad" column="idComunidad" />
 	
 
 </class>

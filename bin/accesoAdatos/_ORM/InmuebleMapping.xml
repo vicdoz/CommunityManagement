@@ -16,6 +16,10 @@
 
 	<many-to-one name="propietario" class="negocio.Propietario" column="idPropietario"  />
 	<many-to-one name="comunidad"   class="negocio.Comunidad" 	column="idComunidad" />
+	<set name="listaRecibos"   >
+			<key column="idInmueble"   />
+			<one-to-many class="negocio.ReciboInmueble" />
+	</set>
 
 </class>
 </hibernate-mapping>

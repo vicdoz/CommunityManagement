@@ -20,6 +20,10 @@
 			<key column="idComunidad"   />
 			<one-to-many class="negocio.Inmueble" />
 		</set>
-
+		<set name="listaFacturas"   >
+			<key column="idComunidad"   />
+			<one-to-many class="negocio.Factura" />
+		</set>
+		
 </class>
 </hibernate-mapping>

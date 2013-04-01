@@ -28,6 +28,10 @@ public class Comunidad {
 	public Set getListaInmuebles() {
 		return listaInmuebles;
 	}
+	public Set<NotaInformativa> getListaNotasInformativas() {
+		return listaNotasInformativas;
+	}
+
 	public Set getListaFacturas() {
 		return listaFacturas;
 	}

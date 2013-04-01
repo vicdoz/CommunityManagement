@@ -1,0 +1,15 @@
+CHANGELOG 30/03/2013-13h v1:
+ - Modificats alguns recuperaX por getX
+ - Creada la interfaç VentanaFacturas en la que es podrà donar d'alta Factures i conceptes
+ - Creades les classes ModeloTablaFactura i ModeloTablaConcepto. 
+ -Ja estan corregits els bugs de actualizar/crear propietari.
+ -Inmobles ja s'inserta be.
+ -Conceptes estan implementats,falta que es mostren be, i acabar de conectar amb la igu
+ 
+ Changelog 01/04/2013-5:30h v2:
+ -Mapping de tot el programa complet (a excepcio de la relacio president)
+ -Controladors de tot el programa complet
+ -Base de dades de tot el programa complet
+ -Proves unitaries per clases
+ -Exemple complet del programa.executar "ejemplo completo" y despres vore TOTS els selects.
+ 

@@ -6,11 +6,11 @@ import java.util.Set;
 
 public class NotaInformativa {
 	private int idNotaInformativa ;
-	private Date fechaCalculo;
+	private String fechaCalculo;
 	private float importeNota ;
 	private int idRecibo ;
-	private Set listaFacturas = new HashSet();
-	private Set listarecibos=new HashSet();	
+	private Set<Factura> listaFacturas = new HashSet<Factura>();
+	private Set<ReciboInmueble> listarecibos=new HashSet<ReciboInmueble>();	
 	private Comunidad comunidad;
     public Comunidad getComunidad() {
 		return comunidad;
@@ -19,7 +19,7 @@ public class NotaInformativa {
 		this.comunidad = comunidad;
 	}
 	public NotaInformativa(){}
-	public NotaInformativa(int idNotaInformativa, Date fechaCalculo,
+	public NotaInformativa(int idNotaInformativa, String fechaCalculo,
 			float importeNota, int idRecibo) {
 		super();
 		this.idNotaInformativa = idNotaInformativa;
@@ -46,11 +46,11 @@ public class NotaInformativa {
 	private void setIdNotaInformativa(int idNotaInformativa) {
 		this.idNotaInformativa = idNotaInformativa;
 	}
-	public Date getFechaCalculo() {
+	public String getFechaCalculo() {
 		return fechaCalculo;
 	}
-	public void setFechaCalculo(Date fechaCalculo) {
-		this.fechaCalculo = fechaCalculo;
+	public void setFechaCalculo(String fecha) {
+		this.fechaCalculo = fecha;
 	}
 	public float getImporteNota() {
 		return importeNota;

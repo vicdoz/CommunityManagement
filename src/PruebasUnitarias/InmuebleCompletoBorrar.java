@@ -4,7 +4,7 @@ import excepciones.DAOExcepcion;
 import accesoAdatos._controladores.ControladorComunidad;
 import negocio.Comunidad;
 
-public class BorrarPack {
+public class InmuebleCompletoBorrar {
 
 	/**
 	 * 

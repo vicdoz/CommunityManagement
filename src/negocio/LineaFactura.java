@@ -7,7 +7,8 @@ public class LineaFactura {
 	private int idLineaFactura;
 	private float importeLinea;
 	private String observacion;
-	private  Concepto concepto;
+	private Concepto concepto;
+	private Factura factura;
 	public LineaFactura(){}
 	public LineaFactura(int idLineaFactura, float importeLinea,
 			String observacion) {
@@ -16,12 +17,21 @@ public class LineaFactura {
 		this.importeLinea = importeLinea;
 		this.observacion = observacion;
 	}
+	
+	public Factura getFactura() {
+		return factura;
+	}
+	public void setFactura(Factura factura) {
+		this.factura = factura;
+	}
 	public int getIdLineaFactura() {
 		return idLineaFactura;
 	}
 	private void setIdLineaFactura(int idLineaFactura) {
 		this.idLineaFactura = idLineaFactura;
 	}
+
+	
 	public Concepto getConcepto() {
 		return concepto;
 	}

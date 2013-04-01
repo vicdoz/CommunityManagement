@@ -1,24 +1,20 @@
 TODO list:
-	- Revisar els "recuperarPorX" en teoría en recuperar per Pos es podría fer TOT
-	ja que a la taula ho tenim a la posició del controlador
+	-igu amb controladors afegits.
+	-Acabar mapping de president.
 	- Afegir avisos al insertar / editar / borrar entrades de la bd
 		- El inmoble no deu d'existir (comprobar ESC-PIS-POR)
 		- El propietari no deu d'existir (comprobar NIF)
 		- La comunitat no deu d'existir (comprobar NOM)		
-	
+	---------------------------------------------------------------------------------
 BUGS:
-- Conceptos que se insertan OK en la BD no se ven bien en la tabla(columnas movidas).
-
+	---------------------------------------------------------------------------------
+REVISAR:
+	-	Estan fets tots els controladors.En el exemple he probat totes les altes 
+	 	i van perfectes.
+		Al ser copy&paste supose q les modificacions/baixes,deurien de anar be.Revisar 
+		que es aixi.
+		Podria haber algun fallo que se me haja escapat en els controladors(copy &paste),
+		igual algun nom no es el que toca exacte.
 	
-CHANGELOG 30/03/2013 v1:
- - Modificats alguns recuperaX por getX
- - Creada la interfaç VentanaFacturas en la que es podrà donar d'alta Factures i conceptes
- - Creades les classes ModeloTablaFactura i ModeloTablaConcepto. 
- 
- Changelog Victor:
- -Ja estan corregits els bugs de actualizar/crear propietari.
- -Inmobles ja s'inserta be.
- -Conceptes estan implementats,falta que es mostren be, i acabar de conectar amb la igu
- 
- 
- 
+	- 	Revisar els "recuperarPorX" en teoría en recuperar per Pos es podría fer TOT
+	ja que a la taula ho tenim a la posició del controlador

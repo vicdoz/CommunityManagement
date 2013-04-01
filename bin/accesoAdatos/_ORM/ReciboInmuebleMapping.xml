@@ -8,6 +8,14 @@
 		<column name="idRecibo" />
 		<generator class="native" />
 	</id>
-	<many-to-one name="NotaInformativa" class="negocio.NotaInformativa" column="NotaInformativa" />
+
+	<property name="FechaPago" column="fechapago" />	
+	<property name="importe" column="importe" />
+
+					
+	
+	<many-to-one name="carta"   class="negocio.Carta" 	column="idCarta" />
+	<many-to-one name="NotaInformativa" class="negocio.NotaInformativa" column="idNotaInformativa" />
+	<many-to-one name="inmueble"   class="negocio.Inmueble" 	column="idInmueble" />
 </class>
 </hibernate-mapping>

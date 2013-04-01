@@ -4,11 +4,14 @@ import java.sql.Date;
 
 public class ReciboInmueble {
 	private int idRecibo; 
-	private Date FechaPago;
+	private String FechaPago;
 	private float Importe;
-    private NotaInformativa notaInformativa;
+	private Carta carta;
+
+	private NotaInformativa notaInformativa;
+	private Inmueble inmueble;
     public ReciboInmueble(){}
-	public ReciboInmueble(int idRecibo, Date fechaPago, float importe) {
+	public ReciboInmueble(int idRecibo, String fechaPago, float importe) {
 		super();
 		this.idRecibo = idRecibo;
 		FechaPago = fechaPago;
@@ -20,7 +23,7 @@ public class ReciboInmueble {
 	private void setIdRecibo(int idRecibo) {
 		this.idRecibo = idRecibo;
 	}
-	public Date getFechaPago() {
+	public String getFechaPago() {
 		return FechaPago;
 	}
 	
@@ -30,7 +33,7 @@ public class ReciboInmueble {
 	public void setNotaInformativa(NotaInformativa notaInformativa) {
 		this.notaInformativa = notaInformativa;
 	}
-	public void setFechaPago(Date fechaPago) {
+	public void setFechaPago(String fechaPago) {
 		FechaPago = fechaPago;
 	}
 	public float getImporte() {
@@ -39,4 +42,17 @@ public class ReciboInmueble {
 	public void setImporte(float importe) {
 		Importe = importe;
 	}
+    public Carta getCarta() {
+		return carta;
+	}
+	public void setCarta(Carta carta) {
+		this.carta = carta;
+	}
+	public Inmueble getInmueble() {
+		return inmueble;
+	}
+	public void setInmueble(Inmueble inmueble) {
+		this.inmueble = inmueble;
+	}
+	
 }
