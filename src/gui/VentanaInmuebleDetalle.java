@@ -179,6 +179,8 @@ public class VentanaInmuebleDetalle extends javax.swing.JFrame {
 					{
 						ComTextField = new JTextField();
 						formularioPanel.add(ComTextField, new GridBagConstraints(1, 3, 2, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.HORIZONTAL, new Insets(0, 0, 0, 10), 0, 0));
+						ComTextField.setText(""+modelo.comunidad.getIdComunidad());
+						ComTextField.setEnabled(false);
 					}
 				}
 				{
@@ -238,8 +240,6 @@ public class VentanaInmuebleDetalle extends javax.swing.JFrame {
 			
 			if(ControladorPropietario.getControladorPropietario().getPropietarioPorId(idProp)==null){
 				javax.swing.JOptionPane.showMessageDialog(null, "Por favor introduzca un ID de Propietario correcto");
-			}else if(ControladorComunidad.getControladorComunidad().getComunidadPorId(idCom)==null){
-				javax.swing.JOptionPane.showMessageDialog(null, "Por favor introduzca un ID de Comunidad correcto");
 			}else{
 			
 				if(editMode==1){	

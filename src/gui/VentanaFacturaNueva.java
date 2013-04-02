@@ -76,10 +76,9 @@ public class VentanaFacturaNueva extends javax.swing.JFrame {
 	public VentanaFacturaNueva(int row, Factura f) {
 		super();
 		editMode=1;
+		this.comunidad = f.getComunidad();
 		initGUI();
-		
 		cifTextField.setText(f.getCIF());
-		ComTextField.setText(""+f.getComunidad().getIdComunidad());	
 		FactAux=f;
 		this.rowAux=row;
 	}

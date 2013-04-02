@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 import accesoAdatos._ORM.ConceptoDAOHibernateImp;
-import accesoAdatos._interfaces.InterfaceControladorConcepto;
 import negocio.Concepto;
 import excepciones.DAOExcepcion;
 
@@ -69,7 +68,7 @@ public class ControladorConcepto   {
 
 	public Concepto getConceptoPorId(int id) {
 		// TODO Auto-generated method stub
-		Iterator<Concepto> it= ListaConceptos.iterator();
+		Iterator<Concepto> it= ListaConceptos.iterator();		
 		while(it.hasNext()){
 			System.out.println("Buscando");
 			Concepto cAux=it.next();
@@ -79,5 +78,19 @@ public class ControladorConcepto   {
 		}
 		System.out.println("Concepto no encontrado");
 		return null;		
+	}
+
+	public Concepto getConceptoPorCodigo(String codigo) {
+		// TODO Auto-generated method stub
+		Iterator<Concepto> it= ListaConceptos.iterator();
+		while(it.hasNext()){
+			System.out.println("Buscando");
+			Concepto cAux=it.next();
+			String cad = cAux.getCodigo().trim();
+			System.out.println("Codigo encontrado: "+cad+".");
+			if(cad==codigo)	return cAux;
+		}
+		System.out.println("Concepto no encontrado");
+		return null;
 	}	
 }

@@ -1,23 +1,7 @@
 package PruebasUnitarias;
 
-import accesoAdatos._controladores.ControladorCarta;
-import accesoAdatos._controladores.ControladorComunidad;
-import accesoAdatos._controladores.ControladorConcepto;
-import accesoAdatos._controladores.ControladorFactura;
-import accesoAdatos._controladores.ControladorInmueble;
-import accesoAdatos._controladores.ControladorLineaFactura;
-import accesoAdatos._controladores.ControladorNotaInformativa;
-import accesoAdatos._controladores.ControladorPropietario;
-import accesoAdatos._controladores.ControladorReciboInmueble;
-import negocio.Carta;
-import negocio.Comunidad;
-import negocio.Concepto;
-import negocio.Factura;
-import negocio.Inmueble;
-import negocio.LineaFactura;
-import negocio.NotaInformativa;
-import negocio.Propietario;
-import negocio.ReciboInmueble;
+import accesoAdatos._controladores.*;
+import negocio.*;
 
 public class EJEMPLO_COMPLETO {
 	public static void main(String[] args) throws Throwable {

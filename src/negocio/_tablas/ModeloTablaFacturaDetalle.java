@@ -69,7 +69,7 @@ public class ModeloTablaFacturaDetalle extends DefaultTableModel {
 			Vector v=new Vector();		
 			//"Línea","Código Concepto", "Importe"
 			v.add(lF.getIdLineaFactura());
-			v.add(lF.getConcepto().getCodigo());
+			v.add(lF.getConcepto().getCodigo().trim());
 			v.add(lF.getImporteLinea());
 			System.out.println("Factura:"+lF.getIdLineaFactura());
 			numLineas++;

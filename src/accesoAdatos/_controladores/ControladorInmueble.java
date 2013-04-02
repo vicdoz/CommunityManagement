@@ -1,10 +1,12 @@
 package accesoAdatos._controladores;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import accesoAdatos._ORM.InmuebleDAOHibernateImp;
 import accesoAdatos._interfaces.InterfaceControladorInmueble;
 
+import negocio.Comunidad;
 import negocio.Inmueble;
 
 import excepciones.DAOExcepcion;
@@ -73,6 +75,19 @@ public class ControladorInmueble implements InterfaceControladorInmueble  {
 		Inmueble i = new Inmueble();
 		i = this.ListaInmuebles.get(row);
 		return i;
+	}
+	public Inmueble getInmueblePorId(int id) {
+		// TODO Auto-generated method stub
+		Iterator<Inmueble> it= ListaInmuebles.iterator();
+		while(it.hasNext()){
+			System.out.println("Buscando");
+			Inmueble iAux=it.next();
+			System.out.println("ID encontrado:"+iAux.getIdInmueble());
+			if(iAux.getIdInmueble()==id)
+				return iAux;
+		}
+		System.out.println("Inmueble no encontrada");
+		return null;		
 	}
 
 

@@ -14,6 +14,7 @@ import accesoAdatos._controladores.ControladorInmueble;
 public class ModeloTablaInmueble extends DefaultTableModel {
 
 		public  int numInmuebles;
+		public Comunidad comunidad;
 		public ModeloTablaInmueble (){
 			super(null,
 					new String[] {"ID","Comunidad", "Escalera", "Piso", " Puerta", "Propietario"});			
@@ -57,6 +58,7 @@ public class ModeloTablaInmueble extends DefaultTableModel {
 		public void cargaInmueblesComunidad(Comunidad c){
 			limpiaTabla();
 			ArrayList<Inmueble> listaInmuebles = ControladorInmueble.getControladorInmueble().GetListaInmuebles();
+			this.comunidad = c;
 			System.out.println("Tamaño lista Inmuebles: "+listaInmuebles.size());
 			for(Inmueble i:listaInmuebles){						
 				if(i.getComunidad().getIdComunidad()==c.getIdComunidad()){
