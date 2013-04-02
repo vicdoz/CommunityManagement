@@ -93,6 +93,7 @@ public class VentanaNotas extends javax.swing.JFrame {
 	private void initGUI() {
 		try {
 			setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+			this.setTitle("Gestion Notas");
 			{
 				notasTabbedPane = new JTabbedPane();
 				getContentPane().add(notasTabbedPane, BorderLayout.CENTER);
