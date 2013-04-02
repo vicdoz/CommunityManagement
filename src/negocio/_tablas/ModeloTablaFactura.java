@@ -73,8 +73,10 @@ public class ModeloTablaFactura extends DefaultTableModel {
 		public void addToTabla(Factura f){
 			Vector v=new Vector();			
 			//"ID","CIF", "Num Factura", "Fecha", "Importe","%IVA", "Total"
-			v.add(f.getidFactura());			v.add("CIF");			v.add("Num. Factura");
-			v.add(f.getFechaFactura());			v.add("Importe");		v.add("%IVA");	v.add("Total");				
+			
+			v.add(f.getidFactura());			v.add(f.getidFactura());
+			v.add(f.getFechaFactura());			v.add(f.getImporteSinIva());		
+			v.add(f.getTipoIva());				v.add(f.getImporteConIva());				
 		
 			System.out.println("Factura:"+f.getidFactura());
 			numFacturas++;

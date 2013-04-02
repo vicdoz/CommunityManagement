@@ -1,3 +1,10 @@
+CHANGELOG 02/04/2013-23:08 v3.01:
+ - Corregits errors de borrar comunitat/Factura i que es mostren inmobles/linies de les borrades
+
+CHANGELOG 02/04/2013-21:00 v3.00:
+ - Afegides finestres VentanasNota i VentanaPagoRecibos
+ - Arreglat Ventana Propietario i derivats per a tindre en compte el e-mail.
+
 CHANGELOG 02/04/2013-15:14h v2.04:
  - Se poden generar els reports de les factures per comunitat o totes.
  - Se poden generar els reports dels conceptes insertats.

@@ -67,7 +67,7 @@ public class ModeloTablaInmueble extends DefaultTableModel {
 			}
 		}
 		
-		private void limpiaTabla() {
+		public void limpiaTabla() {
 			// TODO Auto-generated method stub			
 			while(numInmuebles>0){
 				this.removeRow(numInmuebles-1);

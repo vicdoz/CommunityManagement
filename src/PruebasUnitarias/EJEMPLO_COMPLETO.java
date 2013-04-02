@@ -52,7 +52,7 @@ public class EJEMPLO_COMPLETO {
 		//Comunidad
 			com.setCalle("Nueva calle");
 			com.setNombre("Aqui no hay quien viva");
-			com.setEstado("Morosos");
+			com.setEstado(0);
 			 //com.setIdPresidente(i);
 			com.setMaxRecibosPendientes(12);
 			com.setPoblacion("Valencia");

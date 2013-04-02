@@ -38,6 +38,16 @@ import java.util.*;
 @SuppressWarnings("serial")
 public class VentanaFacturas extends javax.swing.JFrame {
 
+	{
+		//Set Look & Feel
+		try {
+			javax.swing.UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+
 	private JButton delFactButton;
 	private JButton addFactButton;
 	private JPanel factButtonPanel;
@@ -205,7 +215,11 @@ public class VentanaFacturas extends javax.swing.JFrame {
 											int op=OpcionesBorra(fAux.getidFactura(),"Factura");
 											if(op==0){
 												modeloFact.borraFacturaPorPos(tablaFact.getSelectedRow());
-												modeloFactDet.cargaLineasFactura(modeloFactDet.factura);
+												//modeloFactDet.cargaLineasFactura(modeloFactDet.factura);
+												if(fAux == modeloFactDet.factura){
+													modeloFactDet.limpiaTabla();
+													addLineaButton.setEnabled(false);
+												}
 												ChangeStatusBar(IN_BORRADO,fAux.getidFactura(),null);
 												
 											}

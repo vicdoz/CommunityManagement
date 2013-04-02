@@ -66,16 +66,17 @@ public class ModeloTablaComunidad extends DefaultTableModel {
 			this.setValueAt(c.getIdPresidente(), row, 2);			
 			this.setValueAt(c.getCalle(), row, 3);			
 			this.setValueAt(c.getPoblacion(), row, 4);			
-			this.setValueAt(c.getMaxRecibosPendientes(), row, 5);			
+			this.setValueAt("RECIBOS PENDIENTES", row, 5);			
 			this.setValueAt(c.getEstado(), row, 6);
 			
 		}
 		@SuppressWarnings("unchecked")
 		public void addToTabla(Comunidad c){
 			Vector v=new Vector();
-			v.add(c.getIdComunidad());			v.add(c.getNombre());	v.add("");
+			//"ID","Nombre", "Contacto", "Direccion", "Poblacion","Recibos Pend.", "Estado"});
+			v.add(c.getIdComunidad());			v.add(c.getNombre());	v.add(c.getIdPresidente());
 			v.add(c.getCalle());    v.add(c.getPoblacion());
-			v.add("0");			v.add("Cuadrado");			
+			v.add("RECIBOS PENDIENTES");			v.add(c.getEstado());			
 			
 			System.out.println("Comunidad:"+c.getIdComunidad());
 			numComunidades++;

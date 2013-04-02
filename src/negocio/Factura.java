@@ -8,7 +8,7 @@ public class Factura {
 	private int idFactura;
 	private String fechaFactura;
 	private String CIF;
-	private float tipoIva;
+	private float tipoIva;	
 	private float importeIva;
 	private float importeSinIva;
 	private float importeConIva;
@@ -66,5 +66,29 @@ public class Factura {
 	}
 	public void acumulaImporteLinea(LineaFactura l){
 		importeSinIva+=l.getImporteLinea();
+	}
+	public float getTipoIva() {
+		return tipoIva;
+	}
+	public void setTipoIva(float tipoIva) {
+		this.tipoIva = tipoIva;
+	}
+	public float getImporteIva() {
+		return importeIva;
+	}
+	public void setImporteIva(float importeIva) {
+		this.importeIva = importeIva;
+	}
+	public float getImporteSinIva() {
+		return importeSinIva;
+	}
+	public void setImporteSinIva(float importeSinIva) {
+		this.importeSinIva = importeSinIva;
+	}
+	public float getImporteConIva() {
+		return importeConIva;
+	}
+	public void setImporteConIva(float importeConIva) {
+		this.importeConIva = importeConIva;
 	}
 }

@@ -25,7 +25,7 @@ public class InmuebleCompleto {
 		ControladorComunidad controladorcomunidad=ControladorComunidad.getControladorComunidad();
 		
 		c.setCalle("MUSICO MAGENTI");
-		c.setEstado("BIEN");
+		c.setEstado(1);
 		c.setMaxRecibosPendientes(2);
 		c.setIdComunidad(23);
 		

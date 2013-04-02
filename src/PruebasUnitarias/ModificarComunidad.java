@@ -17,7 +17,7 @@ public class ModificarComunidad {
 		ControladorComunidad controladorcomunidad=ControladorComunidad.getControladorComunidad();
 		
 		c.setCalle("Calle de al lado");
-		c.setEstado("BIEN");
+		c.setEstado(1);
 		c.setMaxRecibosPendientes(2);
 		c.setIdComunidad(1);//ID A MODIFICAR
 		try {

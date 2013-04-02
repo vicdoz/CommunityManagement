@@ -210,12 +210,15 @@ public class VentanaComunidad extends javax.swing.JFrame {
 											MuestraMensaje(NO_FILA);										
 										}else{
 											int rowSel = tablaCom.getSelectedRow();
-											Comunidad  caux=modeloCom.getComunidadPorPos(rowSel);
-											int op=OpcionesBorra(caux.getIdComunidad(),"Comunidad");
+											Comunidad  cAux=modeloCom.getComunidadPorPos(rowSel);
+											int op=OpcionesBorra(cAux.getIdComunidad(),"Comunidad");
 											if(op==0){
-												modeloCom.borraComunidadPorPosicion(tablaCom.getSelectedRow());	
-												modeloInm.cargaInmueblesComunidad(modeloInm.comunidad);
-												ChangeStatusBar(IN_BORRADO,caux.getIdComunidad(),null);
+												modeloCom.borraComunidadPorPosicion(tablaCom.getSelectedRow());													
+												if(cAux == modeloInm.comunidad){
+													modeloInm.limpiaTabla();
+													addInmButton.setEnabled(false);
+												}
+												ChangeStatusBar(IN_BORRADO,cAux.getIdComunidad(),null);
 												
 											}
 										}

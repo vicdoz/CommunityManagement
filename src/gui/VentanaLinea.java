@@ -175,7 +175,7 @@ public class VentanaLinea extends javax.swing.JFrame {
 	}
 	public boolean isFloat( String input ){
 		   try{
-		      Integer.parseInt( input );
+		      Float.parseFloat( input );
 		      return true;
 		   }catch( Exception e){
 		      return false;

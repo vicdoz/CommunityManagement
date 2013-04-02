@@ -76,7 +76,7 @@ public class ModeloTablaFacturaDetalle extends DefaultTableModel {
 			System.out.println("Fila nueva: "+v);
 			this.addRow(v);			
 		}
-		private void limpiaTabla() {
+		public void limpiaTabla() {
 			// TODO Auto-generated method stub			
 			while(numLineas>0){
 				this.removeRow(numLineas-1);
