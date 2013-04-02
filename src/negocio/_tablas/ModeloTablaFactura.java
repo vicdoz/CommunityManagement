@@ -82,7 +82,7 @@ public class ModeloTablaFactura extends DefaultTableModel {
 			this.addRow(v);			
 		}
 		public void cargaFacturasComunidad(Comunidad c){
-			//limpiaTabla();
+			limpiaTabla();
 			ArrayList<Factura> listaFacturas = ControladorFactura.getControladorFactura().GetListaFacturas();
 			System.out.println("Tamaño lista"+listaFacturas.size());
 			for(Factura f:listaFacturas){						

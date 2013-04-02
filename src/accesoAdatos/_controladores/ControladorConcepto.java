@@ -88,7 +88,7 @@ public class ControladorConcepto   {
 			Concepto cAux=it.next();
 			String cad = cAux.getCodigo().trim();
 			System.out.println("Codigo encontrado: "+cad+".");
-			if(cad==codigo)	return cAux;
+			if(cad.equals(codigo))	return cAux;
 		}
 		System.out.println("Concepto no encontrado");
 		return null;

@@ -182,7 +182,7 @@ public class VentanaLinea extends javax.swing.JFrame {
 		   }
 		}
 	private void guardarDatos() throws InmuebleYaExiste{
-		String codigo=codTextField.getText();	
+		String codigo=codTextField.getText().trim();	
 		Float importe = Float.parseFloat(importeTextField.getText());
 		
 		if(codigo.isEmpty() || importeTextField.getText().isEmpty()){		

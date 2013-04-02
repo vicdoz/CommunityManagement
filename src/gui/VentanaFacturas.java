@@ -205,6 +205,7 @@ public class VentanaFacturas extends javax.swing.JFrame {
 											int op=OpcionesBorra(fAux.getidFactura(),"Factura");
 											if(op==0){
 												modeloFact.borraFacturaPorPos(tablaFact.getSelectedRow());
+												modeloFactDet.cargaLineasFactura(modeloFactDet.factura);
 												ChangeStatusBar(IN_BORRADO,fAux.getidFactura(),null);
 												
 											}
