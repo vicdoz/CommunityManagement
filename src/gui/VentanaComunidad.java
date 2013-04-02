@@ -114,8 +114,10 @@ public class VentanaComunidad extends javax.swing.JFrame {
 	}
 	
 	public VentanaComunidad() {
-		super();
+		super();		
 		initGUI();
+		//InmButtonPanel.setEnabled(false);
+		addInmButton.setEnabled(false);
 	}
 	
 	private void initGUI() {
@@ -234,6 +236,7 @@ public class VentanaComunidad extends javax.swing.JFrame {
 											int selRow = tablaCom.getSelectedRow();
 											Comunidad c = ControladorComunidad.getControladorComunidad().getComunidadPorPos(selRow);											
 											modeloInm.cargaInmueblesComunidad(c);
+											addInmButton.setEnabled(true);
 											jTabbedPane1.setSelectedIndex(2);
 										}
 									}
