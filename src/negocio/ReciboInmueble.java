@@ -7,7 +7,6 @@ public class ReciboInmueble {
 	private String FechaPago;
 	private float Importe;
 	private Carta carta;
-
 	private NotaInformativa notaInformativa;
 	private Inmueble inmueble;
     public ReciboInmueble(){}

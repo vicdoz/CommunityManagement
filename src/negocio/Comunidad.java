@@ -7,11 +7,8 @@ public class Comunidad {
 
 	private int idComunidad;
 	private String nombre;
-
 	private String calle;
 	private String poblacion;
-	
-
 	private int maxRecibosPendientes;
 	private String estado;
 	private int idPresidente;/*A falta de solucionar las 2 relaciones aqui sera el id del presidente de la comunidad*/

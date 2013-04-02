@@ -12,22 +12,16 @@ public class Propietario {
 	private String telefono;
 	private String observaciones;
 	private String fechaalta;
+	private String email;
 	private int entidad;
 	private int numerocuenta;
 	private Set<Inmueble> listaInmuebles = new HashSet<Inmueble>();
 	
-	@SuppressWarnings("unchecked")
-	public Set getListaInmuebles() {
-		return listaInmuebles;
-	}
-	@SuppressWarnings("unchecked")
-	public void setListaInmuebles(Set listaInmuebles) {
-		this.listaInmuebles = listaInmuebles;
-	}
+
 	public Propietario(){}
 	public Propietario(String nif, String nombre, String poblacion,
 			String direccion, String telefono, String observaciones,
-			String fechaalta, int entidad, int numerocuenta) {
+			String fechaalta, int entidad, int numerocuenta,String email) {
 		super();
 		this.nif = nif;
 		this.nombre = nombre;
@@ -41,7 +35,7 @@ public class Propietario {
 	}
 	public Propietario(String nif, String nombre, String poblacion,
 			String direccion, String telefono, String observaciones,
-			 int entidad, int numerocuenta) {
+			 int entidad, int numerocuenta,String email) {
 		super();
 		this.nif = nif;
 		this.nombre = nombre;
@@ -49,7 +43,7 @@ public class Propietario {
 		this.direccion = direccion;
 		this.telefono = telefono;
 		this.observaciones = observaciones;
-		
+		this.email=email;
 		this.entidad = entidad;
 		this.numerocuenta = numerocuenta;
 	}
@@ -112,5 +106,17 @@ public class Propietario {
 	}
 	public void setNumerocuenta(int numerocuenta) {
 		this.numerocuenta = numerocuenta;
+	}
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	public Set getListaInmuebles() {
+		return listaInmuebles;
+	}
+	public void setListaInmuebles(Set<Inmueble> listaInmuebles) {
+		this.listaInmuebles = listaInmuebles;
 	}
 }
