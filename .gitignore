@@ -1,6 +1,3 @@
-bin
-bin/*
-bin/
-hsqldb/*
+bin/**/*
 .project
-*.classpath
+.classpath

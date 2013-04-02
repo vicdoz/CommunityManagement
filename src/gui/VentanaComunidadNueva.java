@@ -235,7 +235,7 @@ public class VentanaComunidadNueva extends javax.swing.JFrame {
 			Comunidad c = new Comunidad();
 			c.setCalle(direccion);		c.setNombre(nombre);
 			c.setPoblacion(poblacion);	c.setMaxRecibosPendientes(0);
-			c.setEstado("Cuadrado");	
+			c.setEstado(1);	
 			if(idCont>0)	c.setIdPresidente(idCont);
 			if(editMode==1){
 				comAux.setCalle(direccion);

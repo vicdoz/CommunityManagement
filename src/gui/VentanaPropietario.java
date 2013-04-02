@@ -260,7 +260,7 @@ public class VentanaPropietario extends javax.swing.JFrame {
 				}
 			}
 			pack();
-			this.setSize(453, 470);
+			this.setSize(455, 470);
 			//Application.getInstance().getContext().getResourceMap(getClass()).injectComponents(getContentPane());
 		} catch (Exception e) {
 		    //add your error handling code here
@@ -312,7 +312,8 @@ public class VentanaPropietario extends javax.swing.JFrame {
 					e.printStackTrace();
 				}
 			}else{
-				Propietario p=new Propietario(nif,nombre,poblacion,direccion,telefono,obs,entidad,numcuenta);				
+				
+				Propietario p=new Propietario(nif,nombre,poblacion,direccion,telefono,obs,entidad,numcuenta,email);				
 				try {
 					p.setFechaalta(fechaalta);
 					System.out.println("Fecha de alta asignada. Creando en controlador");

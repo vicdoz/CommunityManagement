@@ -8,6 +8,10 @@ public class Factura {
 	private int idFactura;
 	private String fechaFactura;
 	private String CIF;
+	private float tipoIva;
+	private float importeIva;
+	private float importeSinIva;
+	private float importeConIva;
 	
 	private Set<LineaFactura> listaLineas = new HashSet<LineaFactura>();
 	private Comunidad comunidad;
@@ -55,5 +59,12 @@ public class Factura {
 	}
 	public String getCIF() {
 		return CIF;
+	}
+	public void calcularImporteTotal(){
+		importeIva=tipoIva*importeSinIva;
+		importeConIva=importeSinIva+importeIva;
+	}
+	public void acumulaImporteLinea(LineaFactura l){
+		importeSinIva+=l.getImporteLinea();
 	}
 }

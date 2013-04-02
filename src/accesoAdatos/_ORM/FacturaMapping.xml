@@ -14,9 +14,12 @@
 		<one-to-many class="negocio.LineaFactura" />
 	</set>
 	<property name="fechaFactura" column="fechafactura" />
-	
+	<property name="CIF" column="CIF" />
+	<property name="tipoIva" column="tipoIva" />
+	<property name="importeSinIva" column="importeSinIva" />
+	<property name="importeConIva" column="importeConIva" />
 
-					
+		
 	<many-to-one name="comunidad" class="negocio.Comunidad"	column="idComunidad" />
 	<many-to-one name="notainformativa" class= "negocio.NotaInformativa" column="idNotaInformativa" />
 	

@@ -1,6 +1,7 @@
 package negocio;
 
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Set;
 
 public class Comunidad {
@@ -10,7 +11,7 @@ public class Comunidad {
 	private String calle;
 	private String poblacion;
 	private int maxRecibosPendientes;
-	private String estado;
+	private int estado;
 	private int idPresidente;/*A falta de solucionar las 2 relaciones aqui sera el id del presidente de la comunidad*/
 
 	private Set<Inmueble> listaInmuebles = new HashSet<Inmueble>();
@@ -22,25 +23,26 @@ public class Comunidad {
 	/*Constructor*/
 	public Comunidad(){}
 	
-	public Set getListaInmuebles() {
+	public Set<Inmueble> getListaInmuebles() {
 		return listaInmuebles;
 	}
 	public Set<NotaInformativa> getListaNotasInformativas() {
 		return listaNotasInformativas;
 	}
 
-	public Set getListaFacturas() {
+	public Set<Factura> getListaFacturas() {
 		return listaFacturas;
 	}
 
 	public Comunidad(int idComunidad, String calle, int maxRecibosPendientes,
-			String estado, int idPresidente) {
+			int estado, int idPresidente) {
 		super();
 		this.idComunidad = idComunidad;
 		this.calle = calle;
 		this.maxRecibosPendientes = maxRecibosPendientes;
 		this.estado = estado;
 		this.idPresidente = idPresidente;
+		this.estado=-1;
 	}
 	/*Getters and setters*/
 	public int getIdComunidad() {
@@ -61,10 +63,10 @@ public class Comunidad {
 	public void setMaxRecibosPendientes(int maxRecibosPendientes) {
 		this.maxRecibosPendientes = maxRecibosPendientes;
 	}
-	public String getEstado() {
+	public int getEstado() {
 		return estado;
 	}
-	public void setEstado(String estado) {
+	public void setEstado(int estado) {
 		this.estado = estado;
 	}
 	public int getIdPresidente() {
@@ -100,4 +102,32 @@ public class Comunidad {
 	public void setListaFacturas(Set<Factura> listaFacturas) {
 		this.listaFacturas = listaFacturas;
 	}
+	public int convertirEstado(String estado){
+		estado=estado.toLowerCase().trim();
+		if(estado.equals("sincuadrar")){ this.estado=0;return 0;}
+		else if(estado.equals("cuadrado")){this.estado=1; return 1;}
+						else if(estado.equals("baja")){ this.estado=2;return 2;}
+								else if(estado.equals("moroso")){ this.estado=3;return 3;}
+										else return -1;
+
 	}
+	public int calcularEstado(){
+		int totalPercentaje=0;
+		Iterator<Inmueble> it= listaInmuebles.iterator();
+		while(it.hasNext()){
+			System.out.println("Buscando");
+			Inmueble iAux=it.next();
+			totalPercentaje+=iAux.getPorcentaje();
+		}
+		if(totalPercentaje==100){//cuadrado
+				estado=1;
+				return 1;
+		}else{ 
+			if(estado<=1){
+				estado=0;
+				return 0;
+			}//sin cuadrar
+		}
+		return 0;
+	}
+}

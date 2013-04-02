@@ -17,7 +17,7 @@
 	<property name="fechaalta" column="fechaalta" />
 	<property name="entidad" column="entidad" />
 	<property name="numerocuenta" column="numerocuenta" />	
-	
+	<property name="email" column="email" />
 	<set name="listaInmuebles">
 		<key column="idPropietario"/>
 		<one-to-many class="negocio.Inmueble" />
