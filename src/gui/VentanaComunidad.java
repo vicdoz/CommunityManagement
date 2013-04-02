@@ -213,7 +213,8 @@ public class VentanaComunidad extends javax.swing.JFrame {
 											Comunidad  caux=modeloCom.getComunidadPorPos(rowSel);
 											int op=OpcionesBorra(caux.getIdComunidad(),"Comunidad");
 											if(op==0){
-												modeloCom.borraComunidadPorPosicion(tablaCom.getSelectedRow());										
+												modeloCom.borraComunidadPorPosicion(tablaCom.getSelectedRow());	
+												modeloInm.cargaInmueblesComunidad(modeloInm.comunidad);
 												ChangeStatusBar(IN_BORRADO,caux.getIdComunidad(),null);
 												
 											}

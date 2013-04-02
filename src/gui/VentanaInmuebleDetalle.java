@@ -72,9 +72,10 @@ public class VentanaInmuebleDetalle extends javax.swing.JFrame {
 	public VentanaInmuebleDetalle(ModeloTablaInmueble mod) {
 		super();
 		this.modelo=mod;
+		comunidad = modelo.comunidad; 
 		initGUI();
 	}
-	@SuppressWarnings("static-access")
+	/*@SuppressWarnings("static-access")
 	public VentanaInmuebleDetalle(ModeloTablaInmueble mod,Comunidad c,Inmueble i) {
 		super();
 		this.modelo=mod;
@@ -86,14 +87,16 @@ public class VentanaInmuebleDetalle extends javax.swing.JFrame {
 	public VentanaInmuebleDetalle(ModeloTablaInmueble mod,Comunidad c) {
 		super();
 		this.modelo=mod;
-		initGUI();
 		comunidad=c;
+		initGUI();
+		
 	
-	}
+	}*/
 	
 	public VentanaInmuebleDetalle(int row, Inmueble i) {
 		super();
 		editMode=1;
+		comunidad=i.getComunidad();
 		initGUI();
 		
 		escaleraTextField.setText(i.getEscalera());		pisoTextField.setText(i.getPiso());
@@ -179,7 +182,7 @@ public class VentanaInmuebleDetalle extends javax.swing.JFrame {
 					{
 						ComTextField = new JTextField();
 						formularioPanel.add(ComTextField, new GridBagConstraints(1, 3, 2, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.HORIZONTAL, new Insets(0, 0, 0, 10), 0, 0));
-						ComTextField.setText(""+modelo.comunidad.getIdComunidad());
+						ComTextField.setText(""+comunidad.getIdComunidad());
 						ComTextField.setEnabled(false);
 					}
 				}
