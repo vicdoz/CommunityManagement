@@ -50,6 +50,8 @@ public class VentanaPropietario extends javax.swing.JFrame {
 	private JLabel entidadLabel;
 	private JTextField pobTextField;
 	private JTextField telefTextField;
+	private JLabel emailLabel;
+	private JTextField emailTextField;
 
 	private JEditorPane obsEditorPane;
 	private JLabel teleflabel;
@@ -94,6 +96,7 @@ public class VentanaPropietario extends javax.swing.JFrame {
 		
 		nifTextField.setText(pAux.getNif());
 		nombreTextField.setText(pAux.getNombre());
+		emailTextField.setText(pAux.getEmail());
 		direccionTextField.setText(pAux.getDireccion());
 		pobTextField.setText(pAux.getPoblacion());
 		telefTextField.setText(pAux.getTelefono().toString());
@@ -115,13 +118,12 @@ public class VentanaPropietario extends javax.swing.JFrame {
 				jContentPane.setPreferredSize(new java.awt.Dimension(437, 390));
 				{
 					formularioPanel = new JPanel();
-					GridBagLayout jPanel1Layout = new GridBagLayout();
-					
+					GridBagLayout jPanel1Layout = new GridBagLayout();					
 					
 					jPanel1Layout.columnWidths = new int[] {7, 7, 7};
-					jPanel1Layout.rowHeights = new int[] {7, 20, 7, 7, 7, 20, 20, 20, 20};
+					jPanel1Layout.rowHeights = new int[] {7, 20, 20, 7, 7, 7, 20, 20, 20, 20};
 					jPanel1Layout.columnWeights = new double[] {0.005, 0.1, 0.1};
-					jPanel1Layout.rowWeights = new double[] {0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1};
+					jPanel1Layout.rowWeights = new double[] {0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1};
 					jContentPane.add(formularioPanel, BorderLayout.CENTER);
 					formularioPanel.setLayout(jPanel1Layout);
 					formularioPanel.setPreferredSize(new java.awt.Dimension(369, 213));
@@ -153,67 +155,77 @@ public class VentanaPropietario extends javax.swing.JFrame {
 							
 					}
 					{
+						emailLabel = new JLabel();
+						formularioPanel.add(emailLabel, new GridBagConstraints(0, 2, 1, 1, 0.0, 0.0, GridBagConstraints.WEST, GridBagConstraints.HORIZONTAL, new Insets(0, 10, 0, 0), 0, 0));
+						emailLabel.setText("E-Mail");
+					}
+					{
+						emailTextField = new JTextField();
+						formularioPanel.add(emailTextField, new GridBagConstraints(1, 2, 2, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.HORIZONTAL, new Insets(0, 0, 0, 10), 0, 0));
+						if(pAux==null)	emailTextField.setText("");
+					}
+					{
 						direccionLabel = new JLabel();
-						formularioPanel.add(direccionLabel, new GridBagConstraints(0, 2, 1, 1, 0.0, 0.0, GridBagConstraints.WEST, GridBagConstraints.HORIZONTAL, new Insets(0, 10, 0, 0), 0, 0));
+						formularioPanel.add(direccionLabel, new GridBagConstraints(0, 3, 1, 1, 0.0, 0.0, GridBagConstraints.WEST, GridBagConstraints.HORIZONTAL, new Insets(0, 10, 0, 0), 0, 0));
 						direccionLabel.setText("Direccion");
 						direccionLabel.setName("direccionLabel");
 					}
 					{
 						direccionTextField = new JTextField();
-						formularioPanel.add(direccionTextField, new GridBagConstraints(1, 2, 2, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.HORIZONTAL, new Insets(0, 0, 0, 10), 0, 0));
+						formularioPanel.add(direccionTextField, new GridBagConstraints(1, 3, 2, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.HORIZONTAL, new Insets(0, 0, 0, 10), 0, 0));
 						if(pAux==null)	direccionTextField.setText("");
 					}
 					{
 						poblabel = new JLabel();
-						formularioPanel.add(poblabel, new GridBagConstraints(0, 3, 1, 1, 0.0, 0.0, GridBagConstraints.WEST, GridBagConstraints.NONE, new Insets(0, 10, 0, 0), 0, 0));
+						formularioPanel.add(poblabel, new GridBagConstraints(0, 4, 1, 1, 0.0, 0.0, GridBagConstraints.WEST, GridBagConstraints.NONE, new Insets(0, 10, 0, 0), 0, 0));
 						poblabel.setName("poblabel");
 						poblabel.setText("Poblacion");
 					}
 					{
 						pobTextField = new JTextField();
-						formularioPanel.add(pobTextField, new GridBagConstraints(1, 3, 2, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.HORIZONTAL, new Insets(0, 0, 0, 10), 0, 0));
+						formularioPanel.add(pobTextField, new GridBagConstraints(1, 4, 2, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.HORIZONTAL, new Insets(0, 0, 0, 10), 0, 0));
 						if(pAux==null) pobTextField.setText("");
 					}
 					{					
 						teleflabel = new JLabel();
-						formularioPanel.add(teleflabel, new GridBagConstraints(0, 4, 1, 1, 0.0, 0.0, GridBagConstraints.WEST, GridBagConstraints.NONE, new Insets(0, 10, 0, 0), 0, 0));
+						formularioPanel.add(teleflabel, new GridBagConstraints(0, 5, 1, 1, 0.0, 0.0, GridBagConstraints.WEST, GridBagConstraints.NONE, new Insets(0, 10, 0, 0), 0, 0));
 						teleflabel.setName("teleflabel");
 						teleflabel.setText("Telefono:");
 					}
 					{
 						telefTextField = new JTextField();
-						formularioPanel.add(telefTextField, new GridBagConstraints(1, 4, 2, 1, 0.0, 0.0, GridBagConstraints.EAST, GridBagConstraints.HORIZONTAL, new Insets(0, 0, 0, 10), 0, 0));
+						formularioPanel.add(telefTextField, new GridBagConstraints(1, 5, 2, 1, 0.0, 0.0, GridBagConstraints.EAST, GridBagConstraints.HORIZONTAL, new Insets(0, 0, 0, 10), 0, 0));
 						if(pAux==null) telefTextField.setText("");
 					}
 					{
 						entidadLabel = new JLabel();
-						formularioPanel.add(entidadLabel, new GridBagConstraints(0, 5, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
+						formularioPanel.add(entidadLabel, new GridBagConstraints(0, 6, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
 						entidadLabel.setText("Entidad");
 						
 					}
 					{
 						entidadTextField = new JTextField();
-						formularioPanel.add(entidadTextField, new GridBagConstraints(1, 5, 2, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.HORIZONTAL, new Insets(0, 0, 0, 10), 0, 0));
+						formularioPanel.add(entidadTextField, new GridBagConstraints(1, 6, 2, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.HORIZONTAL, new Insets(0, 0, 0, 10), 0, 0));
 						if(pAux==null) entidadTextField.setText("");
 					}
 					{
 						cuentaLabel = new JLabel();
-						formularioPanel.add(cuentaLabel, new GridBagConstraints(0, 6, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
+						formularioPanel.add(cuentaLabel, new GridBagConstraints(0, 7, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
 						cuentaLabel.setText("N. Cuenta");
 					}
 					{
 						cuentaTextField = new JTextField();
-						formularioPanel.add(cuentaTextField, new GridBagConstraints(1, 6, 2, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.HORIZONTAL, new Insets(0, 0, 0, 10), 0, 0));
+						formularioPanel.add(cuentaTextField, new GridBagConstraints(1, 7, 2, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.HORIZONTAL, new Insets(0, 0, 0, 10), 0, 0));
 						cuentaTextField.setText("");
 					}
 					{
 						obsLabel = new JLabel();
-						formularioPanel.add(obsLabel, new GridBagConstraints(0, 7, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
+						formularioPanel.add(obsLabel, new GridBagConstraints(0, 8, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
 						obsLabel.setText("Observ.:");
 					}
 					{
 						obsEditorPane = new JEditorPane();
-						formularioPanel.add(obsEditorPane, new GridBagConstraints(1, 7, 2, 2, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(10, 0, 10, 10), 0, 0));
+						formularioPanel.add(obsEditorPane, new GridBagConstraints(1, 8, 2, 2, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(10, 0, 10, 10), 0, 0));
 						obsEditorPane.setBorder(BorderFactory.createBevelBorder(BevelBorder.LOWERED));
 						obsEditorPane.setSize(362, 40);
 						obsEditorPane.setMaximumSize(new java.awt.Dimension(362, 50));
@@ -279,6 +291,7 @@ public class VentanaPropietario extends javax.swing.JFrame {
 		String nif = nifTextField.getText();		String direccion = direccionTextField.getText();
 		String nombre = nombreTextField.getText();	String poblacion=pobTextField.getText();
 		String telefono=telefTextField.getText(); 	String obs =obsEditorPane.getText();
+		String email = emailTextField.getText();
 		
 		if(nif.isEmpty() || nombre.isEmpty()){
 		
@@ -296,7 +309,7 @@ public class VentanaPropietario extends javax.swing.JFrame {
 			Calendar DiaSemana= Calendar.getInstance();
 			String fechaalta=DiaSemana.get(Calendar.YEAR)+"-"+DiaSemana.get(Calendar.MONTH)+"-"+DiaSemana.get(Calendar.DAY_OF_MONTH);
 			if(editMode==1){
-				pAux.setNif(nif);
+				pAux.setNif(nif);					pAux.setEmail(email);
 				pAux.setDireccion(direccion); 		pAux.setEntidad(entidad);
 				pAux.setNombre(nombre); 			pAux.setPoblacion(poblacion);
 				pAux.setTelefono(telefono); 		pAux.setObservaciones(obs);
