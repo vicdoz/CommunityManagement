@@ -48,7 +48,9 @@ public class ModeloTablaInmueble extends DefaultTableModel {
 		}		
 		public Inmueble getInmueblePorPos(int row) {
 			Inmueble i = new Inmueble();
-			i = ControladorInmueble.getControladorInmueble().getInmueblePorPos(row);
+			int id = Integer.parseInt(this.getValueAt(row, 0).toString());
+			i = ControladorInmueble.getControladorInmueble().getInmueblePorId(id);
+			//i = ControladorInmueble.getControladorInmueble().getInmueblePorPos(row);
 			return i ;
 	
 		}

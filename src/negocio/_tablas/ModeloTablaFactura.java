@@ -78,6 +78,5 @@ public class ModeloTablaFactura extends DefaultTableModel {
 			System.out.println("Fila nueva: "+v);
 			this.addRow(v);			
 		}
-
 }
 

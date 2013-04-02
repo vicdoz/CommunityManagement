@@ -16,7 +16,9 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
+import accesoAdatos._controladores.ControladorComunidad;
 import accesoAdatos._controladores.ControladorFactura;
+import accesoAdatos._controladores.ControladorLineaFactura;
 
 import java.util.*;
 
@@ -49,6 +51,7 @@ public class VentanaFacturas extends javax.swing.JFrame {
 	public static int IN_EXIS=1;
 	public static int GUARDA=4;
 	private JPanel facturaDetallePanel;
+	private JButton detButton;
 	private JButton delLineaButton;
 	private JButton editLineaButton;
 	private JButton addLineaButton;
@@ -204,6 +207,25 @@ public class VentanaFacturas extends javax.swing.JFrame {
 									}
 								});
 							}
+							{
+								detButton = new JButton();
+								factButtonPanel.add(detButton);
+								detButton.setText("Detalle");
+								detButton.addActionListener(new ActionListener() {
+									public void actionPerformed(ActionEvent evt) {
+										System.out.println("detButton.actionPerformed, event="+evt);
+										//TODO add your code for detButton.actionPerformed
+										if(tablaFact.getRowCount()<1||tablaFact.getSelectedRow()==-1){
+											MuestraMensaje(NO_FILA);										
+										}else{
+											int selRow = tablaFact.getSelectedRow();
+											Factura f = ControladorFactura.getControladorFactura().getFacturaPorPos(selRow);											
+											modeloFactDet.cargaLineasFactura(f);
+											jTabbedPane1.setSelectedIndex(2);
+										}
+									}
+								});
+							}
 						}
 					}
 					{
@@ -321,6 +343,8 @@ public class VentanaFacturas extends javax.swing.JFrame {
 									public void actionPerformed(ActionEvent evt) {
 										System.out.println("addLineaButton.actionPerformed, event="+evt);
 										//TODO add your code for addLineaButton.actionPerformed
+										VentanaLinea v = new VentanaLinea(modeloFactDet.factura);
+										v.setVisible(true);
 									}
 								});
 							}
@@ -332,6 +356,16 @@ public class VentanaFacturas extends javax.swing.JFrame {
 									public void actionPerformed(ActionEvent evt) {
 										System.out.println("editLineaButton.actionPerformed, event="+evt);
 										//TODO add your code for editLineaButton.actionPerformed
+										if(tablaFactDet.getRowCount()<1||tablaFactDet.getSelectedRow()==-1){
+											MuestraMensaje(NO_FILA);										
+										}else{
+											int rowSel = tablaFactDet.getSelectedRow();
+											LineaFactura lfAux = new LineaFactura();
+											int id = Integer.parseInt(tablaFactDet.getValueAt(rowSel, 0).toString());
+											lfAux = modeloFactDet.getLineaFacturaPorId(id);
+											VentanaLinea v = new VentanaLinea(lfAux,rowSel);
+											v.setVisible(true);											
+										}
 									}
 								});
 							}
@@ -343,6 +377,19 @@ public class VentanaFacturas extends javax.swing.JFrame {
 									public void actionPerformed(ActionEvent evt) {
 										System.out.println("delLineaButton.actionPerformed, event="+evt);
 										//TODO add your code for delLineaButton.actionPerformed
+										if(tablaFactDet.getRowCount()<1||tablaFactDet.getSelectedRow()==-1){
+											MuestraMensaje(NO_FILA);										
+										}else{
+											int rowSel = tablaFactDet.getSelectedRow();
+											LineaFactura lfAux = new LineaFactura();
+											int id = Integer.parseInt(tablaFactDet.getValueAt(rowSel, 0).toString());
+											lfAux = modeloFactDet.getLineaFacturaPorId(id);
+											int op=OpcionesBorra(lfAux.getIdLineaFactura(),"Linea Factura");
+											if(op==0){
+												modeloConc.borraConceptoPorPos(tablaConc.getSelectedRow());
+												ChangeStatusBar(IN_BORRADO,lfAux.getIdLineaFactura(),null);												
+											}									
+										}
 									}
 								});
 							}

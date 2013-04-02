@@ -12,6 +12,7 @@ import accesoAdatos._controladores.ControladorLineaFactura;
 public class ModeloTablaFacturaDetalle extends DefaultTableModel {
 		
 		public  int numLineas;
+		public Factura factura;
 		public ModeloTablaFacturaDetalle (){//example:new String[][]{{"1","Patio A","1","A"},{"2","Patio B","B","2"}} 
 			super(null,
 					new String[] {"Línea","Código Concepto", "Importe"});		
@@ -50,11 +51,11 @@ public class ModeloTablaFacturaDetalle extends DefaultTableModel {
 			//System.out.println("Inmueble con id: "+c.getIdComunidad()+" recuperado con exito");
 			return lF ;	
 		}
-		public Factura getFacturaPorPos(int row) {
-			Factura f=new Factura();
+		public LineaFactura getLineaFacturaPorPos(int row) {			
+			int id = Integer.parseInt(this.getValueAt(row, 0).toString());			
 			//c = ControladorComunidad.getControladorComunidad().getComunidadPorPos(row);
 			//System.out.println("Inmueble con id: "+c.getIdComunidad()+" recuperado con exito");
-			return f ;
+			return getLineaFacturaPorId(id) ;
 	
 		}
 		
@@ -74,6 +75,25 @@ public class ModeloTablaFacturaDetalle extends DefaultTableModel {
 			numLineas++;
 			System.out.println("Fila nueva: "+v);
 			this.addRow(v);			
+		}
+		private void limpiaTabla() {
+			// TODO Auto-generated method stub			
+			while(numLineas>0){
+				this.removeRow(numLineas-1);
+				numLineas--;				
+			}
+			
+		}
+		public void cargaLineasFactura(Factura f) {
+			// TODO Auto-generated method stub
+			limpiaTabla();
+			this.factura = f;
+			ArrayList<LineaFactura> listaLineas = ControladorLineaFactura.getControladorLineaFactura().GetListaLineaFactura();
+			System.out.println("Tamaño lista"+listaLineas.size());
+			for(LineaFactura lF:listaLineas){						
+				if(lF.getFactura().getidFactura()==factura.getidFactura())	this.addToTabla(lF);
+			}
+			
 		}
 
 }
