@@ -2,9 +2,11 @@ package negocio._tablas;
 
 import negocio.*;
 import accesoAdatos._controladores.ControladorFactura;
+import accesoAdatos._controladores.ControladorInmueble;
 import excepciones.*;
 
 import java.util.*;
+
 import javax.swing.table.DefaultTableModel;
 
 
@@ -16,11 +18,11 @@ public class ModeloTablaFactura extends DefaultTableModel {
 			super(null,
 					new String[] {"ID","CIF", "Num Factura", "Fecha", "Importe","%IVA", "Total"});		
 			numFacturas=0;
-			ArrayList<Factura> listaFacturas = ControladorFactura.getControladorFactura().GetListaFacturas();
+			/*ArrayList<Factura> listaFacturas = ControladorFactura.getControladorFactura().GetListaFacturas();
 			System.out.println("Tamaño lista"+listaFacturas.size());
 			for(Factura f:listaFacturas){						
 				this.addToTabla(f);
-			}
+			}*/
 		}
 		@Override
 	    public boolean isCellEditable(int row, int column) { //De esta forma no se pueden editar las celdas.
@@ -51,10 +53,11 @@ public class ModeloTablaFactura extends DefaultTableModel {
 			return f ;	
 		}
 		public Factura getFacturaPorPos(int row) {
-			Factura f=new Factura();
-			f = ControladorFactura.getControladorFactura().getFacturaPorPos(row);
-			System.out.println("Factura con id: "+f.getidFactura()+" recuperada con exito");
-			return f ;
+			//Factura f=new Factura();
+			int id = Integer.parseInt(this.getValueAt(row, 0).toString());
+			//f = ControladorFactura.getControladorFactura().getFacturaPorPos(row);
+			//System.out.println("Factura con id: "+f.getidFactura()+" recuperada con exito");
+			return getFacturaPorId(id) ;
 		}
 		
 		public void updateRow(int row,Factura f){			
@@ -78,5 +81,24 @@ public class ModeloTablaFactura extends DefaultTableModel {
 			System.out.println("Fila nueva: "+v);
 			this.addRow(v);			
 		}
+		public void cargaFacturasComunidad(Comunidad c){
+			//limpiaTabla();
+			ArrayList<Factura> listaFacturas = ControladorFactura.getControladorFactura().GetListaFacturas();
+			System.out.println("Tamaño lista"+listaFacturas.size());
+			for(Factura f:listaFacturas){						
+				if(f.getComunidad().getIdComunidad()==c.getIdComunidad()) this.addToTabla(f);
+			}
+		}
+		
+		@SuppressWarnings("unused")
+		private void limpiaTabla() {
+			// TODO Auto-generated method stub			
+			while(numFacturas>0){
+				this.removeRow(numFacturas-1);
+				numFacturas--;				
+			}		
+		}
+		
+		
 }
 

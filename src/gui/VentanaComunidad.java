@@ -34,6 +34,16 @@ import java.util.*;
 @SuppressWarnings("serial")
 public class VentanaComunidad extends javax.swing.JFrame {
 
+	{
+		//Set Look & Feel
+		try {
+			javax.swing.UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+
 	private JButton delComButton;
 	private JButton addComButton;
 	private JPanel ComButtonPanel;
@@ -46,6 +56,9 @@ public class VentanaComunidad extends javax.swing.JFrame {
 	public static int IN_BORRADO=0, NO_FILA=0;
 	public static int IN_EXIS=1;
 	public static int GUARDA=4;
+	private JMenuItem facturasTodas;
+	private JMenuItem facturasComunidad;
+	private JMenu generarFacturas;
 	private JMenuItem ventanaFacturas;
 	private JMenu facturaMenu;
 	private JButton detalleButton;
@@ -484,15 +497,59 @@ public class VentanaComunidad extends javax.swing.JFrame {
 						{
 							ventanaFacturas = new JMenuItem();
 							facturaMenu.add(ventanaFacturas);
-							ventanaFacturas.setText("Facturas Comunidad");
+							ventanaFacturas.setText("Gestion Facturas");
 							ventanaFacturas.addActionListener(new ActionListener() {
 								public void actionPerformed(ActionEvent evt) {
 									System.out.println("ventanaFacturas.actionPerformed, event="+evt);									
-									//TODO add your code for detalleButton.actionPerformed
-									VentanaFacturas vF = new VentanaFacturas();
-									vF.setVisible(true);
+									//TODO add your code for detalleButton.actionPerformed									
+									if(tablaCom.getRowCount()<1||tablaCom.getSelectedRow()==-1){
+										MuestraMensaje(NO_FILA);										
+									}else{
+										int rowSel = tablaCom.getSelectedRow();
+										Comunidad  caux=modeloCom.getComunidadPorPos(rowSel);
+										System.out.println(caux.getIdComunidad());
+										VentanaFacturas vF = new VentanaFacturas(caux);
+										vF.setVisible(true);
+									}									
 								}
 							});
+						}
+						{
+							generarFacturas = new JMenu();
+							facturaMenu.add(generarFacturas);
+							generarFacturas.setText("Generar Facturas");
+							{
+								facturasComunidad = new JMenuItem();
+								generarFacturas.add(facturasComunidad);
+								facturasComunidad.setText("De Comunidad");
+								facturasComunidad.addActionListener(new ActionListener() {
+									public void actionPerformed(ActionEvent evt) {
+										System.out.println("facturasComunidad.actionPerformed, event="+evt);
+										//TODO add your code for facturasComunidad.actionPerformed
+										if(tablaCom.getRowCount()<1||tablaCom.getSelectedRow()==-1){
+											MuestraMensaje(NO_FILA);										
+										}else{
+											int rowSel = tablaCom.getSelectedRow();
+											Comunidad  caux=modeloCom.getComunidadPorPos(rowSel);
+											System.out.println(caux.getIdComunidad());
+											ReportFacturas report = new ReportFacturas();
+											report.muestraPorComunidad(caux.getIdComunidad());
+										}
+									}
+								});
+							}
+							{
+								facturasTodas = new JMenuItem();
+								generarFacturas.add(facturasTodas);
+								facturasTodas.setText("Todas");
+								facturasTodas.addActionListener(new ActionListener() {
+									public void actionPerformed(ActionEvent evt) {
+										System.out.println("facturasTodas.actionPerformed, event="+evt);										
+										ReportFacturas report= new ReportFacturas();
+										report.muestraTodos();
+									}
+								});
+							}
 						}
 					}
 				}

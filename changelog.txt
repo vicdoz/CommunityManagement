@@ -1,3 +1,8 @@
+CHANGELOG 02/04/2013-15:14h v2.04:
+ - Se poden generar els reports de les factures per comunitat o totes.
+ - Se poden generar els reports dels conceptes insertats.
+ - La finestra factura només s'obri mostrant les factures de una comunitat seleccionada.
+
 CHANGELOG 02/04/2013-00:08h v2.03:
  - Modificat codi de inmobles i línies per a que recuperen per id ja que ara la posició a les taules no es real
  - Afegit codi per a A/B/M de LineaFactura. (falla al recuperar el concepte, per tant no es crea)

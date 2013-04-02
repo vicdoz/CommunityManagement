@@ -77,7 +77,7 @@ public class VentanaFacturas extends javax.swing.JFrame {
 
 		//public static GestionInmuebles gestion = new GestionInmuebles();
 
-
+	private static Comunidad comunidad;
 	public static JTable tablaFact;
 	public static JTable tablaConc;
 	public static JTable tablaFactDet;
@@ -103,7 +103,12 @@ public class VentanaFacturas extends javax.swing.JFrame {
 		super();
 		initGUI();
 	}
-	
+	public VentanaFacturas(Comunidad com) {
+		super();
+		VentanaFacturas.comunidad=com;
+		modeloFact.cargaFacturasComunidad(comunidad);
+		initGUI();
+	}	
 	private void initGUI() {
 		try {
 			{
@@ -161,7 +166,7 @@ public class VentanaFacturas extends javax.swing.JFrame {
 									public void actionPerformed(ActionEvent evt) {
 										System.out.println("addFactButton.actionPerformed, event="+evt);
 										//TODO add your code for addFactButton.actionPerformed
-										VentanaFacturaNueva v = new VentanaFacturaNueva();
+										VentanaFacturaNueva v = new VentanaFacturaNueva(comunidad);
 										v.setVisible(true);
 									}
 								});
@@ -444,8 +449,7 @@ public class VentanaFacturas extends javax.swing.JFrame {
 								listaFacturasTodas.addActionListener(new ActionListener() {
 									public void actionPerformed(ActionEvent evt) {
 										System.out.println("listaFacturasTodas.actionPerformed, event="+evt);
-										ReportFacturas report= new ReportFacturas();
-										report.muestraTodos();
+
 									}
 								});
 							}
@@ -537,4 +541,6 @@ public class VentanaFacturas extends javax.swing.JFrame {
 		else if(NumeroMes==11){DiaMesLetra="Diciembre";}
 		statusbar.setText(DiaSemanaLetra + ", " + DiaMes.get(Calendar.DAY_OF_MONTH) + " de " + DiaMesLetra + " " + DiaMes.get(Calendar.YEAR));
 	}
+
+
 }

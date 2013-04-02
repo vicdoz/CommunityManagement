@@ -34,6 +34,27 @@ public class ReportFacturas {
 
 		JasperViewer.viewReport(informe,false);
 	}
+	@SuppressWarnings("unchecked")	
+	public void muestraPorComunidad(int id) {
+		JasperPrint informe = null;
+
+		Session sesion= UtilidadHibernate.getSessionFactory().openSession();
+		HashMap parametros = new HashMap();
+
+		parametros.put(JRHibernateQueryExecuterFactory.
+				   		          PARAMETER_HIBERNATE_SESSION,sesion);
+		parametros.put("IDCOM",id);
+
+		try {
+			String fileName= "src/reports/listados/FacturasDeComunidad.jasper";
+			System.out.println("Fichero encontrado!");
+			 informe= JasperFillManager.fillReport(fileName, parametros);
+		   
+		}
+		catch (JRException e){e.printStackTrace();}
+
+		JasperViewer.viewReport(informe,false);
+	}
 	
 	@SuppressWarnings("unchecked")	
 	public void muestraDetalle(int id) {

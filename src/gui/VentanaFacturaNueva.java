@@ -67,6 +67,11 @@ public class VentanaFacturaNueva extends javax.swing.JFrame {
 		super();
 		initGUI();
 	}
+	public VentanaFacturaNueva(Comunidad c) {
+		super();
+		this.comunidad = c;
+		initGUI();
+	}
 	
 	public VentanaFacturaNueva(int row, Factura f) {
 		super();
@@ -120,7 +125,8 @@ public class VentanaFacturaNueva extends javax.swing.JFrame {
 					{
 						ComTextField = new JTextField();
 						formularioPanel.add(ComTextField, new GridBagConstraints(1, 1, 2, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.HORIZONTAL, new Insets(0, 0, 0, 10), 0, 0));
-						if(FactAux==null)	ComTextField.setText("");
+						ComTextField.setText(""+comunidad.getIdComunidad());
+						ComTextField.setEnabled(false);		
 					}
 				}
 				{
