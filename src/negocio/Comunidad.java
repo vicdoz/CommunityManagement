@@ -122,12 +122,19 @@ public class Comunidad {
 		if(totalPercentaje==100){//cuadrado
 				estado=1;
 				return 1;
-		}else{ 
+		}else{ //sin cuadrar
 			if(estado<=1){
 				estado=0;
 				return 0;
-			}//sin cuadrar
+			}
 		}
 		return 0;
+	}
+	public String getEstadoToString(){
+		if (estado==0) return "Sin cuadrar";
+		else if (estado==1) return "Cuadrado";
+		else if(estado==2) return "Baja";
+		else if(estado==3) return "Moroso";
+		return "Estado";
 	}
 }

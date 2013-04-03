@@ -32,6 +32,7 @@ public class EJEMPLO_COMPLETO {
 			p.setFechaalta("14-45-34");
 			p.setNif("1234324S");
 			p.setNombre("victor ahuir");
+			p.setEmail("v.ahuir@gmail.com");
 			p.setNumerocuenta(0000000);
 			p.setObservaciones("nada");
 			p.setPoblacion("valencia");
