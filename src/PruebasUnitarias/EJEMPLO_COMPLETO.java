@@ -41,9 +41,10 @@ public class EJEMPLO_COMPLETO {
 			c.setDescripcion("prueba2");
 			c.setIdConcepto(1);
 		//LineaFactura
+			
 			l.setObservacion("nada");
 			l.setImporteLinea((float)1.5);	
-			l.setConcepto(c);
+			//l.setConcepto(c);
 			l.setFactura(f);	
 		//Factura
 			f.setFechaFactura("1-1-2013");
@@ -82,14 +83,14 @@ public class EJEMPLO_COMPLETO {
 		
 		//Guardamos cambios en BD
 			cp.NuevoPropietario(p);
+			cc1.nuevaCarta(c1);
 			cm.nuevaComunidad(com);
 			ci.nuevoInmueble(i);
+			cc.nuevoConcepto(c);
 			cni.nuevaNotaInformativa(ni);
 			cf.nuevaFactura(f);
-			cl.nuevoLineaFactura(l);
-			cc1.nuevaCarta(c1);
 			cri.NuevoReciboInmueble(ri);
-		
+			cl.nuevoLineaFactura(l);
 		System.out.println("Insertado correctamente");		
 	}
 }

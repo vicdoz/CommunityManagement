@@ -1,3 +1,8 @@
+
+CHANGELOG 03/04/2013-3:33 v3.01:
+ - Arreglado ejemplo completo(Faltaba guardar un objeto,ups(Con anterior version hiberante no se enteraba)
+ - Git ignore arreglado
+
 CHANGELOG 02/04/2013-23:08 v3.01:
  - Corregits errors de borrar comunitat/Factura i que es mostren inmobles/linies de les borrades
 

@@ -1,3 +1,14 @@
-bin/**/*
+/bin/accesoAdatos/*
+/bin/accesoAdatos/_controladores/*
+/bin/accesoAdatos/_interfaces/*
+/bin/accesoAdatos/_ORM/*
+/bin/excepciones/*
+/bin/gui/*
+/bin/negocio/*
+/bin/negocio/_tablas/*
+/bin/pruebasUnitarias/*
+/bin/reports/*
+/bin/reports/listados/*
+
 .project
 .classpath
