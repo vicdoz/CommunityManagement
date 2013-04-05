@@ -67,6 +67,23 @@ public class ControladorPropietario implements InterfaceControladorPropietario  
 		}	
 		return ListaPropietarios;
 	}
+	@SuppressWarnings("unchecked")
+	public ArrayList<String> GetListaNombresPropietarios() {
+		ArrayList<String> nombres=new ArrayList<String>();
+		try {	
+			if(ListaPropietarios.isEmpty())
+				ListaPropietarios = miDaoPropietario.getListaPropietariosDAO();
+			Iterator<Propietario> it= ListaPropietarios.iterator();
+				while(it.hasNext()){
+					Propietario paux=it.next();
+					nombres.add(paux.getNombre());
+				}		
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}	
+		return nombres;
+	}
 	@Override
 	public void NuevoPropietario(Propietario p) throws Exception {
 		// TODO Auto-generated method stub

@@ -8,7 +8,10 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
@@ -41,7 +44,6 @@ public class VentanaComunidadNueva extends javax.swing.JFrame {
 	private JPanel jContentPane;
 	private JPanel jPanel1;
 	private JLabel jLabel;
-	private JTextField contactTextField;
 	private JTextField pobTextField;
 	private JLabel poblabel;
 	private JLabel contactLabel;
@@ -52,6 +54,7 @@ public class VentanaComunidadNueva extends javax.swing.JFrame {
 	private JButton volverButton;
 	private JButton guardarButton;
 	private JPanel formularioPanel;
+	private JComboBox<String> propietarios;
 	private int editMode=0;
 	private int rowAux;
 	public static ModeloTablaComunidad modelo = null;
@@ -91,6 +94,7 @@ public class VentanaComunidadNueva extends javax.swing.JFrame {
 	}
 	
 	
+	@SuppressWarnings("unchecked")
 	private void initGUI() {
 		try {
 			setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
@@ -156,8 +160,10 @@ public class VentanaComunidadNueva extends javax.swing.JFrame {
 						contactLabel.setText("Contacto");
 					}
 					{
-						contactTextField = new JTextField();
-						formularioPanel.add(contactTextField, new GridBagConstraints(1, 3, 2, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.HORIZONTAL, new Insets(0, 0, 0, 10), 0, 0));
+						
+						ArrayList<String> listaPropietarios=ControladorPropietario.getControladorPropietario().GetListaNombresPropietarios();
+						propietarios = new JComboBox(listaPropietarios.toArray());
+						formularioPanel.add(propietarios, new GridBagConstraints(1, 3, 2, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.HORIZONTAL, new Insets(0, 0, 0, 10), 0, 0));
 					}
 				}
 				{
@@ -218,7 +224,7 @@ public class VentanaComunidadNueva extends javax.swing.JFrame {
 	private void guardarDatos() throws InmuebleYaExiste{
 		int idCont=0;
 		String nombre = nombreTextField.getText();		String direccion = direccionTextField.getText();
-		String poblacion = pobTextField.getText();		String auxCont = contactTextField.getText();
+		String poblacion = pobTextField.getText();		String auxCont = String.valueOf(ControladorPropietario.getControladorPropietario().getPropietarioPorPos(propietarios.getSelectedIndex()).getIdPropietario());
 		if(isInteger(auxCont))	idCont = Integer.parseInt(auxCont);
 		else	idCont=-1;
 		System.out.println("idCont="+idCont);

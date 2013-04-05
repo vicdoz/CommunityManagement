@@ -45,7 +45,7 @@ public class EJEMPLO_COMPLETO {
 			
 			l.setObservacion("nada");
 			l.setImporteLinea((float)1.5);	
-			//l.setConcepto(c);
+			l.setConcepto(c);
 			l.setFactura(f);	
 		//Factura
 			f.setFechaFactura("1-1-2013");
