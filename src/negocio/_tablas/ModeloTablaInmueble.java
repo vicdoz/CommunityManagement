@@ -83,10 +83,8 @@ public class ModeloTablaInmueble extends DefaultTableModel {
 			// TODO Auto-generated method stub			
 			while(numInmuebles>0){
 				this.removeRow(numInmuebles-1);
-				numInmuebles--;
-				
-			}
-			
+				numInmuebles--;				
+			}			
 		}
 		public void updateRow(int row, Inmueble i){
 			this.setValueAt(i.getComunidad().getIdComunidad(),row,1);
@@ -103,6 +101,18 @@ public class ModeloTablaInmueble extends DefaultTableModel {
 			v.add(i.getPropietario().getIdPropietario());
 			numInmuebles++;			
 			this.addRow(v); 			
+		}
+		public void cargaInmueblesPropietario(Propietario pAux) {
+			// TODO Auto-generated method stub
+			limpiaTabla();
+			ArrayList<Inmueble> listaInmuebles = ControladorInmueble.getControladorInmueble().GetListaInmuebles();
+			System.out.println("Tamaño lista Inmuebles: "+listaInmuebles.size());
+			for(Inmueble i:listaInmuebles){						
+				if(i.getPropietario().getIdPropietario()==pAux.getIdPropietario()){
+					this.addToTabla(i);
+				}
+			}
+			
 		}
 }
 

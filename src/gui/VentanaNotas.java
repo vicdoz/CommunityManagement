@@ -24,10 +24,6 @@ import javax.swing.JTable;
 import javax.swing.WindowConstants;
 import javax.swing.SwingUtilities;
 
-import excepciones.DAOExcepcion;
-import excepciones.InmuebleYaExiste;
-
-import accesoAdatos._controladores.ControladorFactura;
 import accesoAdatos._controladores.ControladorNotaInformativa;
 
 

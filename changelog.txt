@@ -1,4 +1,11 @@
-CHANGELOG 05/04/2013-15:07 v3.04:
+CHANGELOG 05/04/2013-18:10 v3.05:
+ - Creada taula ModeloTablaRecibo
+ - VentanaPagoRecibos modificada:
+ 	- Opció "Facturas Propietario", mostra totes les factures del propietari
+ 	- Opció "Todos los inmuebles" , mostra tots els inmobles a la BD.
+ - Creats métodes a VentanaPagoRecibos per a mostrar els rebuts que falten per pagar (de propietari o inmoble).
+ 
+CHANGELOG 05/04/2013-17:10 v3.04:
  - Creat métode deleteFromTabla a totes les taules (era necessari)
  - Creats els métodes per a assignar i llevar factures d'una nota informativa.
 
