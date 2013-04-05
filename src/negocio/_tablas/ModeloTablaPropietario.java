@@ -36,10 +36,16 @@ public class ModeloTablaPropietario extends DefaultTableModel {
 		public void borraPropietarioPorPosicion(int row){
 			try {
 				ControladorPropietario.getControladorPropietario().borrarPropietario(getPropietarioPorPosicion(row));
+				deleteFromTabla(row);
 			} catch (DAOExcepcion e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-			}
+			}			
+		}
+		public void deleteFromTabla(int row){ //Borra la factura solo de la TABLA no de la BD		
+			int id = Integer.parseInt(this.getValueAt(row, 0).toString());
+			System.out.println("Fila: "+row+" ID:"+id);	
+			numPropietarios--;
 			this.removeRow(row);
 		}
 		public Propietario getPropietarioPorPosicion(int row){

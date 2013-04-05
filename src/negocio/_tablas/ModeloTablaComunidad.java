@@ -37,15 +37,21 @@ public class ModeloTablaComunidad extends DefaultTableModel {
 		public void borraComunidadPorPosicion(int row){
 			//Integer id=(Integer)getValueAt(row, 0);
 			try {
-				int id = Integer.parseInt(this.getValueAt(row, 0).toString());
-				System.out.println("Fila: "+row+" ID:"+id);
+				int id = Integer.parseInt(this.getValueAt(row, 0).toString());				
 				ControladorComunidad.getControladorComunidad().borrarComunidad(getComunidadPorId(id));
+				deleteFromTabla(row);
 			} catch (DAOExcepcion e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-			}
+			}			
+		}
+		public void deleteFromTabla(int row){ //Borra la factura solo de la TABLA no de la BD		
+			int id = Integer.parseInt(this.getValueAt(row, 0).toString());
+			System.out.println("Fila: "+row+" ID:"+id);	
+			numComunidades--;
 			this.removeRow(row);
 		}
+		
 		public Comunidad getComunidadPorId(int id) {
 			Comunidad c=new Comunidad();
 			c = ControladorComunidad.getControladorComunidad().getComunidadPorId(id);
@@ -69,7 +75,7 @@ public class ModeloTablaComunidad extends DefaultTableModel {
 			this.setValueAt("RECIBOS PENDIENTES", row, 5);			
 			this.setValueAt(c.getEstadoToString(), row, 6);
 			
-		}
+		}	
 		@SuppressWarnings("unchecked")
 		public void addToTabla(Comunidad c){
 			Vector v=new Vector();

@@ -36,13 +36,18 @@ public class ModeloTablaFacturaDetalle extends DefaultTableModel {
 		}
 		public void borraFacturaPorPos(int row){
 			try {
-				int id = Integer.parseInt(this.getValueAt(row, 0).toString());
-				System.out.println("Fila: "+row+" ID:"+id);
+				int id = Integer.parseInt(this.getValueAt(row, 0).toString());				
 				ControladorLineaFactura.getControladorLineaFactura().borrarLineaFactura(getLineaFacturaPorId(id));
+				deleteFromTabla(row);
 			} catch (DAOExcepcion e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+		}
+		public void deleteFromTabla(int row){ //Borra la factura solo de la TABLA no de la BD		
+			int id = Integer.parseInt(this.getValueAt(row, 0).toString());
+			System.out.println("Fila: "+row+" ID:"+id);	
+			numLineas--;
 			this.removeRow(row);
 		}
 		public LineaFactura getLineaFacturaPorId(int id) {

@@ -16,12 +16,7 @@ public class ModeloTablaNotas extends DefaultTableModel {
 		public ModeloTablaNotas (){	//"ID","Fecha Calculo", "Importe", "idRecibo", "Id Comunidad" 
 			super(null,
 					new String[] {"ID","Fecha Calculo", "Importe", "idRecibo", "idComunidad"});		
-			numNotas=0;
-			/*ArrayList<NotaInformativa> listaNotas = ControladorNotaInformativa.getControladorNotaInformativa().GetListaNotaInformativas();
-			System.out.println("Tamaño lista"+listaNotas.size());
-			for(NotaInformativa lN:listaNotas){						
-				this.addToTabla(lN);
-			}*/
+			numNotas=0;			
 		}
 		@Override
 	    public boolean isCellEditable(int row, int column) { //De esta forma no se pueden editar las celdas.
@@ -36,14 +31,18 @@ public class ModeloTablaNotas extends DefaultTableModel {
 		}
 		public void borraNotaPorPos(int row){
 			try {
-				int id = Integer.parseInt(this.getValueAt(row, 0).toString());
-				System.out.println("Fila: "+row+" ID:"+id);
-				NotaInformativa nI = getNotaPorId(id);
-				ControladorNotaInformativa.getControladorNotaInformativa().borrarNotaInformativa(nI);
+				int id = Integer.parseInt(this.getValueAt(row, 0).toString());								
+				ControladorNotaInformativa.getControladorNotaInformativa().borrarNotaInformativa(getNotaPorId(id));
+				deleteFromTabla(row);
 			} catch (DAOExcepcion e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+		}
+		public void deleteFromTabla(int row){ //Borra la factura solo de la TABLA no de la BD		
+			int id = Integer.parseInt(this.getValueAt(row, 0).toString());
+			System.out.println("Fila: "+row+" ID:"+id);	
+			numNotas--;
 			this.removeRow(row);
 		}
 		public NotaInformativa getNotaPorId(int id) {

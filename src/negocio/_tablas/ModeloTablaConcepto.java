@@ -36,14 +36,19 @@ public class ModeloTablaConcepto extends DefaultTableModel {
 		}
 		public void borraConceptoPorPos(int row){
 			try {
-				int id = Integer.parseInt(this.getValueAt(row, 0).toString());
-				System.out.println("Fila: "+row+" ID:"+id);
-				ControladorConcepto.getControladorConcepto().borrarConcepto(getConceptoPorId(id));				
+				int id = Integer.parseInt(this.getValueAt(row, 0).toString());				
+				ControladorConcepto.getControladorConcepto().borrarConcepto(getConceptoPorId(id));
+				deleteFromTabla(row);
 			} catch (DAOExcepcion e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-			}
-			this.removeRow(row);			
+			}						
+		}
+		public void deleteFromTabla(int row){ //Borra la factura solo de la TABLA no de la BD		
+			int id = Integer.parseInt(this.getValueAt(row, 0).toString());
+			System.out.println("Fila: "+row+" ID:"+id);	
+			numConceptos--;
+			this.removeRow(row);
 		}
 		public Concepto getConceptoPorId(int id) {
 			Concepto c=new Concepto();

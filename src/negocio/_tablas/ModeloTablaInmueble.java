@@ -40,18 +40,23 @@ public class ModeloTablaInmueble extends DefaultTableModel {
 		public void borraInmueblePorPos(int row){			
 			try {
 				ControladorInmueble.getControladorInmueble().borrarInmueble(getInmueblePorPos(row));
+				deleteFromTabla(row);
 			} catch (DAOExcepcion e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-			}		
-			
+			}			
+		}
+		public void deleteFromTabla(int row){ //Borra la factura solo de la TABLA no de la BD		
+			int id = Integer.parseInt(this.getValueAt(row, 0).toString());
+			System.out.println("Fila: "+row+" ID:"+id);	
+			numInmuebles--;
 			this.removeRow(row);
-		}		
+		}
+		
 		public Inmueble getInmueblePorPos(int row) {
 			Inmueble i = new Inmueble();
 			int id = Integer.parseInt(this.getValueAt(row, 0).toString());
 			i = ControladorInmueble.getControladorInmueble().getInmueblePorId(id);
-			//i = ControladorInmueble.getControladorInmueble().getInmueblePorPos(row);
 			return i ;
 	
 		}

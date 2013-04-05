@@ -2,6 +2,7 @@ package gui;
 
 import negocio._tablas.*;
 import negocio.Comunidad;
+import negocio.Factura;
 import negocio.NotaInformativa;
 
 import java.awt.BorderLayout;
@@ -23,6 +24,10 @@ import javax.swing.JTable;
 import javax.swing.WindowConstants;
 import javax.swing.SwingUtilities;
 
+import excepciones.DAOExcepcion;
+import excepciones.InmuebleYaExiste;
+
+import accesoAdatos._controladores.ControladorFactura;
 import accesoAdatos._controladores.ControladorNotaInformativa;
 
 
@@ -73,7 +78,7 @@ public class VentanaNotas extends javax.swing.JFrame {
 	private JMenu jMenu1;
 	
 	private Comunidad cAux;
-	
+	private NotaInformativa niAux;
 	public JTable notasTable;
 	public JTable factsPendTable;
 	public JTable factsSelTable;
@@ -180,11 +185,9 @@ public class VentanaNotas extends javax.swing.JFrame {
 									if(notasTable.getRowCount()<1||notasTable.getSelectedRow()==-1){
 										javax.swing.JOptionPane.showMessageDialog(null, "No hay ninguna fila seleccionada");										
 									}else{
-										int selRow = notasTable.getSelectedRow();	
-										
-										NotaInformativa nI = ControladorNotaInformativa.getControladorNotaInformativa().getNotaInformativaPorPos(selRow);
-										
-										factsSelModel.cargaFacturasComunidadAsignadas(nI);
+										int selRow = notasTable.getSelectedRow();											
+										niAux = ControladorNotaInformativa.getControladorNotaInformativa().getNotaInformativaPorPos(selRow);									
+										factsSelModel.cargaFacturasComunidadAsignadas(niAux);
 										factsPendModel.cargaFacturasComunidadPendientes(cAux);										
 										notasTabbedPane.setSelectedIndex(1);
 									}
@@ -227,11 +230,24 @@ public class VentanaNotas extends javax.swing.JFrame {
 						{
 							left2rightButton = new JButton();
 							leftOrRightPanel.add(left2rightButton, new GridBagConstraints(1, 4, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
-							left2rightButton.setText("->");
+							left2rightButton.setText("->"); //This means we assign a "Nota" to a given "Factura"
 							left2rightButton.addActionListener(new ActionListener() {
 								public void actionPerformed(ActionEvent evt) {
 									System.out.println("left2rightButton.actionPerformed, event="+evt);
 									//TODO add your code for left2rightButton.actionPerformed
+									if(factsPendTable.getRowCount()<1||factsPendTable.getSelectedRow()==-1){
+										javax.swing.JOptionPane.showMessageDialog(null, "No hay ninguna fila seleccionada");										
+									}else{
+										int selRow = factsPendTable.getSelectedRow();		
+										Factura fAux = factsPendModel.getFacturaPorPos(selRow);																				//
+										factsPendModel.setDeNotaInformativa(fAux, niAux);
+										//Delete from "pendientes"
+										factsPendModel.deleteFromTabla(selRow);
+										factsPendTable.setModel(factsPendModel);
+										//Add to "selected"
+										factsSelModel.addToTabla(fAux);
+										factsSelTable.setModel(factsSelModel);
+									}
 								}
 							});
 						}
@@ -243,6 +259,19 @@ public class VentanaNotas extends javax.swing.JFrame {
 								public void actionPerformed(ActionEvent evt) {
 									System.out.println("right2leftButton.actionPerformed, event="+evt);
 									//TODO add your code for right2leftButton.actionPerformed
+									if(factsSelTable.getRowCount()<1||factsSelTable.getSelectedRow()==-1){
+										javax.swing.JOptionPane.showMessageDialog(null, "No hay ninguna fila seleccionada");										
+									}else{
+										int selRow = factsSelTable.getSelectedRow();		
+										Factura fAux = factsSelModel.getFacturaPorPos(selRow);																				//
+										factsSelModel.setDeNotaInformativa(null, niAux);
+										//Delete from "pendientes"
+										factsSelModel.deleteFromTabla(selRow);
+										factsSelTable.setModel(factsPendModel);
+										//Add to "selected"
+										factsPendModel.addToTabla(fAux);
+										factsPendTable.setModel(factsSelModel);
+									}
 								}
 							});
 						}
@@ -254,6 +283,16 @@ public class VentanaNotas extends javax.swing.JFrame {
 								public void actionPerformed(ActionEvent evt) {
 									System.out.println("all2rightButton.actionPerformed, event="+evt);
 									//TODO add your code for all2rightButton.actionPerformed
+									for(int i=0; i<factsPendTable.getRowCount();i++){										
+										Factura fAux = factsPendModel.getFacturaPorPos(i);
+										//Delete from "pendientes"
+										factsPendModel.setDeNotaInformativa(fAux, niAux);											
+										factsPendModel.deleteFromTabla(i);
+										factsPendTable.setModel(factsPendModel);
+										//Add to "selected"
+										factsSelModel.addToTabla(fAux);
+										factsSelTable.setModel(factsSelModel);																																				
+									}
 								}
 							});
 						}
@@ -265,6 +304,16 @@ public class VentanaNotas extends javax.swing.JFrame {
 								public void actionPerformed(ActionEvent evt) {
 									System.out.println("all2leftButton.actionPerformed, event="+evt);
 									//TODO add your code for all2leftButton.actionPerformed
+									for(int i=0; i<factsSelTable.getRowCount();i++){										
+										Factura fAux = factsSelModel.getFacturaPorPos(i);
+										//Delete from "pendientes"
+										factsSelModel.setDeNotaInformativa(null, niAux);
+										factsSelModel.deleteFromTabla(i);
+										factsSelTable.setModel(factsSelModel);										
+										//Add to "selected"
+										factsPendModel.addToTabla(fAux);
+										factsPendTable.setModel(factsPendModel);										
+									}
 								}
 							});
 						}

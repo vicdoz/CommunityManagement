@@ -189,7 +189,7 @@ public class VentanaFacturas extends javax.swing.JFrame {
 											MuestraMensaje(NO_FILA);										
 										}else{
 											int rowSel = tablaFact.getSelectedRow();
-											Factura fAux = ControladorFactura.getControladorFactura().getFacturaPorPos(rowSel);
+											Factura fAux = modeloFact.getFacturaPorPos(rowSel); 												
 											VentanaFacturaNueva v = new VentanaFacturaNueva(rowSel,fAux);
 											v.setVisible(true);
 										}

@@ -36,15 +36,21 @@ public class ModeloTablaFactura extends DefaultTableModel {
 		}
 		public void borraFacturaPorPos(int row){
 			try {
-				int id = Integer.parseInt(this.getValueAt(row, 0).toString());
-				System.out.println("Fila: "+row+" ID:"+id);
+				int id = Integer.parseInt(this.getValueAt(row, 0).toString());				
 				ControladorFactura.getControladorFactura().borrarFactura(getFacturaPorId(id));
+				deleteFromTabla(row);
 			} catch (DAOExcepcion e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+		}
+		public void deleteFromTabla(int row){ //Borra la factura solo de la TABLA no de la BD		
+			int id = Integer.parseInt(this.getValueAt(row, 0).toString());
+			System.out.println("Fila: "+row+" ID:"+id);	
+			numFacturas--;
 			this.removeRow(row);
 		}
+
 		public Factura getFacturaPorId(int id) {
 			Factura f=new Factura();
 			f = ControladorFactura.getControladorFactura().getFacturaPorId(id);
@@ -60,12 +66,12 @@ public class ModeloTablaFactura extends DefaultTableModel {
 		}
 		
 		public void updateRow(int row,Factura f){			
-			this.setValueAt("CIF", row, 1);			
-			this.setValueAt("Num. Factura", row, 2);			
+			this.setValueAt(f.getCIF(), row, 1);			
+			this.setValueAt(f.getidFactura(), row, 2);			
 			this.setValueAt(f.getFechaFactura(), row, 3);			
-			this.setValueAt("Importe", row, 4);			
-			this.setValueAt("%IVA", row, 5);			
-			this.setValueAt("Total", row, 6);			
+			this.setValueAt(f.getImporteSinIva(), row, 4);			
+			this.setValueAt(f.getTipoIva(), row, 5);			
+			this.setValueAt(f.getImporteConIva(), row, 6);			
 		}
 		
 		@SuppressWarnings("unchecked")
@@ -82,6 +88,7 @@ public class ModeloTablaFactura extends DefaultTableModel {
 			System.out.println("Fila nueva: "+v);
 			this.addRow(v);			
 		}
+			
 		public void cargaFacturasComunidad(Comunidad c){
 			limpiaTabla();
 			ArrayList<Factura> listaFacturas = ControladorFactura.getControladorFactura().GetListaFacturas();
@@ -116,6 +123,17 @@ public class ModeloTablaFactura extends DefaultTableModel {
 				this.removeRow(numFacturas-1);
 				numFacturas--;				
 			}		
+		}
+		
+		public void setDeNotaInformativa(Factura f, NotaInformativa niAux) {
+			// TODO Auto-generated method stub
+			f.setNotainformativa(niAux);
+			try {
+				ControladorFactura.getControladorFactura().actualizarFactura(f);
+			} catch (DAOExcepcion e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}			
 		}
 		
 		
