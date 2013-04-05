@@ -1,3 +1,5 @@
+CHANGELOG 05/04/2013-11:53 v3.02:
+ - Afegides les taules Inmoble i propietari a la finestra PagoRecibos
 
 CHANGELOG 03/04/2013-3:33 v3.01:
  - Arreglado ejemplo completo(Faltaba guardar un objeto,ups(Con anterior version hiberante no se enteraba)

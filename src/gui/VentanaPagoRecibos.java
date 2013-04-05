@@ -13,6 +13,9 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import javax.swing.SwingUtilities;
 
+import negocio._tablas.ModeloTablaInmueble;
+import negocio._tablas.ModeloTablaPropietario;
+
 
 /**
 * This code was edited or generated using CloudGarden's Jigloo
@@ -27,16 +30,30 @@ import javax.swing.SwingUtilities;
 * LEGALLY FOR ANY CORPORATE OR COMMERCIAL PURPOSE.
 */
 public class VentanaPagoRecibos extends javax.swing.JFrame {
+
+	{
+		//Set Look & Feel
+		try {
+			javax.swing.UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+
 	private JPanel pagoRecibosPanel;
 	private JButton pagarFacturaButton;
 	private JButton mostrarFactsInmButton;
 	private JButton mostrarInmPropButton;
-	private JTable recibosTable;
-	private JTable inmTable;
-	private JTable propTable;
 	private JScrollPane recibosScrollPane;
 	private JScrollPane inmScrollPane;
 	private JScrollPane propScrollPane;
+	
+	public JTable recibosTable;
+	public JTable inmTable;
+	public JTable propTable;
+	
+	public static ModeloTablaPropietario modeloProp = new ModeloTablaPropietario();
+	public static ModeloTablaInmueble modeloInm = new ModeloTablaInmueble();
 
 	/**
 	* Auto-generated main method to display this JFrame
@@ -81,15 +98,20 @@ public class VentanaPagoRecibos extends javax.swing.JFrame {
 					pagoRecibosPanel.add(propScrollPane, new GridBagConstraints(0, 1, 1, 3, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(0, 10, 10, 10), 0, 0));
 					propScrollPane.setSize(250, 227);
 					{
-						TableModel propTableModel = 
-							new DefaultTableModel(
-									new String[][] { { "One", "Two" }, { "Three", "Four" } },
-									new String[] { "Column 1", "Column 2" });
-						propTable = new JTable();
+						propTable = new JTable(modeloProp);
+						propTable.setModel(modeloProp);												
 						propScrollPane.setViewportView(propTable);
-						propTable.setModel(propTableModel);
 						propTable.setFillsViewportHeight(true);
 						propTable.setSize(250, 200);
+						propTable.removeColumn(propTable.getColumnModel().getColumn(9));
+						propTable.removeColumn(propTable.getColumnModel().getColumn(8));
+						propTable.removeColumn(propTable.getColumnModel().getColumn(7));
+						propTable.removeColumn(propTable.getColumnModel().getColumn(6));
+						propTable.removeColumn(propTable.getColumnModel().getColumn(5));
+						propTable.removeColumn(propTable.getColumnModel().getColumn(4));
+						propTable.removeColumn(propTable.getColumnModel().getColumn(3));
+						propTable.removeColumn(propTable.getColumnModel().getColumn(1));							
+						
 					}
 				}
 				{
@@ -102,13 +124,10 @@ public class VentanaPagoRecibos extends javax.swing.JFrame {
 					pagoRecibosPanel.add(inmScrollPane, new GridBagConstraints(1, 1, 1, 3, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(0, 10, 10, 10), 0, 0));
 					inmScrollPane.setSize(250, 227);
 					{
-						TableModel inmTableModel = 
-							new DefaultTableModel(
-									new String[][] { { "One", "Two" }, { "Three", "Four" } },
-									new String[] { "Column 1", "Column 2" });
-						inmTable = new JTable();
+						modeloInm.cargaInmueblesTodos();
+						inmTable = new JTable(modeloInm);
+						inmTable.setModel(modeloInm);
 						inmScrollPane.setViewportView(inmTable);
-						inmTable.setModel(inmTableModel);
 						inmTable.setFillsViewportHeight(true);
 						inmTable.setSize(250, 200);
 					}

@@ -56,6 +56,8 @@ public class VentanaComunidad extends javax.swing.JFrame {
 	public static int IN_BORRADO=0, NO_FILA=0;
 	public static int IN_EXIS=1;
 	public static int GUARDA=4;
+	private JSeparator jSeparator1;
+	private JMenuItem ventanaPagos;
 	private JMenuItem facturasTodas;
 	private JMenuItem facturasComunidad;
 	private JMenu generarFacturas;
@@ -500,7 +502,7 @@ public class VentanaComunidad extends javax.swing.JFrame {
 					{
 						facturaMenu = new JMenu();
 						jMenuBar1.add(facturaMenu);
-						facturaMenu.setText("Ver Facturas");
+						facturaMenu.setText("Pagos y Facturas");
 						{
 							ventanaFacturas = new JMenuItem();
 							facturaMenu.add(ventanaFacturas);
@@ -557,6 +559,23 @@ public class VentanaComunidad extends javax.swing.JFrame {
 									}
 								});
 							}
+						}
+						{
+							jSeparator1 = new JSeparator();
+							facturaMenu.add(jSeparator1);
+						}
+						{
+							ventanaPagos = new JMenuItem();
+							facturaMenu.add(ventanaPagos);
+							ventanaPagos.setText("Gestion Pagos");
+							ventanaPagos.addActionListener(new ActionListener() {
+								public void actionPerformed(ActionEvent evt) {
+									System.out.println("ventanaPagos.actionPerformed, event="+evt);
+									//TODO add your code for ventanaPagos.actionPerformed
+									VentanaPagoRecibos v = new VentanaPagoRecibos();
+									v.setVisible(true);
+								}
+							});
 						}
 					}
 				}

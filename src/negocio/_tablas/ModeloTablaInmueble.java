@@ -66,7 +66,14 @@ public class ModeloTablaInmueble extends DefaultTableModel {
 				}
 			}
 		}
-		
+		public void cargaInmueblesTodos(){
+			limpiaTabla();
+			ArrayList<Inmueble> listaInmuebles = ControladorInmueble.getControladorInmueble().GetListaInmuebles();
+			System.out.println("Tamaño lista Inmuebles: "+listaInmuebles.size());
+			for(Inmueble i:listaInmuebles){						
+				this.addToTabla(i);
+			}
+		}
 		public void limpiaTabla() {
 			// TODO Auto-generated method stub			
 			while(numInmuebles>0){

@@ -182,7 +182,7 @@ public class VentanaNotas extends javax.swing.JFrame {
 					{
 						factsPendPane = new JScrollPane();
 						factsPanel.add(factsPendPane, new GridBagConstraints(0, 0, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 0));
-						{
+						{		
 							TableModel factsPendTableModel = 
 								new DefaultTableModel(
 										new String[][] { { "One", "Two" }, { "Three", "Four" } },
