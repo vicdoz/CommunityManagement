@@ -69,7 +69,7 @@ public class ModeloTablaFacturaDetalle extends DefaultTableModel {
 			Vector v=new Vector();		
 			//"Línea","Código Concepto", "Importe"
 			v.add(lF.getIdLineaFactura());
-			v.add(lF.getConcepto().getCodigo().trim());
+			//v.add(lF.getConcepto().getCodigo());
 			v.add(lF.getImporteLinea());
 			System.out.println("Factura:"+lF.getIdLineaFactura());
 			numLineas++;
@@ -90,7 +90,9 @@ public class ModeloTablaFacturaDetalle extends DefaultTableModel {
 			this.factura = f;
 			ArrayList<LineaFactura> listaLineas = ControladorLineaFactura.getControladorLineaFactura().GetListaLineaFactura();
 			System.out.println("Tamaño lista"+listaLineas.size());
-			for(LineaFactura lF:listaLineas){						
+			for(LineaFactura lF:listaLineas){
+				System.out.println(lF.getFactura().getidFactura());
+				System.out.println(factura.getidFactura());
 				if(lF.getFactura().getidFactura()==factura.getidFactura())	this.addToTabla(lF);
 			}
 			
