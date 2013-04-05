@@ -1,4 +1,9 @@
 package gui;
+
+import negocio._tablas.*;
+import negocio.Comunidad;
+import negocio.NotaInformativa;
+
 import java.awt.BorderLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -6,22 +11,19 @@ import java.awt.GridLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.JSplitPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTable;
-import javax.swing.JToolBar;
 
 import javax.swing.WindowConstants;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
 import javax.swing.SwingUtilities;
+
+import accesoAdatos._controladores.ControladorNotaInformativa;
 
 
 /**
@@ -36,6 +38,7 @@ import javax.swing.SwingUtilities;
 * THIS MACHINE, SO JIGLOO OR THIS CODE CANNOT BE USED
 * LEGALLY FOR ANY CORPORATE OR COMMERCIAL PURPOSE.
 */
+@SuppressWarnings("serial")
 public class VentanaNotas extends javax.swing.JFrame {
 
 	{
@@ -54,23 +57,29 @@ public class VentanaNotas extends javax.swing.JFrame {
 	private JButton delNotasButton;
 	private JButton editNotasButton;
 	private JButton addNotasButton;
-	private JTable notasTable;
 	private JPanel notasPanelButtons;
 	private JMenuItem genSelNotaReport;
 	private JMenuItem genAllNotaReport;
 	private JButton all2leftButton;
 	private JButton all2rightButton;
 	private JButton genNotaButton;
-	private JTable factSelTable;
 	private JButton right2leftButton;
 	private JButton left2rightButton;
-	private JTable factsPendTable;
 	private JScrollPane factsSelPane;
 	private JScrollPane notasScrollPane;
 	private JPanel factsPanel;
 	private JPanel notasPane;
 	private JTabbedPane notasTabbedPane;
 	private JMenu jMenu1;
+	
+	private Comunidad cAux;
+	
+	public JTable notasTable;
+	public JTable factsPendTable;
+	public JTable factsSelTable;
+	public static ModeloTablaNotas notasModel = new ModeloTablaNotas();
+	public static ModeloTablaFactura factsPendModel = new ModeloTablaFactura();
+	public static ModeloTablaFactura factsSelModel = new ModeloTablaFactura();
 
 	/**
 	* Auto-generated main method to display this JFrame
@@ -89,6 +98,11 @@ public class VentanaNotas extends javax.swing.JFrame {
 		super();
 		initGUI();
 	}
+	public VentanaNotas(Comunidad c) {
+		super();
+		this.cAux = c;
+		initGUI();
+	}
 	
 	private void initGUI() {
 		try {
@@ -105,14 +119,12 @@ public class VentanaNotas extends javax.swing.JFrame {
 					{
 						notasScrollPane = new JScrollPane();
 						notasPane.add(notasScrollPane, BorderLayout.CENTER);
-						{
-							TableModel notasTableModel = 
-								new DefaultTableModel(
-										new String[][] { { "One", "Two" }, { "Three", "Four" } },
-										new String[] { "Column 1", "Column 2" });
-							notasTable = new JTable();
+						{					
+							notasTable = new JTable(notasModel);
+							notasTable.setModel(notasModel);
 							notasScrollPane.setViewportView(notasTable);
-							notasTable.setModel(notasTableModel);
+							notasTable.setFillsViewportHeight(true);
+							
 						}
 					}
 					{
@@ -165,6 +177,17 @@ public class VentanaNotas extends javax.swing.JFrame {
 								public void actionPerformed(ActionEvent evt) {
 									System.out.println("detNotasButton.actionPerformed, event="+evt);
 									//TODO add your code for detNotasButton.actionPerformed
+									if(notasTable.getRowCount()<1||notasTable.getSelectedRow()==-1){
+										javax.swing.JOptionPane.showMessageDialog(null, "No hay ninguna fila seleccionada");										
+									}else{
+										int selRow = notasTable.getSelectedRow();	
+										
+										NotaInformativa nI = ControladorNotaInformativa.getControladorNotaInformativa().getNotaInformativaPorPos(selRow);
+										
+										factsSelModel.cargaFacturasComunidadAsignadas(nI);
+										factsPendModel.cargaFacturasComunidadPendientes(cAux);										
+										notasTabbedPane.setSelectedIndex(1);
+									}
 								}
 							});
 						}
@@ -183,13 +206,12 @@ public class VentanaNotas extends javax.swing.JFrame {
 						factsPendPane = new JScrollPane();
 						factsPanel.add(factsPendPane, new GridBagConstraints(0, 0, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 0));
 						{		
-							TableModel factsPendTableModel = 
-								new DefaultTableModel(
-										new String[][] { { "One", "Two" }, { "Three", "Four" } },
-										new String[] { "Column 1", "Column 2" });
-							factsPendTable = new JTable();
+							factsPendModel.cargaFacturasComunidadPendientes(cAux);
+							factsPendTable = new JTable(factsPendModel);
+							factsPendTable.setModel(factsPendModel);
 							factsPendPane.setViewportView(factsPendTable);
-							factsPendTable.setModel(factsPendTableModel);
+							factsPendTable.setFillsViewportHeight(true);
+							
 						}
 					}
 					{
@@ -262,14 +284,11 @@ public class VentanaNotas extends javax.swing.JFrame {
 						factsSelPane = new JScrollPane();
 						factsPanel.add(factsSelPane, new GridBagConstraints(2, 0, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 0));
 						factsSelPane.setPreferredSize(new java.awt.Dimension(277, 307));
-						{
-							TableModel factSelTableModel = 
-								new DefaultTableModel(
-										new String[][] { { "One", "Two" }, { "Three", "Four" } },
-										new String[] { "Column 1", "Column 2" });
-							factSelTable = new JTable();
-							factsSelPane.setViewportView(factSelTable);
-							factSelTable.setModel(factSelTableModel);
+						{							
+							factsSelTable = new JTable(factsSelModel);
+							factsSelTable.setModel(factsSelModel);
+							factsSelPane.setViewportView(factsSelTable);							
+							factsSelTable.setFillsViewportHeight(true);
 						}
 					}
 				}

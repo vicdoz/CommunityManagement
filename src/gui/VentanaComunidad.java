@@ -56,6 +56,7 @@ public class VentanaComunidad extends javax.swing.JFrame {
 	public static int IN_BORRADO=0, NO_FILA=0;
 	public static int IN_EXIS=1;
 	public static int GUARDA=4;
+	private JMenuItem ventanaNotas;
 	private JSeparator jSeparator1;
 	private JMenuItem ventanaPagos;
 	private JMenuItem facturasTodas;
@@ -234,8 +235,7 @@ public class VentanaComunidad extends javax.swing.JFrame {
 								detalleButton.addActionListener(new ActionListener() {
 									public void actionPerformed(ActionEvent evt) {
 										System.out.println("detalleButton.actionPerformed, event="+evt);
-										//TODO add your code for detalleButton.actionPerformed										
-										
+										//TODO add your code for detalleButton.actionPerformed																				
 										if(tablaCom.getRowCount()<1||tablaCom.getSelectedRow()==-1){
 											MuestraMensaje(NO_FILA);										
 										}else{
@@ -574,6 +574,26 @@ public class VentanaComunidad extends javax.swing.JFrame {
 									//TODO add your code for ventanaPagos.actionPerformed
 									VentanaPagoRecibos v = new VentanaPagoRecibos();
 									v.setVisible(true);
+								}
+							});
+						}
+						{
+							ventanaNotas = new JMenuItem();
+							facturaMenu.add(ventanaNotas);
+							ventanaNotas.setText("Gestion Notas");
+							ventanaNotas.addActionListener(new ActionListener() {
+								public void actionPerformed(ActionEvent evt) {
+									System.out.println("ventanaNotas.actionPerformed, event="+evt);
+									//TODO add your code for ventanaNotas.actionPerformed
+									if(tablaCom.getRowCount()<1||tablaCom.getSelectedRow()==-1){
+										MuestraMensaje(NO_FILA);										
+									}else{
+										int rowSel = tablaCom.getSelectedRow();
+										Comunidad  cAux=modeloCom.getComunidadPorPos(rowSel);
+										System.out.println(cAux.getIdComunidad());
+										VentanaNotas v = new VentanaNotas(cAux);
+										v.setVisible(true);
+									}
 								}
 							});
 						}

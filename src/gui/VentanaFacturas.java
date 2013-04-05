@@ -13,12 +13,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
 
-import accesoAdatos._controladores.ControladorComunidad;
 import accesoAdatos._controladores.ControladorFactura;
-import accesoAdatos._controladores.ControladorLineaFactura;
 
 import java.util.*;
 

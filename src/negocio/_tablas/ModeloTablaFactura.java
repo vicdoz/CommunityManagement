@@ -2,7 +2,6 @@ package negocio._tablas;
 
 import negocio.*;
 import accesoAdatos._controladores.ControladorFactura;
-import accesoAdatos._controladores.ControladorInmueble;
 import excepciones.*;
 
 import java.util.*;
@@ -91,8 +90,26 @@ public class ModeloTablaFactura extends DefaultTableModel {
 				if(f.getComunidad().getIdComunidad()==c.getIdComunidad()) this.addToTabla(f);
 			}
 		}
-		
-		@SuppressWarnings("unused")
+		public void cargaFacturasComunidadPendientes(Comunidad c){
+			limpiaTabla();
+			ArrayList<Factura> listaFacturas = ControladorFactura.getControladorFactura().GetListaFacturas();
+			System.out.println("Tamaño lista"+listaFacturas.size());
+			for(Factura f:listaFacturas){						
+				if(f.getComunidad().getIdComunidad()==c.getIdComunidad()){
+					if(f.getNotainformativa()==null)	this.addToTabla(f);
+				}
+			}
+		}
+		public void cargaFacturasComunidadAsignadas(NotaInformativa nI){
+			limpiaTabla();
+			ArrayList<Factura> listaFacturas = ControladorFactura.getControladorFactura().GetListaFacturas();
+			System.out.println("Tamaño lista"+listaFacturas.size());
+			for(Factura f:listaFacturas){						
+				if(f.getNotainformativa().getIdNotaInformativa()==nI.getIdNotaInformativa()){
+						this.addToTabla(f);					
+				}
+			}
+		}
 		private void limpiaTabla() {
 			// TODO Auto-generated method stub			
 			while(numFacturas>0){

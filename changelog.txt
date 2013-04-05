@@ -1,3 +1,8 @@
+CHANGELOG 05/04/2013-15:07 v3.03:
+ - Creades Taules per a Notes.
+ - Creades funcions a ModeloTablaFactura per a adaptar-se a VentanaNotas.
+ - Integrades finestres VentanaNotas i VentanaPagoRecibos en VentanaComunidad.
+ 
 CHANGELOG 05/04/2013-11:53 v3.02:
  - Afegides les taules Inmoble i propietari a la finestra PagoRecibos
 

@@ -29,6 +29,7 @@ import negocio._tablas.ModeloTablaPropietario;
 * THIS MACHINE, SO JIGLOO OR THIS CODE CANNOT BE USED
 * LEGALLY FOR ANY CORPORATE OR COMMERCIAL PURPOSE.
 */
+@SuppressWarnings("serial")
 public class VentanaPagoRecibos extends javax.swing.JFrame {
 
 	{
