@@ -1,6 +1,7 @@
 package negocio._tablas;
 
 import negocio.*;
+import accesoAdatos._controladores.ControladorFactura;
 import accesoAdatos._controladores.ControladorNotaInformativa;
 import excepciones.*;
 
@@ -94,7 +95,32 @@ public class ModeloTablaNotas extends DefaultTableModel {
 				numNotas--;				
 			}		
 		}
-		
-		
+		@SuppressWarnings("unchecked")
+		public void calcularImporte(Comunidad cAux,NotaInformativa niAux) {
+			// TODO Auto-generated method stub
+			/*Calcular importe total de la nota*/
+			float importe=0;
+			Iterator<Factura> fa= niAux.getListaFacturas().iterator();
+			while(fa.hasNext()){
+				Factura fAux=fa.next();
+				importe+=fAux.getImporteConIva();
+			}
+			niAux.setImporteNota(importe);
+		}
+		public void generarRecibos(Comunidad cAux, NotaInformativa niAux) {
+			// TODO Auto-generated method stub
+			//genera y actualiza a la vez.
+			/* Calculo por inmueble */
+			Iterator<Inmueble> i= cAux.getListaInmuebles().iterator();
+			while(i.hasNext()){
+				Inmueble iAux=i.next();
+				ReciboInmueble ri= new ReciboInmueble();
+				ri.setInmueble(iAux);
+				ri.setNotaInformativa(niAux);
+				ri.setImporte(niAux.getImporteNota()*(iAux.getPorcentaje()/100));
+				ri.setFechaPago(niAux.getFechaCalculo());
+				
+			}
+		}
 }
 

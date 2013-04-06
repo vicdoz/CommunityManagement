@@ -49,6 +49,8 @@ public class VentanaInmuebleDetalle extends javax.swing.JFrame {
         private JPanel jContentPane;
         private JPanel jPanel1;
         private JLabel jLabel;
+        private JTextField porcTextField;
+        private JLabel porcLabel;
         private JTextField ComTextField;
         private JLabel ComLab;
 
@@ -121,7 +123,7 @@ public class VentanaInmuebleDetalle extends javax.swing.JFrame {
                 propietarios.setSelectedIndex(i.getPropietario().getIdPropietario()-1);
                 //String idProp=i.getPropietario().getIdPropietario()+"";
                 String idCom=i.getComunidad().getIdComunidad()+"";
-                //propTextField.setText(idProp);         
+                porcTextField.setText(String.valueOf(i.getPorcentaje()));         
                 ComTextField.setText(idCom);    
                 InAux=i;
                 this.rowAux=row;
@@ -141,11 +143,12 @@ public class VentanaInmuebleDetalle extends javax.swing.JFrame {
                                 {
                                         formularioPanel = new JPanel();
                                         GridBagLayout jPanel1Layout = new GridBagLayout();
+                                     
                                                                                 
                                         jPanel1Layout.columnWidths = new int[] {7, 7, 7};
-                                        jPanel1Layout.rowHeights = new int[] {7, 7, 7, 20, 7};
+                                        jPanel1Layout.rowHeights = new int[] {7, 7, 7, 20, 20, 7};
                                         jPanel1Layout.columnWeights = new double[] {0.005, 0.1, 0.1};
-                                        jPanel1Layout.rowWeights = new double[] {0.1, 0.1, 0.1, 0.1, 0.1};
+                                        jPanel1Layout.rowWeights = new double[] {0.1, 0.1, 0.1, 0.1, 0.1, 0.1};
                                         jContentPane.add(formularioPanel, BorderLayout.CENTER);
                                         formularioPanel.setLayout(jPanel1Layout);
                                         formularioPanel.setPreferredSize(new java.awt.Dimension(384, 183));
@@ -184,26 +187,36 @@ public class VentanaInmuebleDetalle extends javax.swing.JFrame {
 
                                         }
                                         {
-                                                PropLab = new JLabel();
-                                                formularioPanel.add(PropLab, new GridBagConstraints(0, 4, 1, 1, 0.0, 0.0, GridBagConstraints.WEST, GridBagConstraints.NONE, new Insets(0, 10, 0, 0), 0, 0));
-                                                PropLab.setText("Propietario");
+                                        	porcLabel = new JLabel();
+                                        	formularioPanel.add(porcLabel, new GridBagConstraints(0, 3, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
+                                        	porcLabel.setText("Porcentaje");
                                         }
                                         {
-                    						
-                    						ArrayList<String> listaPropietarios=ControladorPropietario.getControladorPropietario().GetListaNombresPropietarios();
-                    						 propietarios = new JComboBox(listaPropietarios.toArray());
-                    						 formularioPanel.add(propietarios, new GridBagConstraints(1, 4, 2, 1, 0.0, 0.0, GridBagConstraints.WEST, GridBagConstraints.HORIZONTAL, new Insets(0, 0, 0, 10), 0, 0));
-                    					}
+                                        	porcTextField = new JTextField();
+                                        	formularioPanel.add(porcTextField, new GridBagConstraints(1, 3, 2, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.HORIZONTAL, new Insets(0, 0, 0, 10), 0, 0));
+                                        	if(InAux==null) porcTextField.setText("");
+                                        }
                                         {
                                                 ComLab = new JLabel();
-                                                formularioPanel.add(ComLab, new GridBagConstraints(0, 3, 1, 1, 0.0, 0.0, GridBagConstraints.WEST, GridBagConstraints.NONE, new Insets(0, 10, 0, 0), 0, 0));
+                                                formularioPanel.add(ComLab, new GridBagConstraints(0, 4, 1, 1, 0.0, 0.0, GridBagConstraints.WEST, GridBagConstraints.NONE, new Insets(0, 10, 0, 0), 0, 0));
                                                 ComLab.setText("Comunidad");
                                         }
                                         {
                                                 ComTextField = new JTextField();
-                                                formularioPanel.add(ComTextField, new GridBagConstraints(1, 3, 2, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.HORIZONTAL, new Insets(0, 0, 0, 10), 0, 0));
+                                                formularioPanel.add(ComTextField, new GridBagConstraints(1, 4, 2, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.HORIZONTAL, new Insets(0, 0, 0, 10), 0, 0));
                                                 if(comunidad!=null)	ComTextField.setText(""+comunidad.getIdComunidad());
                                                 ComTextField.setEnabled(false);
+                                        }
+                                        {
+                                        	PropLab = new JLabel();
+                                        	formularioPanel.add(PropLab, new GridBagConstraints(0, 5, 1, 1, 0.0, 0.0, GridBagConstraints.WEST, GridBagConstraints.NONE, new Insets(0, 10, 0, 0), 0, 0));
+                                        	PropLab.setText("Propietario");
+                                        }
+                                        {
+                                        	
+                                        	ArrayList<String> listaPropietarios=ControladorPropietario.getControladorPropietario().GetListaNombresPropietarios();
+                                        	propietarios = new JComboBox(listaPropietarios.toArray());
+                                        	formularioPanel.add(propietarios, new GridBagConstraints(1, 5, 2, 1, 0.0, 0.0, GridBagConstraints.WEST, GridBagConstraints.HORIZONTAL, new Insets(0, 0, 0, 10), 0, 0));
                                         }
                                 }
                                 {
@@ -257,7 +270,8 @@ public class VentanaInmuebleDetalle extends javax.swing.JFrame {
                         javax.swing.JOptionPane.showMessageDialog(null, "Debe completar todos los campos");
                 }else {
                         String Escalera = escaleraTextField.getText();  String Puerta = puertaTextField.getText();
-                        String Piso = pisoTextField.getText();                  
+                        String Piso = pisoTextField.getText();    
+                        float Porcentaje=Float.parseFloat(porcTextField.getText());
                         int idProp =ControladorPropietario.getControladorPropietario().getPropietarioPorPos(propietarios.getSelectedIndex()).getIdPropietario();
                         int idCom = Integer.parseInt(ComTextField.getText());
                         
@@ -271,7 +285,7 @@ public class VentanaInmuebleDetalle extends javax.swing.JFrame {
                                         InAux.setPuerta(Puerta);                InAux.setComunidad(comunidad);                          
                                         InAux.setComunidad(ControladorComunidad.getControladorComunidad().getComunidadPorId(idCom));
                                         InAux.setPropietario(ControladorPropietario.getControladorPropietario().getPropietarioPorId(idProp));
-                                        
+                                        InAux.setPorcentaje(Porcentaje);
                                         try {                   
                                                 
                                                 ControladorInmueble.getControladorInmueble().actualizarInmueble(InAux);                                 
