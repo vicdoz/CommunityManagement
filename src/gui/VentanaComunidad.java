@@ -294,21 +294,25 @@ public class VentanaComunidad extends javax.swing.JFrame {
 									public void actionPerformed(ActionEvent evt) {
 										//System.out.println("borrarPropButton.actionPerformed, event="+evt);
 										//TODO add your code for borrarPropButton.actionPerformed
+										
 										if(tablaProp.getRowCount()<1||tablaProp.getSelectedRow()==-1){
 											MuestraMensaje(NO_FILA);										
 										}else{
-											/*String dni=tablaConc.getValueAt(tablaConc.getSelectedRow(),0).toString();
-											System.out.println("dni="+dni);
-											Propietario p = modeloProp.recuperaPropietarioPorNIF(dni);*/
 											int rowSel = tablaProp.getSelectedRow();
 											Propietario p = modeloProp.getPropietarioPorPosicion(rowSel);
+											
 											int op=OpcionesBorra(p.getIdPropietario(),"Propietario");
 											if(op==0){
-												//modeloProp.borraPropietarioPorPosicion(tabla2.getSelectedRow());
-												modeloProp.borraPropietarioPorPosicion(tablaProp.getSelectedRow());
 												
-												ChangeStatusBar(IN_BORRADO,p.getIdPropietario(),null);
-												
+												if(!p.getListaInmuebles().isEmpty()){
+													modeloProp.borraPropietarioPorPosicion(tablaProp.getSelectedRow());
+													ChangeStatusBar(IN_BORRADO,p.getIdPropietario(),null);
+												}
+												else{
+													javax.swing.JOptionPane.showMessageDialog(null, "No se puede borrar un propietario si tiene inmuebles asociados.");
+													
+													
+												}
 											}
 										}
 									}

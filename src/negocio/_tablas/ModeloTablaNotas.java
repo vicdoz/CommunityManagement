@@ -18,7 +18,7 @@ public class ModeloTablaNotas extends DefaultTableModel {
 		public  int numNotas;
 		public ModeloTablaNotas (){	//"ID","Fecha Calculo", "Importe", "idRecibo", "Id Comunidad" 
 			super(null,
-					new String[] {"ID","Fecha Calculo", "Importe", "idRecibo", "idComunidad"});		
+					new String[] {"ID","Fecha Calculo", "Importe", "idComunidad"});		
 			numNotas=0;			
 		}
 		@Override

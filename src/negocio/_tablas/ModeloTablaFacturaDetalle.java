@@ -6,6 +6,7 @@ import java.util.*;
 import excepciones.*;
 import javax.swing.table.DefaultTableModel;
 
+import accesoAdatos._controladores.ControladorConcepto;
 import accesoAdatos._controladores.ControladorLineaFactura;
 
 @SuppressWarnings("serial")
@@ -74,7 +75,8 @@ public class ModeloTablaFacturaDetalle extends DefaultTableModel {
 			Vector v=new Vector();		
 			//"Línea","Código Concepto", "Importe"
 			v.add(lF.getIdLineaFactura());
-			v.add("");//v.add(lF.getConcepto().getCodigo());
+			Concepto conc = ControladorConcepto.getControladorConcepto().getConceptoPorId(lF.getConcepto().getIdConcepto());
+			v.add(conc.getCodigo());
 			v.add(lF.getImporteLinea());
 			System.out.println("Factura:"+lF.getIdLineaFactura());
 			numLineas++;

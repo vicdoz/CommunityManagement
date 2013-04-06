@@ -237,6 +237,7 @@ public class VentanaFacturas extends javax.swing.JFrame {
 											Factura f = ControladorFactura.getControladorFactura().getFacturaPorPos(selRow);											
 											modeloFactDet.cargaLineasFactura(f);
 											jTabbedPane1.setSelectedIndex(2);
+											addLineaButton.setEnabled(true);
 										}
 									}
 								});

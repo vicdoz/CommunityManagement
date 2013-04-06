@@ -23,6 +23,14 @@ public class ModeloTablaPropietario extends DefaultTableModel {
 				this.addToTabla(p);
 			}
 		}
+		public void limpiaTabla() {
+			// TODO Auto-generated method stub			
+			while(numPropietarios>0){
+				this.removeRow(numPropietarios-1);
+				numPropietarios--;				
+			}		
+			
+		}
 		@Override
 	    public boolean isCellEditable(int row, int column) { 
 		       return false;

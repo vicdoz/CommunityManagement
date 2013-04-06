@@ -32,9 +32,7 @@ Varios:
 
 ---------------------------------------------------------------------------------
 BUGS:
-	- No carrega bé el Concepto al fer Factura->detalle. Dona error.
 	- No es pot llevar una factura de una nota (Gestión Notas)	
-	- Set id recibo de nota informativa
 	- Carta
 	- Revisar excepciones
 

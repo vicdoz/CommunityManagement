@@ -1,3 +1,3 @@
-select * from ReciboInmueble;
+select * from LineaFactura;
 select * from NotaInformativa;
 
