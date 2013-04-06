@@ -1,3 +1,6 @@
+CHANGELOG 06/04/2013-17:40 v3.09:
+ - Modificada la finestra VentanaPagosRecibos
+ 
 CHANGELOG 06/04/2013-13:19 v3.08:
  - creats constructors buits.
  - Ara només demana confirmació de tancament a VentanaComunidad

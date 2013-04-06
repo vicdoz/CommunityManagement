@@ -6,17 +6,14 @@ import java.awt.GridLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.GroupLayout;
 import javax.swing.JButton;
-import javax.swing.JComponent;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.JSeparator;
 import javax.swing.JTabbedPane;
 import javax.swing.JTable;
-import javax.swing.LayoutStyle;
 
 import javax.swing.WindowConstants;
+import javax.swing.border.LineBorder;
 import javax.swing.SwingUtilities;
 
 import negocio.Inmueble;
@@ -50,28 +47,29 @@ public class VentanaPagoRecibosAUX extends javax.swing.JFrame {
 		}
 	}
 
-	private JPanel pagoRecibosPanel;
-	private JButton pagarFacturaButton;
-	private JButton mostrarTodosInmuebles;
-	private JButton mostrarRecibosPropButton;
-	private JButton mostrarFactsInmButton;
-	private JButton mostrarInmPropButton;
-	private JScrollPane recibosScrollPane;
-	private JScrollPane inmScrollPane;
-	private JScrollPane propScrollPane;
-	
-	public JTable recibosTable;
-	private JPanel inmPanel;
-	private JPanel propPanel;
-	private JTabbedPane propInmTabbedPane;
-	private JPanel propButtonPanel;
+
 	private JPanel recibosPanel;
-	public JTable inmTable;
-	public JTable propTable;
+	private JButton pagarReciboButton;
+	private JTable recibosTable;
+	private JScrollPane recibosScrollPane;
+	private JPanel recibosButtonsPanel;
+	private JTabbedPane propInmTabbedPane;
+	private JPanel propPanel;
+	private JButton mostrarRecibosInmButton;
+	private JButton mostrarListaInmueblesButton;
+	private JTable inmTable;
+	private JScrollPane inmScrollPane;
+	private JPanel inmButtonsPanel;
+	private JButton mostrarRecibosPropButton;
+	private JButton mostrarInmPropButton;
+	private JTable propTable;
+	private JScrollPane propScrollPane;
+	private JPanel propButtonsPanel;
+	private JPanel inmPanel;
 	
+	public static ModeloTablaRecibo recibosModel = new ModeloTablaRecibo();
 	public static ModeloTablaPropietario propModel = new ModeloTablaPropietario();
 	public static ModeloTablaInmueble inmModel = new ModeloTablaInmueble();
-	public static ModeloTablaRecibo recibosModel = new ModeloTablaRecibo();
 
 	/**
 	* Auto-generated main method to display this JFrame
@@ -94,168 +92,189 @@ public class VentanaPagoRecibosAUX extends javax.swing.JFrame {
 	
 	private void initGUI() {
 		try {
-			setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+			setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);						
+			GridLayout thisLayout = new GridLayout(1, 1);
+			thisLayout.setHgap(5);
+			thisLayout.setVgap(5);
+			thisLayout.setColumns(1);
+			getContentPane().setLayout(thisLayout);
 			this.setTitle("Gestion Pagos");
 			{
-				pagoRecibosPanel = new JPanel();
-				getContentPane().add(pagoRecibosPanel, BorderLayout.CENTER);
-				GridLayout pagoRecibosPanelLayout = new GridLayout(1, 3);
-				pagoRecibosPanelLayout.setHgap(5);
-				pagoRecibosPanelLayout.setVgap(5);
-				pagoRecibosPanelLayout.setColumns(3);
-				pagoRecibosPanel.setLayout(pagoRecibosPanelLayout);
-				pagoRecibosPanel.setPreferredSize(new java.awt.Dimension(927, 490));
+				propInmTabbedPane = new JTabbedPane();
+				getContentPane().add(propInmTabbedPane);
+				propInmTabbedPane.setPreferredSize(new java.awt.Dimension(380, 331));
 				{
-					propInmTabbedPane = new JTabbedPane();
-					pagoRecibosPanel.add(propInmTabbedPane);
-					propInmTabbedPane.setPreferredSize(new java.awt.Dimension(306, 655));
+					propPanel = new JPanel();
+					BorderLayout propPanelLayout = new BorderLayout();
+					propPanel.setLayout(propPanelLayout);
+					propInmTabbedPane.addTab("Propietarios", null, propPanel, null);
 					{
-						propPanel = new JPanel();
-						propInmTabbedPane.addTab("Propietarios", null, propPanel, null);
-						propPanel.setPreferredSize(new java.awt.Dimension(457, 460));
+						propButtonsPanel = new JPanel();
+						GridBagLayout propButtonsPanelLayout = new GridBagLayout();
+						propButtonsPanelLayout.rowWeights = new double[] {0.1};
+						propButtonsPanelLayout.rowHeights = new int[] {7};
+						propButtonsPanelLayout.columnWeights = new double[] {0.1, 0.1};
+						propButtonsPanelLayout.columnWidths = new int[] {7, 7};
+						propPanel.add(propButtonsPanel, BorderLayout.NORTH);
+						propButtonsPanel.setLayout(propButtonsPanelLayout);
 						{
 							mostrarInmPropButton = new JButton();
-							propPanel.add(mostrarInmPropButton);
-							mostrarInmPropButton.setText("Inmuebles del Propietario");
+							propButtonsPanel.add(mostrarInmPropButton, new GridBagConstraints(0, 0, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(5, 10, 5, 10), 0, 0));
+							mostrarInmPropButton.setText("Inmuebles del propietario");
 							mostrarInmPropButton.addActionListener(new ActionListener() {
 								public void actionPerformed(ActionEvent evt) {
 									System.out.println("mostrarInmPropButton.actionPerformed, event="+evt);
 									//TODO add your code for mostrarInmPropButton.actionPerformed
 									if(propTable.getRowCount()<1||propTable.getSelectedRow()==-1){
-										javax.swing.JOptionPane.showMessageDialog(null, "No hay ninguna fila seleccionada");										
+                                        javax.swing.JOptionPane.showMessageDialog(null, "No hay ninguna fila seleccionada");                                                                            
 									}else{
-										int rowSel = propTable.getSelectedRow();
-										Propietario pAux = propModel.getPropietarioPorPosicion(rowSel);															
-										inmModel.cargaInmueblesPropietario(pAux);								
+                                        int rowSel = propTable.getSelectedRow();
+                                        Propietario pAux = propModel.getPropietarioPorPosicion(rowSel);                                                                                                                 
+                                        inmModel.cargaInmueblesPropietario(pAux); 
+										propInmTabbedPane.setSelectedIndex(1);
 									}
 								}
 							});
 						}
 						{
 							mostrarRecibosPropButton = new JButton();
-							propPanel.add(mostrarRecibosPropButton);
-							mostrarRecibosPropButton.setText("Recibos Propietario");
+							propButtonsPanel.add(mostrarRecibosPropButton, new GridBagConstraints(1, 0, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(5, 10, 5, 10), 0, 0));
+							mostrarRecibosPropButton.setText("Recibos del Propietario");
 							mostrarRecibosPropButton.addActionListener(new ActionListener() {
 								public void actionPerformed(ActionEvent evt) {
 									System.out.println("mostrarRecibosPropButton.actionPerformed, event="+evt);
 									//TODO add your code for mostrarRecibosPropButton.actionPerformed
-									if(propTable.getRowCount()<1||propTable.getSelectedRow()==-1){
-										javax.swing.JOptionPane.showMessageDialog(null, "No hay ninguna fila seleccionada");										
-									}else{
-										int rowSel = propTable.getSelectedRow();
-										Propietario pAux = propModel.getPropietarioPorPosicion(rowSel);	
-										recibosModel.cargaRecibosPropietario(pAux);
-										recibosTable.setModel(recibosModel);																
-									}
+                                    if(propTable.getRowCount()<1||propTable.getSelectedRow()==-1){
+                                        javax.swing.JOptionPane.showMessageDialog(null, "No hay ninguna fila seleccionada");                                                                            
+                                    }else{
+                                        int rowSel = propTable.getSelectedRow();
+                                        Propietario pAux = propModel.getPropietarioPorPosicion(rowSel); 
+                                        recibosModel.cargaRecibosPropietario(pAux);
+                                        recibosTable.setModel(recibosModel);                                                                                                                            
+                                    }
 								}
 							});
-						}
-						{
-							propScrollPane = new JScrollPane();
-							propPanel.add(propScrollPane);
-							propScrollPane.setSize(250, 227);
-							{
-								propTable = new JTable(propModel);
-								propTable.setModel(propModel);												
-								propScrollPane.setViewportView(propTable);
-								propTable.setFillsViewportHeight(true);
-								propTable.setSize(250, 200);	
-								propTable.removeColumn(propTable.getColumnModel().getColumn(9));	propTable.removeColumn(propTable.getColumnModel().getColumn(8));
-								propTable.removeColumn(propTable.getColumnModel().getColumn(7));	propTable.removeColumn(propTable.getColumnModel().getColumn(6));
-								propTable.removeColumn(propTable.getColumnModel().getColumn(5));	propTable.removeColumn(propTable.getColumnModel().getColumn(4));
-								propTable.removeColumn(propTable.getColumnModel().getColumn(3));	propTable.removeColumn(propTable.getColumnModel().getColumn(1));
-								propTable.getColumnModel().getColumn(0).setMaxWidth(40);
-								propTable.setPreferredSize(new java.awt.Dimension(351, 235));
-
-							}
-						}
-						{
-							propButtonPanel = new JPanel();
-							BorderLayout propButtonPanelLayout = new BorderLayout();
-							propButtonPanel.setLayout(propButtonPanelLayout);
-							propPanel.add(propButtonPanel);
 						}
 					}
 					{
-						inmPanel = new JPanel();
-						propInmTabbedPane.addTab("Inmuebles", null, inmPanel, null);
+						propScrollPane = new JScrollPane();
+						propPanel.add(propScrollPane, BorderLayout.CENTER);
 						{
-							mostrarTodosInmuebles = new JButton();
-							inmPanel.add(mostrarTodosInmuebles);
-							mostrarTodosInmuebles.setText("Todos los Inmuebles");
-							mostrarTodosInmuebles.addActionListener(new ActionListener() {
-								public void actionPerformed(ActionEvent evt) {
-									System.out.println("mostrarTodosInmuebles.actionPerformed, event="+evt);
-									//TODO add your code for mostrarTodosInmuebles.actionPerformed
-									inmModel.cargaInmueblesTodos();
-									inmTable.setModel(inmModel);
-								}
-							});
-						}
-						{
-							mostrarFactsInmButton = new JButton();
-							inmPanel.add(mostrarFactsInmButton);
-							mostrarFactsInmButton.setText("Facturas de Inmueble");
-							mostrarFactsInmButton.addActionListener(new ActionListener() {
-								public void actionPerformed(ActionEvent evt) {
-									System.out.println("mostrarFactsInmButton.actionPerformed, event="+evt);
-									//TODO add your code for mostrarFactsInmButton.actionPerformed
-									if(inmTable.getRowCount()<1||inmTable.getSelectedRow()==-1){
-										javax.swing.JOptionPane.showMessageDialog(null, "No hay ninguna fila seleccionada");										
-									}else{
-										int rowSel = inmTable.getSelectedRow();
-										Inmueble iAux = inmModel.getInmueblePorPos(rowSel);
-										recibosModel.cargaRecibosInmueble(iAux);
-										recibosTable.setModel(recibosModel);
-									}
-								}
-							});
-						}
-						{
-							inmScrollPane = new JScrollPane();
-							inmPanel.add(inmScrollPane);
-							inmScrollPane.setSize(250, 227);
-							{
-								inmTable = new JTable(inmModel);
-								inmScrollPane.setViewportView(inmTable);
-								inmTable.setModel(inmModel);
-								inmTable.setFillsViewportHeight(true);
-								inmTable.setSize(250, 200);
-							}
+					        propTable = new JTable(propModel);
+                            propTable.setModel(propModel);                                                                                          
+                            propScrollPane.setViewportView(propTable);
+                            propTable.setSize(250, 200);    
+                            
+                            propTable.removeColumn(propTable.getColumnModel().getColumn(9));        propTable.removeColumn(propTable.getColumnModel().getColumn(8));
+                            propTable.removeColumn(propTable.getColumnModel().getColumn(7));        propTable.removeColumn(propTable.getColumnModel().getColumn(6));
+                            propTable.removeColumn(propTable.getColumnModel().getColumn(5));        propTable.removeColumn(propTable.getColumnModel().getColumn(4));
+                            propTable.removeColumn(propTable.getColumnModel().getColumn(3));        propTable.removeColumn(propTable.getColumnModel().getColumn(1));
+                            propTable.getColumnModel().getColumn(0).setMaxWidth(40);
+                            						
+							propTable.setFillsViewportHeight(true);
 						}
 					}
 				}
 				{
-					recibosPanel = new JPanel();
-					pagoRecibosPanel.add(recibosPanel);
-					recibosPanel.setPreferredSize(new java.awt.Dimension(644, 188));
+					inmPanel = new JPanel();
+					BorderLayout inmPanelLayout = new BorderLayout();
+					inmPanel.setLayout(inmPanelLayout);
+					propInmTabbedPane.addTab("Inmuebles", null, inmPanel, null);
 					{
-						pagarFacturaButton = new JButton();
-						recibosPanel.add(pagarFacturaButton);
-						pagarFacturaButton.setText("Pagar Recibos");
-						pagarFacturaButton.addActionListener(new ActionListener() {
-							public void actionPerformed(ActionEvent evt) {
-								System.out.println("pagarFacturaButton.actionPerformed, event="+evt);
-								//TODO add your code for pagarFacturaButton.actionPerformed
-							}
-						});
+						inmButtonsPanel = new JPanel();
+						GridBagLayout inmButtonsPanelLayout = new GridBagLayout();
+						inmButtonsPanelLayout.rowWeights = new double[] {0.1};
+						inmButtonsPanelLayout.rowHeights = new int[] {7};
+						inmButtonsPanelLayout.columnWeights = new double[] {0.1, 0.1};
+						inmButtonsPanelLayout.columnWidths = new int[] {7, 7};
+						inmPanel.add(inmButtonsPanel, BorderLayout.NORTH);
+						inmButtonsPanel.setLayout(inmButtonsPanelLayout);
+						{
+							mostrarListaInmueblesButton = new JButton();
+							inmButtonsPanel.add(mostrarListaInmueblesButton, new GridBagConstraints(0, 0, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(5, 10, 5, 10), 0, 0));
+							mostrarListaInmueblesButton.setText("Ver todos los Inmuebles");
+							mostrarListaInmueblesButton.addActionListener(new ActionListener() {
+								public void actionPerformed(ActionEvent evt) {
+									System.out.println("mostrarListaInmueblesButton.actionPerformed, event="+evt);
+									//TODO add your code for mostrarListaInmueblesButton.actionPerformed
+									inmModel.cargaInmueblesTodos();
+                                    inmTable.setModel(inmModel);
+								}
+							});
+						}
+						{
+							mostrarRecibosInmButton = new JButton();
+							inmButtonsPanel.add(mostrarRecibosInmButton, new GridBagConstraints(1, 0, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(5, 10, 5, 10), 0, 0));
+							mostrarRecibosInmButton.setText("Recibos del Inmueble");
+							mostrarRecibosInmButton.addActionListener(new ActionListener() {
+								public void actionPerformed(ActionEvent evt) {
+									System.out.println("mostrarRecibosInmButton.actionPerformed, event="+evt);
+									//TODO add your code for mostrarRecibosInmButton.actionPerformed
+									if(inmTable.getRowCount()<1||inmTable.getSelectedRow()==-1){
+                                        javax.swing.JOptionPane.showMessageDialog(null, "No hay ninguna fila seleccionada");                                                                            
+									}else{
+                                        int rowSel = inmTable.getSelectedRow();
+                                        Inmueble iAux = inmModel.getInmueblePorPos(rowSel);
+                                        recibosModel.cargaRecibosInmueble(iAux);
+                                        recibosTable.setModel(recibosModel);
+									}
+								}
+							});
+						}
 					}
 					{
-						recibosScrollPane = new JScrollPane();
-						recibosPanel.add(recibosScrollPane);
-						recibosScrollPane.setSize(200, 227);
-						{												
-							recibosTable = new JTable(recibosModel);						
-							recibosTable.setModel(recibosModel);
-							recibosScrollPane.setViewportView(recibosTable);
-							recibosTable.setFillsViewportHeight(true);
-							recibosTable.setSize(200, 200);
+						inmScrollPane = new JScrollPane();
+						inmPanel.add(inmScrollPane, BorderLayout.CENTER);
+						{
+							inmTable = new JTable(inmModel);
+                            inmTable.setModel(inmModel);
+                            inmScrollPane.setViewportView(inmTable);
+                            inmTable.setFillsViewportHeight(true);                            
 						}
 					}
 				}
 			}
+			{
+				recibosPanel = new JPanel();
+				getContentPane().add(recibosPanel);
+				BorderLayout mainLayoutLayout = new BorderLayout();
+				recibosPanel.setLayout(mainLayoutLayout);
+				recibosPanel.setPreferredSize(new java.awt.Dimension(314, 331));
+				recibosPanel.setBorder(new LineBorder(new java.awt.Color(0,0,0), 1, true));
+				{
+					recibosButtonsPanel = new JPanel();
+					GridBagLayout recibosButtonsPanelLayout = new GridBagLayout();
+					recibosButtonsPanelLayout.rowWeights = new double[] {0.1};
+					recibosButtonsPanelLayout.rowHeights = new int[] {7};
+					recibosButtonsPanelLayout.columnWeights = new double[] {0.1};
+					recibosButtonsPanelLayout.columnWidths = new int[] {7};
+					recibosPanel.add(recibosButtonsPanel, BorderLayout.SOUTH);
+					recibosButtonsPanel.setLayout(recibosButtonsPanelLayout);
+					{
+						pagarReciboButton = new JButton();
+						recibosButtonsPanel.add(pagarReciboButton, new GridBagConstraints(0, 0, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(5, 10, 5, 10), 0, 0));
+						pagarReciboButton.setText("Pagar Recibo");
+						pagarReciboButton.addActionListener(new ActionListener() {
+							public void actionPerformed(ActionEvent evt) {
+								System.out.println("pagarReciboButton.actionPerformed, event="+evt);
+								//TODO add your code for pagarReciboButton.actionPerformed
+							}
+						});
+					}
+				}
+				{
+					recibosScrollPane = new JScrollPane();
+					recibosPanel.add(recibosScrollPane, BorderLayout.CENTER);
+					{
+						recibosTable = new JTable(recibosModel);                                                
+                        recibosTable.setModel(recibosModel);
+                        recibosScrollPane.setViewportView(recibosTable);
+                        recibosTable.setFillsViewportHeight(true);                        
+					}
+				}
+			}
 			pack();
-			this.setSize(979, 369);
+			this.setSize(710, 369);
 		} catch (Exception e) {
 		    //add your error handling code here
 			e.printStackTrace();
