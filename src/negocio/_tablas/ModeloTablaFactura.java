@@ -112,7 +112,7 @@ public class ModeloTablaFactura extends DefaultTableModel {
 			ArrayList<Factura> listaFacturas = ControladorFactura.getControladorFactura().GetListaFacturas();
 			System.out.println("Tamaño lista"+listaFacturas.size());
 			for(Factura f:listaFacturas){						
-				if(f.getNotainformativa().getIdNotaInformativa()==nI.getIdNotaInformativa()){
+				if(f.getNotainformativa()!=null && f.getNotainformativa().getIdNotaInformativa()==nI.getIdNotaInformativa()){
 						this.addToTabla(f);					
 				}
 			}

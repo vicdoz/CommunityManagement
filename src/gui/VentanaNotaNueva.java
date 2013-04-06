@@ -182,7 +182,7 @@ public class VentanaNotaNueva extends javax.swing.JFrame {
 		String fecha = fechaTextField.getText();
 		if(ComTextField.getText().isEmpty()	||fecha.isEmpty()){
 			javax.swing.JOptionPane.showMessageDialog(null, "Debe completar todos los campos");
-		}else if(checkFecha(fecha)) {
+		}else if(!checkFecha(fecha)) {
 			javax.swing.JOptionPane.showMessageDialog(null, "El formato de fecha es incorrecto \n Ejemplo: 2013-03-20");
 		}else{	
 			int idCom = Integer.parseInt(ComTextField.getText());						

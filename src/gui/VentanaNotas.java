@@ -103,6 +103,7 @@ public class VentanaNotas extends javax.swing.JFrame {
 	public VentanaNotas(Comunidad c) {
 		super();
 		this.cAux = c;
+		notasModel.cargaNotasComunidad(c);
 		initGUI();
 	}
 	
@@ -146,7 +147,7 @@ public class VentanaNotas extends javax.swing.JFrame {
 								public void actionPerformed(ActionEvent evt) {
 									System.out.println("addNotasButton.actionPerformed, event="+evt);
 									//TODO add your code for addNotasButton.actionPerformed
-									VentanaNotaNueva v = new VentanaNotaNueva();
+									VentanaNotaNueva v = new VentanaNotaNueva(cAux);
 									v.setVisible(true);
 								}
 							});
@@ -349,8 +350,11 @@ public class VentanaNotas extends javax.swing.JFrame {
 							genNotaButton.setEnabled(false);
 							genNotaButton.addActionListener(new ActionListener() {
 								public void actionPerformed(ActionEvent evt) {
-									System.out.println("genNotaButton.actionPerformed, event="+evt);
-									//TODO add your code for genNotaButton.actionPerformed
+									
+									notasModel.calcularImporte(cAux,niAux);
+									notasModel.generarRecibos(cAux,niAux);
+									javax.swing.JOptionPane.showMessageDialog(null, "Recibos generados correctamente.");										
+									
 								}
 							});
 						}
