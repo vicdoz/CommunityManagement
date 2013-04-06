@@ -193,7 +193,8 @@ public class VentanaLinea extends javax.swing.JFrame {
 			conc = ControladorConcepto.getControladorConcepto().getConceptoPorCodigo(codigo);
 			if(editMode==1){
 				lfAux.setConcepto(conc);
-				lfAux.setImporteLinea(importe);		
+				lfAux.setImporteLinea(importe);	
+				VentanaFacturas.modeloFact.actualizaImporteFactura(lfAux);
 				try {
 					ControladorLineaFactura.getControladorLineaFactura().actualizarLineaFactura(lfAux);
 				} catch (DAOExcepcion e) {
@@ -201,12 +202,13 @@ public class VentanaLinea extends javax.swing.JFrame {
 					e.printStackTrace();
 				}
 				VentanaFacturas.modeloFactDet.updateRow(rowAux,lfAux);				
-				VentanaFacturas.tablaFactDet.setModel(VentanaFacturas.modeloFactDet);
+				VentanaFacturas.tablaFactDet.setModel(VentanaFacturas.modeloFactDet);	
 				VentanaFacturas.tablaFactDet.repaint();
 			}else{				
 				LineaFactura lf = new LineaFactura();
 				lf.setConcepto(conc);
 				lf.setImporteLinea(importe); lf.setFactura(factura);
+				VentanaFacturas.modeloFact.actualizaImporteFactura(lf);
 				try {	
 					ControladorLineaFactura.getControladorLineaFactura().nuevoLineaFactura(lf);
 					VentanaFacturas.modeloFactDet.addFactura(lf);					

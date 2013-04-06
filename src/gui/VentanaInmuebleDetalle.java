@@ -309,7 +309,7 @@ public class VentanaInmuebleDetalle extends javax.swing.JFrame {
                                                         Integer.parseInt(ComTextField.getText())));
                                         i.setPropietario(ControladorPropietario.getControladorPropietario().getPropietarioPorId(
                                         		ControladorPropietario.getControladorPropietario().getPropietarioPorPos(propietarios.getSelectedIndex()).getIdPropietario()));
-                                        
+                                        i.setPorcentaje(Porcentaje);
                                         System.out.println(i.getPropietario().getIdPropietario());
                                         try {           
                                                 ControladorInmueble.getControladorInmueble().nuevoInmueble(i);

@@ -205,10 +205,12 @@ public class VentanaNotaNueva extends javax.swing.JFrame {
 				}
 				else{
 					NotaInformativa n = new NotaInformativa();
+					n.setImporteNota((float)0.0);
 					n.setFechaCalculo(fecha);
 					n.setComunidad(ControladorComunidad.getControladorComunidad().getComunidadPorId(
 							Integer.parseInt(ComTextField.getText())));																								
-					System.out.println(n.getIdNotaInformativa());
+				
+					System.out.println("Importe nota inicio:"+n.getImporteNota());
 					try {		
 						ControladorNotaInformativa.getControladorNotaInformativa().nuevaNotaInformativa(n);
 						VentanaNotas.notasModel.addNotaInformativa(n);

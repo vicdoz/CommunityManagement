@@ -98,7 +98,7 @@ public class ModeloTablaInmueble extends DefaultTableModel {
 			Vector v=new Vector();
 			v.add(i.getIdInmueble());	v.add(i.getComunidad().getIdComunidad());	
 			v.add(i.getEscalera());		v.add(i.getPiso());			v.add(i.getPuerta());
-			v.add(i.getPropietario().getIdPropietario());
+			v.add(i.getPorcentaje());	v.add(i.getPropietario().getIdPropietario());
 			numInmuebles++;			
 			this.addRow(v); 			
 		}

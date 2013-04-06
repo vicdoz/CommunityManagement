@@ -3,6 +3,7 @@ package negocio._tablas;
 import negocio.*;
 import accesoAdatos._controladores.ControladorFactura;
 import accesoAdatos._controladores.ControladorNotaInformativa;
+import accesoAdatos._controladores.ControladorReciboInmueble;
 import excepciones.*;
 
 import java.util.*;
@@ -106,6 +107,13 @@ public class ModeloTablaNotas extends DefaultTableModel {
 				importe+=fAux.getImporteConIva();
 			}
 			niAux.setImporteNota(importe);
+			System.out.println("Importe:"+importe);
+			try {
+				ControladorNotaInformativa.getControladorNotaInformativa().actualizarNotaInformativa(niAux);
+			} catch (DAOExcepcion e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		public void generarRecibos(Comunidad cAux, NotaInformativa niAux) {
 			// TODO Auto-generated method stub
@@ -113,13 +121,18 @@ public class ModeloTablaNotas extends DefaultTableModel {
 			/* Calculo por inmueble */
 			Iterator<Inmueble> i= cAux.getListaInmuebles().iterator();
 			while(i.hasNext()){
-				Inmueble iAux=i.next();
-				ReciboInmueble ri= new ReciboInmueble();
-				ri.setInmueble(iAux);
-				ri.setNotaInformativa(niAux);
-				ri.setImporte(niAux.getImporteNota()*(iAux.getPorcentaje()/100));
-				ri.setFechaPago(niAux.getFechaCalculo());
-				
+				try {
+					Inmueble iAux=i.next();
+					ReciboInmueble ri= new ReciboInmueble();
+					ri.setInmueble(iAux);
+					ri.setNotaInformativa(niAux);
+					ri.setImporte(niAux.getImporteNota()*(iAux.getPorcentaje()/100));
+					ri.setFechaPago(niAux.getFechaCalculo());	
+					ControladorReciboInmueble.getControladorReciboInmueble().NuevoReciboInmueble(ri);
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 		}
 }
