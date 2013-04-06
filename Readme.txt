@@ -22,6 +22,8 @@ Factura:
 
 Emision de recibos:
 	- Ver comunidades cuyos estados son "alta" y sus inmublestienen la participacion cuadrada(100%).
+Pago recibos:
+	- Pagar automáticamente recibos cuyos propietarios tengan Cuenta Bancaria.	
 Varios:
 	- Afegir avisos al insertar / editar / borrar entrades de la bd
 		- El inmoble no deu d'existir (comprobar ESC-PIS-POR)
@@ -29,8 +31,7 @@ Varios:
 		- La comunitat no deu d'existir (comprobar NOM)	
 
 ---------------------------------------------------------------------------------
-BUGS:
-	- No es pot llevar una factura de una nota (Gestión Notas)	
+BUGS:	
 	- Carta
 	- Revisar excepciones
 

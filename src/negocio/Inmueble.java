@@ -26,7 +26,7 @@ public class Inmueble {
 	public void addReciboToList(ReciboInmueble r){
 		listaRecibos.add(r);
 	}
-	public void delReciboToList(ReciboInmueble r){
+	public void delReciboFromList(ReciboInmueble r){
 		listaRecibos.remove(r);
 	}
 	public int getIdInmueble() {

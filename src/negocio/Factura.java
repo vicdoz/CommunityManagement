@@ -27,7 +27,7 @@ public class Factura {
 	public void addLineaToList(LineaFactura l){
 		listaLineas.add(l);
 	}
-	public void delLineaToList(LineaFactura l){
+	public void delLineaFromList(LineaFactura l){
 		listaLineas.remove(l);
 	}
 	public Set getListaLineas() {

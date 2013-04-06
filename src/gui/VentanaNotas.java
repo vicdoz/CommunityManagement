@@ -307,7 +307,7 @@ public class VentanaNotas extends javax.swing.JFrame {
 									}else{
 										int selRow = factsSelTable.getSelectedRow();		
 										Factura fAux = factsSelModel.getFacturaPorPos(selRow);																				//
-										factsSelModel.setDeNotaInformativa(null, niAux);
+										factsSelModel.setDeNotaInformativa(fAux, null);
 										//Delete from "pendientes"
 										factsSelModel.deleteFromTabla(selRow);
 										factsSelTable.setModel(factsPendModel);
@@ -350,7 +350,7 @@ public class VentanaNotas extends javax.swing.JFrame {
 									for(int i=0; i<factsSelTable.getRowCount();i++){										
 										Factura fAux = factsSelModel.getFacturaPorPos(i);
 										//Delete from "pendientes"
-										factsSelModel.setDeNotaInformativa(null, niAux);
+										factsSelModel.setDeNotaInformativa(fAux, null);
 										factsSelModel.deleteFromTabla(i);
 										factsSelTable.setModel(factsSelModel);										
 										//Add to "selected"

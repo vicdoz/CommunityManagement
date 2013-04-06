@@ -253,8 +253,6 @@ public class VentanaComunidadNueva extends javax.swing.JFrame {
 				comAux.setPoblacion(poblacion);					
 				try {
 					ControladorComunidad.getControladorComunidad().actualizarComunidad(comAux);
-					//modelo.updateRow(rowAux, comAux);
-					//modelo.fireTableDataChanged();
 					VentanaComunidad.modeloCom.updateRow(rowAux,comAux);		
 					VentanaComunidad.modeloCom.fireTableDataChanged();
 					VentanaComunidad.tablaCom.setModel(VentanaComunidad.modeloCom);
@@ -264,7 +262,7 @@ public class VentanaComunidadNueva extends javax.swing.JFrame {
 					e.printStackTrace();
 				}			
 			}
-			else{
+			else{ //Comunidad nueva
 				try {		
 					ControladorComunidad.getControladorComunidad().nuevaComunidad(c);
 					VentanaComunidad.modeloCom.addComunidad(c);

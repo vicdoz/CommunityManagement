@@ -17,18 +17,15 @@ public class ModeloTablaRecibo extends DefaultTableModel {
 			super(null,
 					new String[] {"ID","Id Nota", "Fecha", "Total a Pagar"});		
 			numRecibos=0;
-			/*ArrayList<Factura> listaFacturas = ControladorFactura.getControladorFactura().GetListaFacturas();
-			System.out.println("Tamaño lista"+listaFacturas.size());
-			for(Factura f:listaFacturas){						
-				this.addToTabla(f);
-			}*/
 		}
 		@Override
 	    public boolean isCellEditable(int row, int column) { //De esta forma no se pueden editar las celdas.
 		       //all cells false
 		       return false;
 		    }
-		public void addRecibo (ReciboInmueble r) throws InmuebleYaExiste{									
+		public void addRecibo (ReciboInmueble r) throws InmuebleYaExiste{
+			r.getInmueble().addReciboToList(r);
+			r.getNotaInformativa().addReciboToList(r);
 			this.addToTabla(r);
 		}
 		public int getNumRecibos(){
@@ -36,7 +33,12 @@ public class ModeloTablaRecibo extends DefaultTableModel {
 		}
 		public void borraReciboPorPos(int row){
 			try {
-				int id = Integer.parseInt(this.getValueAt(row, 0).toString());								
+				int id = Integer.parseInt(this.getValueAt(row, 0).toString());	
+				ReciboInmueble r = getReciboPorId(id);
+				//Borrem les relaciones
+				r.getInmueble().delReciboFromList(r);
+				r.getNotaInformativa().delReciboFromList(r);
+				//Borrem de la BD
 				ControladorReciboInmueble.getControladorReciboInmueble().borrarReciboInmueble(getReciboPorId(id));
 				deleteFromTabla(row);
 			} catch (DAOExcepcion e) {

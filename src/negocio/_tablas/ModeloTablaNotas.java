@@ -26,7 +26,8 @@ public class ModeloTablaNotas extends DefaultTableModel {
 		       //all cells false
 		       return false;
 		    }
-		public void addNotaInformativa (NotaInformativa nI) throws InmuebleYaExiste{									
+		public void addNotaInformativa (NotaInformativa nI) throws InmuebleYaExiste{
+			nI.getComunidad().addNotaInformativaToList(nI);
 			this.addToTabla(nI);
 		}
 		public int getNumNotas(){
@@ -34,8 +35,11 @@ public class ModeloTablaNotas extends DefaultTableModel {
 		}
 		public void borraNotaPorPos(int row){
 			try {
-				int id = Integer.parseInt(this.getValueAt(row, 0).toString());								
-				ControladorNotaInformativa.getControladorNotaInformativa().borrarNotaInformativa(getNotaPorId(id));
+				int id = Integer.parseInt(this.getValueAt(row, 0).toString());
+				NotaInformativa ni = getNotaPorId(id);
+				ni.getComunidad().delNotaInformativaFromList(ni);
+				
+				ControladorNotaInformativa.getControladorNotaInformativa().borrarNotaInformativa(ni);
 				deleteFromTabla(row);
 			} catch (DAOExcepcion e) {
 				// TODO Auto-generated catch block
@@ -59,7 +63,7 @@ public class ModeloTablaNotas extends DefaultTableModel {
 			return getNotaPorId(id) ;
 		}
 		
-		public void updateRow(int row,NotaInformativa nI){			
+		public void updateRow(int row,NotaInformativa nI){				
 			this.setValueAt(nI.getFechaCalculo(), row, 1);			
 			this.setValueAt(nI.getImporteNota(), row, 2);			
 			this.setValueAt(nI.getIdRecibo(), row, 3);			

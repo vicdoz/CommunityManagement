@@ -266,41 +266,31 @@ public class VentanaInmuebleDetalle extends javax.swing.JFrame {
                                 javax.swing.JOptionPane.showMessageDialog(null, "Por favor introduzca un ID de Propietario correcto");
                         }else{
                         
-                                if(editMode==1){        
+                                if(editMode==1){ //Editar inmoble       
                                         
                                         InAux.setEscalera(Escalera);    InAux.setPiso(Piso); 
-                                        InAux.setPuerta(Puerta);                InAux.setComunidad(comunidad);                          
-                                        InAux.setComunidad(ControladorComunidad.getControladorComunidad().getComunidadPorId(idCom));
+                                        InAux.setPuerta(Puerta);                InAux.setComunidad(comunidad);                                                                  
                                         InAux.setPropietario(ControladorPropietario.getControladorPropietario().getPropietarioPorId(idProp));
                                         InAux.setPorcentaje(Porcentaje);
-                                        try {   
-                                        		
+                                        try {                                           		
                                                 ControladorInmueble.getControladorInmueble().actualizarInmueble(InAux);                                 
-                                                VentanaComunidad.modeloInm.updateRow(rowAux,InAux);             
-                                                VentanaComunidad.modeloInm.fireTableDataChanged();
-                                                VentanaComunidad.tablaInm.setModel(VentanaComunidad.modeloInm);                 
-                                                
-                                                dispose();
-                                                
+                                                VentanaComunidad.modeloInm.updateRow(rowAux,InAux);
+                                                VentanaComunidad.tablaInm.setModel(VentanaComunidad.modeloInm);                                                                 
+                                                dispose();                                                
                                         } catch (DAOExcepcion e) {
                                                 e.printStackTrace();
                                         }
                                         
                                 }
-                                else{
+                                else{ //Inmueble nuevo
                                         Inmueble i = new Inmueble();
-                                        i.setEscalera(Escalera);
-                                        i.setPiso(Piso);
-                                        i.setPuerta(Puerta);                            
-                                        i.setComunidad(comunidad);
+                                        i.setEscalera(Escalera);     i.setPiso(Piso);
+                                        i.setPuerta(Puerta);         i.setComunidad(comunidad);
                                         Propietario p=ControladorPropietario.getControladorPropietario().getPropietarioPorId(
                                         		ControladorPropietario.getControladorPropietario().getPropietarioPorPos(propietariosComboBox.getSelectedIndex()).getIdPropietario());
-                                        i.setPropietario(p);
-                                        i.setPorcentaje(Porcentaje);
-                                        System.out.println(i.getPropietario().getIdPropietario());
+                                        i.setPropietario(p);         i.setPorcentaje(Porcentaje);
+                                        System.out.println(i.getPropietario().getIdPropietario());                                		
                                         try {   
-                                        		comunidad.addInmuebleToList(i);
-                                        		p.addInmuebleToList(i);
                                                 ControladorInmueble.getControladorInmueble().nuevoInmueble(i);
                                                 VentanaComunidad.modeloInm.addInmueble(i);
                                                 VentanaComunidad.tablaInm.setModel(VentanaComunidad.modeloInm);

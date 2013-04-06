@@ -40,13 +40,13 @@ public class Comunidad {
 	public void addNotaInformativaToList(NotaInformativa i){
 		listaNotasInformativas.add(i);
 	}
-	public void delFacturaToList(Factura i){
+	public void delFacturaFromList(Factura i){
 		 listaFacturas.add(i);
 	}
-	public void delInmuebleToList(Inmueble i){
+	public void delInmuebleFromList(Inmueble i){
 		 listaInmuebles.remove(i);
 	}
-	public void delNotaInformativaToList(NotaInformativa i){
+	public void delNotaInformativaFromList(NotaInformativa i){
 		 listaNotasInformativas.remove(i);
 	}
 	public void addFacturaToList(Factura i){

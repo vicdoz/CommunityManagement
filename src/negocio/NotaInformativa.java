@@ -33,13 +33,13 @@ public class NotaInformativa {
 	public void addReciboToList(ReciboInmueble r){
 		listarecibos.add(r);
 	}
-	public void delReciboToList(ReciboInmueble r){
+	public void delReciboFromList(ReciboInmueble r){
 		listarecibos.remove(r);
 	}
 	public void addFacturaToList(Factura f){
 		listaFacturas.add(f);
 	}
-	public void delFacturaToList(Factura f){
+	public void delFacturaFromList(Factura f){
 		listaFacturas.remove(f);
 	}
 	

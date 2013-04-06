@@ -208,8 +208,7 @@ public class VentanaNotaNueva extends javax.swing.JFrame {
 					n.setImporteNota((float)0.0);
 					n.setFechaCalculo(fecha);
 					n.setComunidad(ControladorComunidad.getControladorComunidad().getComunidadPorId(
-							Integer.parseInt(ComTextField.getText())));																								
-				
+							Integer.parseInt(ComTextField.getText())));																												
 					System.out.println("Importe nota inicio:"+n.getImporteNota());
 					try {		
 						ControladorNotaInformativa.getControladorNotaInformativa().nuevaNotaInformativa(n);

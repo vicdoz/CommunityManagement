@@ -25,7 +25,9 @@ public class ModeloTablaInmueble extends DefaultTableModel {
 		       //all cells false
 		       return false;
 		    }
-		public void addInmueble (Inmueble i) throws InmuebleYaExiste{									
+		public void addInmueble (Inmueble i) throws InmuebleYaExiste{	
+			i.getComunidad().addInmuebleToList(i);  		
+			i.getPropietario().addInmuebleToList(i);
 			this.addToTabla(i);			
 		}
 		public int getNumInmuebles(){
@@ -35,7 +37,9 @@ public class ModeloTablaInmueble extends DefaultTableModel {
 		public void borraInmueblePorPos(int row){			
 			try {
 				Inmueble i = getInmueblePorPos(row);
-				ControladorInmueble.getControladorInmueble().borrarInmueble(i);							
+				i.getPropietario().delInmuebleFromList(i);
+				i.getComunidad().delInmuebleFromList(i);				
+				ControladorInmueble.getControladorInmueble().borrarInmueble(i);
 				deleteFromTabla(row);
 			} catch (DAOExcepcion e) {
 				// TODO Auto-generated catch block
@@ -83,6 +87,12 @@ public class ModeloTablaInmueble extends DefaultTableModel {
 			}			
 		}
 		public void updateRow(int row, Inmueble i){
+			
+			if(!i.getComunidad().getListaInmuebles().contains(i))
+				i.getComunidad().addInmuebleToList(i);  		
+			if(!i.getPropietario().getListaInmuebles().contains(i))
+				i.getPropietario().addInmuebleToList(i);
+			
 			this.setValueAt(i.getComunidad().getIdComunidad(),row,1);
 			this.setValueAt(i.getEscalera(),row,2);
 			this.setValueAt(i.getPiso(),row,3);

@@ -17,18 +17,14 @@ public class ModeloTablaFactura extends DefaultTableModel {
 			super(null,
 					new String[] {"ID","CIF","Fecha", "Importe","%IVA", "Total"});		
 			numFacturas=0;
-			/*ArrayList<Factura> listaFacturas = ControladorFactura.getControladorFactura().GetListaFacturas();
-			System.out.println("Tamaño lista"+listaFacturas.size());
-			for(Factura f:listaFacturas){						
-				this.addToTabla(f);
-			}*/
 		}
 		@Override
 	    public boolean isCellEditable(int row, int column) { //De esta forma no se pueden editar las celdas.
 		       //all cells false
 		       return false;
 		    }
-		public void addFactura (Factura f) throws InmuebleYaExiste{									
+		public void addFactura (Factura f) throws InmuebleYaExiste{
+			f.getComunidad().addFacturaToList(f);			
 			this.addToTabla(f);
 		}
 		public int getNumFacturas(){
@@ -36,8 +32,13 @@ public class ModeloTablaFactura extends DefaultTableModel {
 		}
 		public void borraFacturaPorPos(int row){
 			try {
-				int id = Integer.parseInt(this.getValueAt(row, 0).toString());				
-				ControladorFactura.getControladorFactura().borrarFactura(getFacturaPorId(id));
+				int id = Integer.parseInt(this.getValueAt(row, 0).toString());	
+				Factura f = getFacturaPorId(id);
+				//Borrem relacions
+				f.getComunidad().delFacturaFromList(f);
+				f.getNotainformativa().delFacturaFromList(f);
+				//Borrem de la BD
+				ControladorFactura.getControladorFactura().borrarFactura(f);
 				deleteFromTabla(row);
 			} catch (DAOExcepcion e) {
 				// TODO Auto-generated catch block
@@ -126,6 +127,11 @@ public class ModeloTablaFactura extends DefaultTableModel {
 		
 		public void setDeNotaInformativa(Factura f, NotaInformativa niAux) {
 			// TODO Auto-generated method stub
+			if(niAux==null){
+				f.getNotainformativa().delFacturaFromList(f);
+			}else{
+				f.getNotainformativa().addFacturaToList(f);
+			}
 			f.setNotainformativa(niAux);
 			try {
 				ControladorFactura.getControladorFactura().actualizarFactura(f);

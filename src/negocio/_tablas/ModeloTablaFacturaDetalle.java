@@ -18,18 +18,14 @@ public class ModeloTablaFacturaDetalle extends DefaultTableModel {
 			super(null,
 					new String[] {"Línea","Código Concepto", "Importe"});		
 			numLineas=0;
-			/*ArrayList<LineaFactura> listaLineas = ControladorLineaFactura.getControladorLineaFactura().GetListaLineaFactura();
-			System.out.println("Tamaño lista"+listaLineas.size());
-			for(LineaFactura lF:listaLineas){						
-				this.addToTabla(lF);
-			}*/
 		}
 		@Override
 	    public boolean isCellEditable(int row, int column) { //De esta forma no se pueden editar las celdas.
 		       //all cells false
 		       return false;
 		    }
-		public void addFactura (LineaFactura lF) throws InmuebleYaExiste{									
+		public void addFactura (LineaFactura lF) throws InmuebleYaExiste{	
+			lF.getFactura().addLineaToList(lF);
 			this.addToTabla(lF);
 		}
 		public int getNumFacturas(){
@@ -37,8 +33,10 @@ public class ModeloTablaFacturaDetalle extends DefaultTableModel {
 		}
 		public void borraFacturaPorPos(int row){
 			try {
-				int id = Integer.parseInt(this.getValueAt(row, 0).toString());				
-				ControladorLineaFactura.getControladorLineaFactura().borrarLineaFactura(getLineaFacturaPorId(id));
+				int id = Integer.parseInt(this.getValueAt(row, 0).toString());	
+				LineaFactura lfAux = getLineaFacturaPorId(id);
+				lfAux.getFactura().delLineaFromList(lfAux);
+				ControladorLineaFactura.getControladorLineaFactura().borrarLineaFactura(lfAux);
 				deleteFromTabla(row);
 			} catch (DAOExcepcion e) {
 				// TODO Auto-generated catch block
