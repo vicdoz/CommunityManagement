@@ -1,6 +1,12 @@
+CHANGELOG 06/04/2013-21:01 v3.11:
+ - Creat Report Justificant de Pago
+ - La comunitat ara demana Maxim de Rebuts pendents al crear-la
+ - La taula Inmoble ara mostra el % de participació.
+
 CHANGELOG 06/04/2013-21:01 v3.10:
  - Creades relacions entre objectes (hashlists)
- - Arreglat bug de pasar de dreta a esquerra en nota->factures. (era una parida)
+ - Modificat un fallo de codi de pasar de dreta a esquerra en nota->factures (encara que seguix fallant)
+ 
 CHANGELOG 06/04/2013-17:40 v3.09:
  - Modificada la finestra VentanaPagosRecibos
  

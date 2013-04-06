@@ -17,7 +17,7 @@ public class ModeloTablaInmueble extends DefaultTableModel {
 		public Comunidad comunidad;
 		public ModeloTablaInmueble (){
 			super(null,
-					new String[] {"ID","Comunidad", "Escalera", "Piso", " Puerta", "Propietario"});			
+					new String[] {"ID","Comunidad", "Escalera", "Piso", " Puerta","%Participacion", "Propietario"});			
 			numInmuebles=0;
 		}
 		@Override
@@ -97,11 +97,13 @@ public class ModeloTablaInmueble extends DefaultTableModel {
 			this.setValueAt(i.getEscalera(),row,2);
 			this.setValueAt(i.getPiso(),row,3);
 			this.setValueAt(i.getPuerta(),row,4);
-			this.setValueAt(i.getPropietario().getIdPropietario(),row,5);
+			this.setValueAt(i.getPorcentaje(),row,5);
+			this.setValueAt(i.getPropietario().getIdPropietario(),row,6);
 		}
 		@SuppressWarnings("unchecked")
 		public void addToTabla(Inmueble i){
 			Vector v=new Vector();
+			//"ID","Comunidad", "Escalera", "Piso", " Puerta","%Participacion", "Propietario"
 			v.add(i.getIdInmueble());	v.add(i.getComunidad().getIdComunidad());	
 			v.add(i.getEscalera());		v.add(i.getPiso());			v.add(i.getPuerta());
 			v.add(i.getPorcentaje());	v.add(i.getPropietario().getIdPropietario());

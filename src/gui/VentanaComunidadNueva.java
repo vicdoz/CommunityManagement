@@ -44,6 +44,8 @@ public class VentanaComunidadNueva extends javax.swing.JFrame {
 	private JPanel jContentPane;
 	private JPanel jPanel1;
 	private JLabel jLabel;
+	private JTextField recibosMaxTextField;
+	private JLabel maxPendLabel;
 	private JTextField pobTextField;
 	private JLabel poblabel;
 	private JLabel contactLabel;
@@ -91,10 +93,10 @@ public class VentanaComunidadNueva extends javax.swing.JFrame {
 		editMode=1;
 		initGUI();
 		
-		nombreTextField.setText(c.getNombre());
-		
+		nombreTextField.setText(c.getNombre());		
 		direccionTextField.setText(c.getCalle());		
 		pobTextField.setText(c.getPoblacion());	
+		recibosMaxTextField.setText(String.valueOf(c.getMaxRecibosPendientes()));
 	}
 	
 	
@@ -114,9 +116,9 @@ public class VentanaComunidadNueva extends javax.swing.JFrame {
 					GridBagLayout jPanel1Layout = new GridBagLayout();
 					
 					jPanel1Layout.columnWidths = new int[] {7, 7, 7};
-					jPanel1Layout.rowHeights = new int[] {7, 20, 7, 7};
+					jPanel1Layout.rowHeights = new int[] {7, 20, 7, 20, 7};
 					jPanel1Layout.columnWeights = new double[] {0.005, 0.1, 0.1};
-					jPanel1Layout.rowWeights = new double[] {0.1, 0.1, 0.1, 0.1};
+					jPanel1Layout.rowWeights = new double[] {0.1, 0.1, 0.1, 0.1, 0.1};
 					jContentPane.add(formularioPanel, BorderLayout.CENTER);
 					formularioPanel.setLayout(jPanel1Layout);
 					formularioPanel.setPreferredSize(new java.awt.Dimension(437, 215));
@@ -156,10 +158,21 @@ public class VentanaComunidadNueva extends javax.swing.JFrame {
 					{
 						pobTextField = new JTextField();
 						formularioPanel.add(pobTextField, new GridBagConstraints(1, 2, 2, 1, 0.0, 0.0, GridBagConstraints.WEST, GridBagConstraints.HORIZONTAL, new Insets(0, 0, 0, 10), 0, 0));
+						if(comAux==null)	pobTextField.setText("");
+					}
+					{
+						maxPendLabel = new JLabel();
+						formularioPanel.add(maxPendLabel, new GridBagConstraints(0, 3, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.HORIZONTAL, new Insets(0, 10, 0, 0), 0, 0));
+						maxPendLabel.setText("Recibos máx:");
+					}
+					{
+						recibosMaxTextField = new JTextField();
+						formularioPanel.add(recibosMaxTextField, new GridBagConstraints(1, 3, 2, 1, 0.0, 0.0, GridBagConstraints.WEST, GridBagConstraints.HORIZONTAL, new Insets(0, 0, 0, 10), 0, 0));
+						if(comAux==null)	recibosMaxTextField.setText("");
 					}
 					{
 						contactLabel = new JLabel();
-						formularioPanel.add(contactLabel, new GridBagConstraints(0, 3, 1, 1, 0.0, 0.0, GridBagConstraints.WEST, GridBagConstraints.NONE, new Insets(0, 10, 0, 0), 0, 0));
+						formularioPanel.add(contactLabel, new GridBagConstraints(0, 4, 1, 1, 0.0, 0.0, GridBagConstraints.WEST, GridBagConstraints.NONE, new Insets(0, 10, 0, 0), 0, 0));
 						contactLabel.setName("contactLabel");
 						contactLabel.setText("Contacto");
 					}
@@ -167,7 +180,7 @@ public class VentanaComunidadNueva extends javax.swing.JFrame {
 						
 						ArrayList<String> listaPropietarios=ControladorPropietario.getControladorPropietario().GetListaNombresPropietarios();
 						propietarios = new JComboBox(listaPropietarios.toArray());
-						formularioPanel.add(propietarios, new GridBagConstraints(1, 3, 2, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.HORIZONTAL, new Insets(0, 0, 0, 10), 0, 0));
+						formularioPanel.add(propietarios, new GridBagConstraints(1, 4, 2, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.HORIZONTAL, new Insets(0, 0, 0, 10), 0, 0));
 					}
 				}
 				{
@@ -229,12 +242,16 @@ public class VentanaComunidadNueva extends javax.swing.JFrame {
 		int idCont=0;
 		String nombre = nombreTextField.getText();		String direccion = direccionTextField.getText();
 		String poblacion = pobTextField.getText();		String auxCont = String.valueOf(ControladorPropietario.getControladorPropietario().getPropietarioPorPos(propietarios.getSelectedIndex()).getIdPropietario());
+		int maxRecibosPendientes = Integer.parseInt(recibosMaxTextField.getText());
 		if(isInteger(auxCont))	idCont = Integer.parseInt(auxCont);
 		else	idCont=-1;
 		System.out.println("idCont="+idCont);
-		if(nombre.isEmpty() || direccion.isEmpty() || poblacion.isEmpty()){
-			javax.swing.JOptionPane.showMessageDialog(null, "Los campos Nombre, Dirección y Población deben completarse");
-		} 
+		if(nombre.isEmpty() || direccion.isEmpty() || poblacion.isEmpty()||recibosMaxTextField.getText().isEmpty()){
+			javax.swing.JOptionPane.showMessageDialog(null, "Deben completarse todos los campos");
+		}
+		else if(!isInteger(recibosMaxTextField.getText())){
+			javax.swing.JOptionPane.showMessageDialog(null, "El campo Recibos Máx debe ser un entero");
+		}
 		else if((!auxCont.isEmpty()&&idCont==-1) ){ 
 			javax.swing.JOptionPane.showMessageDialog(null, "Por favor introduzca un ID de Contacto correcto");
 		}
@@ -244,13 +261,12 @@ public class VentanaComunidadNueva extends javax.swing.JFrame {
 		else{
 			Comunidad c = new Comunidad();
 			c.setCalle(direccion);		c.setNombre(nombre);
-			c.setPoblacion(poblacion);	c.setMaxRecibosPendientes(0);
+			c.setPoblacion(poblacion);	c.setMaxRecibosPendientes(maxRecibosPendientes);
 			c.setEstado(1);	
 			if(idCont>0)	c.setIdPresidente(idCont);
 			if(editMode==1){
-				comAux.setCalle(direccion);
-				comAux.setNombre(nombre);
-				comAux.setPoblacion(poblacion);					
+				comAux.setCalle(direccion);				comAux.setNombre(nombre);
+				comAux.setPoblacion(poblacion);			comAux.setMaxRecibosPendientes(maxRecibosPendientes);					
 				try {
 					ControladorComunidad.getControladorComunidad().actualizarComunidad(comAux);
 					VentanaComunidad.modeloCom.updateRow(rowAux,comAux);		
