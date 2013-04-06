@@ -56,6 +56,8 @@ public class NotaInformativa {
 		return importeNota;
 	}
 	public void setImporteNota(float importeNota) {
+		if(importeNota==0.0)
+			importeNota=Float.parseFloat("0.0");
 		this.importeNota = importeNota;
 	}
 	public int getIdRecibo() {
