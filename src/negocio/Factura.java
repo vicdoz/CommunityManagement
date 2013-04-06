@@ -24,6 +24,12 @@ public class Factura {
 		this.idFactura = numFactura;
 		this.fechaFactura = fechaFactura;
 	}
+	public void addLineaToList(LineaFactura l){
+		listaLineas.add(l);
+	}
+	public void delLineaToList(LineaFactura l){
+		listaLineas.remove(l);
+	}
 	public Set getListaLineas() {
 		return listaLineas;
 	}

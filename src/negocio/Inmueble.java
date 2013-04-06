@@ -23,6 +23,12 @@ public class Inmueble {
 		this.puerta = puerta;
 		this.porcentaje = porcentaje;
 	}
+	public void addReciboToList(ReciboInmueble r){
+		listaRecibos.add(r);
+	}
+	public void delReciboToList(ReciboInmueble r){
+		listaRecibos.remove(r);
+	}
 	public int getIdInmueble() {
 		return idInmueble;
 	}

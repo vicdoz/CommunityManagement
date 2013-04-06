@@ -62,6 +62,12 @@ public class Propietario {
 	public String getNombre() {
 		return nombre;
 	}
+	public void addInmuebleToList(Inmueble i){
+		listaInmuebles.add(i);
+	}
+	public void delInmuebleToList(Inmueble i){
+		 listaInmuebles.remove(i);
+	}
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}

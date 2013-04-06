@@ -33,6 +33,25 @@ public class Comunidad {
 	public Set<Factura> getListaFacturas() {
 		return listaFacturas;
 	}
+	
+	public void addInmuebleToList(Inmueble i){
+		listaInmuebles.add(i);
+	}
+	public void addNotaInformativaToList(NotaInformativa i){
+		listaNotasInformativas.add(i);
+	}
+	public void delFacturaToList(Factura i){
+		 listaFacturas.add(i);
+	}
+	public void delInmuebleToList(Inmueble i){
+		 listaInmuebles.remove(i);
+	}
+	public void delNotaInformativaToList(NotaInformativa i){
+		 listaNotasInformativas.remove(i);
+	}
+	public void addFacturaToList(Factura i){
+		listaFacturas.add(i);
+	}
 
 	public Comunidad(int idComunidad, String calle, int maxRecibosPendientes,
 			int estado, int idPresidente) {

@@ -1,3 +1,4 @@
-select * from LineaFactura;
-select * from NotaInformativa;
+select * from propietario;
+select * from inmueble;
+select * from comunidad;
 

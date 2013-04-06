@@ -273,8 +273,8 @@ public class VentanaInmuebleDetalle extends javax.swing.JFrame {
                                         InAux.setComunidad(ControladorComunidad.getControladorComunidad().getComunidadPorId(idCom));
                                         InAux.setPropietario(ControladorPropietario.getControladorPropietario().getPropietarioPorId(idProp));
                                         InAux.setPorcentaje(Porcentaje);
-                                        try {                   
-                                                
+                                        try {   
+                                        		
                                                 ControladorInmueble.getControladorInmueble().actualizarInmueble(InAux);                                 
                                                 VentanaComunidad.modeloInm.updateRow(rowAux,InAux);             
                                                 VentanaComunidad.modeloInm.fireTableDataChanged();
@@ -292,13 +292,15 @@ public class VentanaInmuebleDetalle extends javax.swing.JFrame {
                                         i.setEscalera(Escalera);
                                         i.setPiso(Piso);
                                         i.setPuerta(Puerta);                            
-                                        i.setComunidad(ControladorComunidad.getControladorComunidad().getComunidadPorId(
-                                                        Integer.parseInt(ComTextField.getText())));
-                                        i.setPropietario(ControladorPropietario.getControladorPropietario().getPropietarioPorId(
-                                        		ControladorPropietario.getControladorPropietario().getPropietarioPorPos(propietariosComboBox.getSelectedIndex()).getIdPropietario()));
+                                        i.setComunidad(comunidad);
+                                        Propietario p=ControladorPropietario.getControladorPropietario().getPropietarioPorId(
+                                        		ControladorPropietario.getControladorPropietario().getPropietarioPorPos(propietariosComboBox.getSelectedIndex()).getIdPropietario());
+                                        i.setPropietario(p);
                                         i.setPorcentaje(Porcentaje);
                                         System.out.println(i.getPropietario().getIdPropietario());
-                                        try {           
+                                        try {   
+                                        		comunidad.addInmuebleToList(i);
+                                        		p.addInmuebleToList(i);
                                                 ControladorInmueble.getControladorInmueble().nuevoInmueble(i);
                                                 VentanaComunidad.modeloInm.addInmueble(i);
                                                 VentanaComunidad.tablaInm.setModel(VentanaComunidad.modeloInm);

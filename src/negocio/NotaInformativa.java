@@ -30,6 +30,18 @@ public class NotaInformativa {
 	public int getIdNotaInformativa() {
 		return idNotaInformativa;
 	}
+	public void addReciboToList(ReciboInmueble r){
+		listarecibos.add(r);
+	}
+	public void delReciboToList(ReciboInmueble r){
+		listarecibos.remove(r);
+	}
+	public void addFacturaToList(Factura f){
+		listaFacturas.add(f);
+	}
+	public void delFacturaToList(Factura f){
+		listaFacturas.remove(f);
+	}
 	
 	public Set getListaFacturas() {
 		return listaFacturas;
