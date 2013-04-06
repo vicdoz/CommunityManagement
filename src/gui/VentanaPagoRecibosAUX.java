@@ -36,7 +36,7 @@ import negocio._tablas.ModeloTablaRecibo;
 * LEGALLY FOR ANY CORPORATE OR COMMERCIAL PURPOSE.
 */
 @SuppressWarnings("serial")
-public class VentanaPagoRecibos extends javax.swing.JFrame {
+public class VentanaPagoRecibosAUX extends javax.swing.JFrame {
 
 	{
 		//Set Look & Feel
@@ -84,7 +84,7 @@ public class VentanaPagoRecibos extends javax.swing.JFrame {
 		});
 	}
 	
-	public VentanaPagoRecibos() {
+	public VentanaPagoRecibosAUX() {
 		super();
 		inmModel.cargaInmueblesTodos();
 		initGUI();
