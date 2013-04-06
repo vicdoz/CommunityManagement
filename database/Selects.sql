@@ -1,3 +1,3 @@
-select * from inmueble;
-select * from propietario;
+select * from Factura;
+select * from NotaInformativa;
 

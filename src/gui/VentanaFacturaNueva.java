@@ -213,7 +213,9 @@ public class VentanaFacturaNueva extends javax.swing.JFrame {
 				if(editMode==1){	
 					FactAux.setCIF(cif);	FactAux.setTipoIva(tipoIva);
 					FactAux.setComunidad(ControladorComunidad.getControladorComunidad().getComunidadPorId(idCom));
-					FactAux.calcularImporteTotal();
+					FactAux.setImporteConIva(FactAux.getImporteSinIva()*((tipoIva/100)+1));
+					FactAux.setImporteIva(FactAux.getImporteSinIva()*(tipoIva/100));
+					
 					try {			
 						ControladorFactura.getControladorFactura().actualizarFactura(FactAux);					
 						VentanaFacturas.modeloFact.updateRow(rowAux,FactAux);		
@@ -228,8 +230,11 @@ public class VentanaFacturaNueva extends javax.swing.JFrame {
 				}
 				else{
 					Factura f = new Factura();
+					f.setImporteConIva((float) 0.0);
+					f.setImporteSinIva((float) 0.0);
+					f.setImporteIva((float)0.0);
+					f.setCIF(cif);	f.setTipoIva(tipoIva);	
 					
-					f.setCIF(cif);	f.setTipoIva(tipoIva);					
 					Calendar DiaSemana= Calendar.getInstance();
 					String fechaAlta=DiaSemana.get(Calendar.YEAR)+"-"+DiaSemana.get(Calendar.MONTH)+"-"+DiaSemana.get(Calendar.DAY_OF_MONTH);
 					f.setFechaFactura(fechaAlta);													

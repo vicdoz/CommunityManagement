@@ -12,7 +12,6 @@
 	<many-to-one name="Concepto" class="negocio.Concepto" column="claveConcepto" />
 	<many-to-one name="Factura"   class="negocio.Factura" 	column="idFactura" />
 	<property name="ImporteLinea" column="ImporteLinea"  />
-	<property name="Observacion" column="Observacion"  />
 	
 
 	

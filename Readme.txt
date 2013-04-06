@@ -26,10 +26,19 @@ Varios:
 		- El inmoble no deu d'existir (comprobar ESC-PIS-POR)
 		- El propietari no deu d'existir (comprobar NIF)
 		- La comunitat no deu d'existir (comprobar NOM)	
-	
+
 ---------------------------------------------------------------------------------
 BUGS:
-	- 
+-opciones predeterminadas salir
+-Abrir ventana factura con linea nueva
+-arreglar bug linea factura al cerrar y abrir
+-arreglar bug factura derecha nota
+-titulo de facturas pendientes en ventana notas
+-set id recibo de nota informativa
+-carta
+-revisar excepciones
+-en tabla inmuebles mostrar porcentaje
+-actualizar tabla factura una vez añadidas las lineas
 ---------------------------------------------------------------------------------
 REVISAR:
 	

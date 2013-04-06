@@ -60,10 +60,7 @@ public class Factura {
 	public String getCIF() {
 		return CIF;
 	}
-	public void calcularImporteTotal(){
-		importeIva=tipoIva*importeSinIva;
-		importeConIva=importeSinIva+importeIva;
-	}
+
 	public void acumulaImporteLinea(LineaFactura l){
 		importeSinIva+=l.getImporteLinea();
 	}
