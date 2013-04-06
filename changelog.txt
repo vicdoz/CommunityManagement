@@ -1,3 +1,11 @@
+CHANGELOG 06/04/2013-02:06 v3.07:
+ - Creada Finestra VentanaNotaNueva per a crear notes noves.
+ 	- Funcionalitat A/B/M de la nota.
+ - Eliminats warnings a /gui
+
+CHANGELOG 06/04/2013-01:30 v3.06:
+ - En inmoble se selecciona el seu propietari en un ComboBox - Se implantarà a la resta
+
 CHANGELOG 05/04/2013-18:10 v3.05:
  - Creada taula ModeloTablaRecibo
  - VentanaPagoRecibos modificada:

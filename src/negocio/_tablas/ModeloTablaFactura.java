@@ -117,7 +117,7 @@ public class ModeloTablaFactura extends DefaultTableModel {
 				}
 			}
 		}
-		private void limpiaTabla() {
+		public void limpiaTabla() {
 			// TODO Auto-generated method stub			
 			while(numFacturas>0){
 				this.removeRow(numFacturas-1);

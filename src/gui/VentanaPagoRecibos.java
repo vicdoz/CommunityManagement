@@ -11,8 +11,6 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
 import javax.swing.WindowConstants;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
 import javax.swing.SwingUtilities;
 
 import negocio.Inmueble;

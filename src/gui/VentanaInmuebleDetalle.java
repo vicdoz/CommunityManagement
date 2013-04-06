@@ -36,6 +36,16 @@ import accesoAdatos._controladores.*;
 */
 @SuppressWarnings("serial")
 public class VentanaInmuebleDetalle extends javax.swing.JFrame {
+
+	{
+		//Set Look & Feel
+		try {
+			javax.swing.UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+
         private JPanel jContentPane;
         private JPanel jPanel1;
         private JLabel jLabel;
@@ -52,7 +62,8 @@ public class VentanaInmuebleDetalle extends javax.swing.JFrame {
         private JButton volverButton;
         private JButton guardarButton;
         private JPanel formularioPanel;
-        private JComboBox propietarios;
+        @SuppressWarnings("unchecked")
+		private JComboBox propietarios;
         private int editMode=0;
         private int rowAux;
         public static ModeloTablaInmueble modelo = null;
@@ -64,13 +75,16 @@ public class VentanaInmuebleDetalle extends javax.swing.JFrame {
         public static void main(String[] args) {
                 SwingUtilities.invokeLater(new Runnable() {
                         public void run() {
-                                VentanaInmuebleDetalle inst = new VentanaInmuebleDetalle(modelo);
+                                VentanaInmuebleDetalle inst = new VentanaInmuebleDetalle();
                                 inst.setLocationRelativeTo(null);
                                 inst.setVisible(true);                          
                         }
                 });
         }
-
+        public VentanaInmuebleDetalle() {
+            super(); 
+            initGUI();
+        }
         @SuppressWarnings("static-access")
         public VentanaInmuebleDetalle(ModeloTablaInmueble mod) {
                 super();
@@ -104,8 +118,8 @@ public class VentanaInmuebleDetalle extends javax.swing.JFrame {
                 
                 escaleraTextField.setText(i.getEscalera());             pisoTextField.setText(i.getPiso());
                 puertaTextField.setText(i.getPuerta());
-                
-                String idProp=i.getPropietario().getIdPropietario()+"";
+                propietarios.setSelectedIndex(i.getPropietario().getIdPropietario()-1);
+                //String idProp=i.getPropietario().getIdPropietario()+"";
                 String idCom=i.getComunidad().getIdComunidad()+"";
                 //propTextField.setText(idProp);         
                 ComTextField.setText(idCom);    
@@ -114,7 +128,8 @@ public class VentanaInmuebleDetalle extends javax.swing.JFrame {
         }
 
         
-        private void initGUI() {
+        @SuppressWarnings("unchecked")
+		private void initGUI() {
                 try {
                         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
                         this.setTitle("Datos Inmueble");
@@ -187,7 +202,7 @@ public class VentanaInmuebleDetalle extends javax.swing.JFrame {
                                         {
                                                 ComTextField = new JTextField();
                                                 formularioPanel.add(ComTextField, new GridBagConstraints(1, 3, 2, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.HORIZONTAL, new Insets(0, 0, 0, 10), 0, 0));
-                                                ComTextField.setText(""+comunidad.getIdComunidad());
+                                                if(comunidad!=null)	ComTextField.setText(""+comunidad.getIdComunidad());
                                                 ComTextField.setEnabled(false);
                                         }
                                 }

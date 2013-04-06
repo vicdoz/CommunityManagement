@@ -16,6 +16,7 @@ import javax.swing.JButton;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
@@ -75,9 +76,9 @@ public class VentanaNotas extends javax.swing.JFrame {
 	
 	private Comunidad cAux;
 	private NotaInformativa niAux;
-	public JTable notasTable;
-	public JTable factsPendTable;
-	public JTable factsSelTable;
+	public static JTable notasTable;
+	public static JTable factsPendTable;
+	public static JTable factsSelTable;
 	public static ModeloTablaNotas notasModel = new ModeloTablaNotas();
 	public static ModeloTablaFactura factsPendModel = new ModeloTablaFactura();
 	public static ModeloTablaFactura factsSelModel = new ModeloTablaFactura();
@@ -145,6 +146,8 @@ public class VentanaNotas extends javax.swing.JFrame {
 								public void actionPerformed(ActionEvent evt) {
 									System.out.println("addNotasButton.actionPerformed, event="+evt);
 									//TODO add your code for addNotasButton.actionPerformed
+									VentanaNotaNueva v = new VentanaNotaNueva();
+									v.setVisible(true);
 								}
 							});
 						}
@@ -156,6 +159,15 @@ public class VentanaNotas extends javax.swing.JFrame {
 								public void actionPerformed(ActionEvent evt) {
 									System.out.println("editNotasButton.actionPerformed, event="+evt);
 									//TODO add your code for editNotasButton.actionPerformed
+									if(notasTable.getRowCount()<1||notasTable.getSelectedRow()==-1){
+										javax.swing.JOptionPane.showMessageDialog(null, "No hay ninguna fila seleccionada");							
+									}else{
+										int rowSel = notasTable.getSelectedRow();
+										NotaInformativa nAux = notasModel.getNotaInformativaPorPos(rowSel);
+										System.out.println(nAux.getIdNotaInformativa());
+										VentanaNotaNueva v = new VentanaNotaNueva(rowSel, nAux);
+										v.setVisible(true);
+									}
 								}
 							});
 						}
@@ -167,6 +179,22 @@ public class VentanaNotas extends javax.swing.JFrame {
 								public void actionPerformed(ActionEvent evt) {
 									System.out.println("delNotasButton.actionPerformed, event="+evt);
 									//TODO add your code for delNotasButton.actionPerformed
+									if(notasTable.getRowCount()<1||notasTable.getSelectedRow()==-1){
+										javax.swing.JOptionPane.showMessageDialog(null, "No hay ninguna fila seleccionada");										
+									}else{
+										int rowSel = notasTable.getSelectedRow();
+										NotaInformativa nAux = notasModel.getNotaInformativaPorPos(rowSel);
+										System.out.println(nAux.getIdNotaInformativa());
+										int op=OpcionesBorra(nAux.getIdNotaInformativa(),"Nota Informativa");
+										if(op==0){
+											notasModel.borraNotaPorPos(rowSel);
+											if(nAux == niAux){
+												factsPendModel.limpiaTabla();
+												factsSelModel.limpiaTabla();
+												genNotaButton.setEnabled(false);												
+											}											
+										}
+									}
 								}
 							});
 						}
@@ -186,6 +214,7 @@ public class VentanaNotas extends javax.swing.JFrame {
 										factsSelModel.cargaFacturasComunidadAsignadas(niAux);
 										factsPendModel.cargaFacturasComunidadPendientes(cAux);										
 										notasTabbedPane.setSelectedIndex(1);
+										genNotaButton.setEnabled(true);
 									}
 								}
 							});
@@ -317,6 +346,7 @@ public class VentanaNotas extends javax.swing.JFrame {
 							genNotaButton = new JButton();
 							leftOrRightPanel.add(genNotaButton, new GridBagConstraints(1, 7, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 0));
 							genNotaButton.setText("Generar");
+							genNotaButton.setEnabled(false);
 							genNotaButton.addActionListener(new ActionListener() {
 								public void actionPerformed(ActionEvent evt) {
 									System.out.println("genNotaButton.actionPerformed, event="+evt);
@@ -375,6 +405,15 @@ public class VentanaNotas extends javax.swing.JFrame {
 		    //add your error handling code here
 			e.printStackTrace();
 		}
+	}
+	public static int OpcionesBorra(int id, String tipo){ 
+		Object[] options = {"Sí", "No"};		
+		int n = JOptionPane.showOptionDialog(
+			null, "Esta a punto de borrar el "+tipo+" "+id+
+					"\n ¿Desea continuar?","Borrar "+tipo,
+			JOptionPane.YES_NO_CANCEL_OPTION,JOptionPane.QUESTION_MESSAGE,
+			null,options,options[1]);    
+		return n;
 	}
 
 }
