@@ -246,6 +246,13 @@ public class VentanaFacturaNueva extends javax.swing.JFrame {
 						ControladorFactura.getControladorFactura().nuevaFactura(f);
 						VentanaFacturas.modeloFact.addFactura(f);
 						VentanaFacturas.tablaFact.setModel(VentanaFacturas.modeloFact);
+						//Abrimos la ventana de nueva linea
+						VentanaFacturas.modeloFactDet.cargaLineasFactura(f);
+						VentanaFacturas.jTabbedPane1.setSelectedIndex(2);
+						VentanaFacturas.addLineaButton.setEnabled(true);
+						VentanaLinea v=new VentanaLinea(f); 
+						v.setVisible(true);	
+						//Cerramos esta ventana
 						dispose();
 					} catch (DAOExcepcion e) {
 						e.printStackTrace();

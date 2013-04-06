@@ -12,11 +12,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JSpinner;
 import javax.swing.JTextField;
-import javax.swing.SpinnerListModel;
-import javax.swing.SpinnerModel;
-import javax.swing.SpinnerNumberModel;
 import javax.swing.WindowConstants;
 import javax.swing.SwingUtilities;
 
@@ -59,11 +55,15 @@ public class VentanaLinea extends javax.swing.JFrame {
 	public static void main(String[] args) {
 		SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
-				VentanaLinea inst = new VentanaLinea(factura);
+				VentanaLinea inst = new VentanaLinea();
 				inst.setLocationRelativeTo(null);
 				inst.setVisible(true);
 			}
 		});
+	}
+	public VentanaLinea() {
+		super();
+		initGUI();		
 	}
 	@SuppressWarnings("static-access")
 	public VentanaLinea(Factura fact) {

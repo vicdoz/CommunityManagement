@@ -72,7 +72,7 @@ public class VentanaComunidad extends javax.swing.JFrame {
 
 	private JButton editInmButton;
 	private JButton borrarInmButton;
-	private JButton addInmButton;
+	public static JButton addInmButton;
 	private JPanel InmButtonPanel;
 	private JScrollPane InmueblesScrollPane;
 	private JPanel InmueblesPanel;
@@ -82,7 +82,7 @@ public class VentanaComunidad extends javax.swing.JFrame {
 	private JScrollPane PropietariosScrollPane;
 	private JPanel PropButtonPanel;
 	private JPanel PropietariosPanel;
-	private JTabbedPane jTabbedPane1;
+	public static JTabbedPane jTabbedPane1;
 	private JButton addPropButton;
 	private JMenuItem listaComunidades;
 	private JMenuItem listaPropietarios;
@@ -119,7 +119,6 @@ public class VentanaComunidad extends javax.swing.JFrame {
 	public VentanaComunidad() {
 		super();		
 		initGUI();
-		//InmButtonPanel.setEnabled(false);
 		addInmButton.setEnabled(false);
 	}
 	
@@ -195,9 +194,9 @@ public class VentanaComunidad extends javax.swing.JFrame {
 											MuestraMensaje(NO_FILA);										
 										}else{
 											int rowSel = tablaCom.getSelectedRow();
-											Comunidad  caux=modeloCom.getComunidadPorPos(rowSel);
-											System.out.println(caux.getIdComunidad());
-											VentanaComunidadNueva prop=new VentanaComunidadNueva(caux,tablaCom.getSelectedRow());
+											Comunidad  cAux=modeloCom.getComunidadPorPos(rowSel);
+											System.out.println(cAux.getIdComunidad());
+											VentanaComunidadNueva prop=new VentanaComunidadNueva(cAux,tablaCom.getSelectedRow());
 											prop.setVisible(true);
 										}
 									}
@@ -366,7 +365,7 @@ public class VentanaComunidad extends javax.swing.JFrame {
 								addInmButton.setText("Nuevo Inmueble");
 								addInmButton.addActionListener(new ActionListener() {
 									public void actionPerformed(ActionEvent evt) {
-										VentanaInmuebleDetalle v=new VentanaInmuebleDetalle(modeloInm); 
+										VentanaInmuebleDetalle v=new VentanaInmuebleDetalle(modeloInm.comunidad); 
 										v.setVisible(true);
 									}
 								});

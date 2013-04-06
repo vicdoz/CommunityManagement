@@ -60,7 +60,7 @@ public class VentanaFacturas extends javax.swing.JFrame {
 	private JButton detButton;
 	private JButton delLineaButton;
 	private JButton editLineaButton;
-	private JButton addLineaButton;
+	public static JButton addLineaButton;
 	private JPanel detalleButtonPanel;
 	private JScrollPane detalleScrollPane;
 	private JMenuItem listaFacturaDetalle;
@@ -72,7 +72,7 @@ public class VentanaFacturas extends javax.swing.JFrame {
 	private JScrollPane conceptosScrollPane;
 	private JPanel concButtonPanel;
 	private JPanel conceptosPanel;
-	private JTabbedPane jTabbedPane1;
+	public static JTabbedPane jTabbedPane1;
 	private JButton addConcButton;
 	private JMenuItem listaFacturasTodas;
 	private JMenuItem listaConceptos;
@@ -114,6 +114,7 @@ public class VentanaFacturas extends javax.swing.JFrame {
 		VentanaFacturas.comunidad=com;
 		modeloFact.cargaFacturasComunidad(comunidad);
 		initGUI();
+		addLineaButton.setEnabled(false);
 	}	
 	private void initGUI() {
 		try {
@@ -121,7 +122,7 @@ public class VentanaFacturas extends javax.swing.JFrame {
 				this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 				this.addWindowListener(new WindowAdapter() {
 					public void windowClosing(WindowEvent e) {
-						if(Salir()==0)	dispose();
+						dispose();
 					}
 				});
 				this.setResizable(true);
@@ -215,9 +216,7 @@ public class VentanaFacturas extends javax.swing.JFrame {
 												if(fAux == modeloFactDet.factura){
 													modeloFactDet.limpiaTabla();
 													addLineaButton.setEnabled(false);
-												}
-												ChangeStatusBar(IN_BORRADO,fAux.getidFactura(),null);
-												
+												}												
 											}
 										}
 									}
@@ -297,9 +296,7 @@ public class VentanaFacturas extends javax.swing.JFrame {
 											Concepto  cAux=modeloConc.getConceptoPorPos(rowSel);
 											int op=OpcionesBorra(cAux.getIdConcepto(),"Concepto");
 											if(op==0){
-												modeloConc.borraConceptoPorPos(tablaConc.getSelectedRow());
-												ChangeStatusBar(IN_BORRADO,cAux.getIdConcepto(),null);
-												
+												modeloConc.borraConceptoPorPos(tablaConc.getSelectedRow());																								
 											}
 										}
 										
@@ -402,8 +399,7 @@ public class VentanaFacturas extends javax.swing.JFrame {
 											lfAux = modeloFactDet.getLineaFacturaPorId(id);
 											int op=OpcionesBorra(lfAux.getIdLineaFactura(),"Linea Factura");
 											if(op==0){
-												modeloConc.borraConceptoPorPos(tablaConc.getSelectedRow());
-												ChangeStatusBar(IN_BORRADO,lfAux.getIdLineaFactura(),null);												
+												modeloConc.borraConceptoPorPos(tablaConc.getSelectedRow());										
 											}									
 										}
 									}
@@ -485,15 +481,6 @@ public class VentanaFacturas extends javax.swing.JFrame {
 		return n;
 	}
 	
-	public static int Salir() {
-			Object[] options = {"Si", "No"};
-			int n = JOptionPane.showOptionDialog(
-			null, "¿Desea Salir?",
-			"Salir",
-			JOptionPane.YES_NO_CANCEL_OPTION,JOptionPane.QUESTION_MESSAGE,	null,
-			options,options[1]);
-			return n;
-	}
 	public static void MuestraMensaje(int tipo){
 		switch(tipo){
 			case 0:
@@ -507,21 +494,7 @@ public class VentanaFacturas extends javax.swing.JFrame {
 				break;
 		}
 	}
-	public static void ChangeStatusBar(int tipo,int auxint,String auxstr){
-		switch(tipo){
-			case 0:
-				statusbar.setText("Inmueble "+auxint+" borrado");
-				break;
-			case 1:
-				statusbar.setText("Inmueble "+auxint+" aÃ±adido");
-				break;
-			case 9:
-				estadofecha();
-				break;
-			default:
-				break;
-		}
-	}
+
 	public static void estadofecha() {
 		Calendar DiaSemana= Calendar.getInstance();
 		int NumeroDia;

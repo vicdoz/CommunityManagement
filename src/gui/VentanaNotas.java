@@ -104,7 +104,13 @@ public class VentanaNotas extends javax.swing.JFrame {
 		super();
 		this.cAux = c;
 		notasModel.cargaNotasComunidad(c);
+		
 		initGUI();
+		
+		genNotaButton.setEnabled(false);
+		left2rightButton.setEnabled(false);		right2leftButton.setEnabled(false);
+		all2leftButton.setEnabled(false);		all2rightButton.setEnabled(false);
+		
 	}
 	
 	private void initGUI() {
@@ -216,6 +222,8 @@ public class VentanaNotas extends javax.swing.JFrame {
 										factsPendModel.cargaFacturasComunidadPendientes(cAux);										
 										notasTabbedPane.setSelectedIndex(1);
 										genNotaButton.setEnabled(true);
+										left2rightButton.setEnabled(true);		right2leftButton.setEnabled(true);
+										all2leftButton.setEnabled(true);		all2rightButton.setEnabled(true);
 									}
 								}
 							});
@@ -235,7 +243,7 @@ public class VentanaNotas extends javax.swing.JFrame {
 						factsPendPane = new JScrollPane();
 						factsPanel.add(factsPendPane, new GridBagConstraints(0, 0, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 0));
 						{		
-							factsPendModel.cargaFacturasComunidadPendientes(cAux);
+							if(cAux!=null)	factsPendModel.cargaFacturasComunidadPendientes(cAux);
 							factsPendTable = new JTable(factsPendModel);
 							factsPendTable.setModel(factsPendModel);
 							factsPendPane.setViewportView(factsPendTable);
@@ -346,8 +354,7 @@ public class VentanaNotas extends javax.swing.JFrame {
 						{
 							genNotaButton = new JButton();
 							leftOrRightPanel.add(genNotaButton, new GridBagConstraints(1, 7, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 0));
-							genNotaButton.setText("Generar");
-							genNotaButton.setEnabled(false);
+							genNotaButton.setText("Generar");							
 							genNotaButton.addActionListener(new ActionListener() {
 								public void actionPerformed(ActionEvent evt) {
 								

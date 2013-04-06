@@ -1,3 +1,9 @@
+CHANGELOG 06/04/2013-13:19 v3.08:
+ - creats constructors buits.
+ - Ara només demana confirmació de tancament a VentanaComunidad
+ - Al crear una comunitat te obri una finestra per a crear inmobles automaticament
+ 	- El mateix procediment per a factura-línea
+
 CHANGELOG 06/04/2013-02:06 v3.07:
  - Creada Finestra VentanaNotaNueva per a crear notes noves.
  	- Funcionalitat A/B/M de la nota.

@@ -65,16 +65,20 @@ public class VentanaComunidadNueva extends javax.swing.JFrame {
 	public static void main(String[] args) {
 		SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
-				VentanaComunidadNueva inst = new VentanaComunidadNueva(modelo);
+				VentanaComunidadNueva inst = new VentanaComunidadNueva();
 				inst.setLocationRelativeTo(null);
 				inst.setVisible(true);
 			}
 		});
 	}
-	@SuppressWarnings("static-access")
-	public VentanaComunidadNueva(ModeloTablaComunidad tabla) {
+	public VentanaComunidadNueva() {
 		super();
-		this.modelo=tabla;
+		initGUI();
+	}	
+	@SuppressWarnings("static-access")
+	public VentanaComunidadNueva(ModeloTablaComunidad mod) {
+		super();
+		this.modelo=mod;
 		initGUI();
 
 	}
@@ -249,6 +253,8 @@ public class VentanaComunidadNueva extends javax.swing.JFrame {
 				comAux.setPoblacion(poblacion);					
 				try {
 					ControladorComunidad.getControladorComunidad().actualizarComunidad(comAux);
+					//modelo.updateRow(rowAux, comAux);
+					//modelo.fireTableDataChanged();
 					VentanaComunidad.modeloCom.updateRow(rowAux,comAux);		
 					VentanaComunidad.modeloCom.fireTableDataChanged();
 					VentanaComunidad.tablaCom.setModel(VentanaComunidad.modeloCom);
@@ -263,6 +269,13 @@ public class VentanaComunidadNueva extends javax.swing.JFrame {
 					ControladorComunidad.getControladorComunidad().nuevaComunidad(c);
 					VentanaComunidad.modeloCom.addComunidad(c);
 					VentanaComunidad.tablaCom.setModel(VentanaComunidad.modeloCom);
+					//Abrimos la ventana de añadir inmuebles
+					VentanaComunidad.modeloInm.cargaInmueblesComunidad(c);
+					VentanaComunidad.addInmButton.setEnabled(true);
+					VentanaComunidad.jTabbedPane1.setSelectedIndex(2);
+					VentanaInmuebleDetalle v = new VentanaInmuebleDetalle(c);
+					v.setVisible(true);
+					//Cerramos esta ventana
 					dispose();
 				} catch (DAOExcepcion e) {
 					// TODO Auto-generated catch block

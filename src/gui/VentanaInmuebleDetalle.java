@@ -49,6 +49,7 @@ public class VentanaInmuebleDetalle extends javax.swing.JFrame {
         private JPanel jContentPane;
         private JPanel jPanel1;
         private JLabel jLabel;
+        
         private JTextField porcTextField;
         private JLabel porcLabel;
         private JTextField ComTextField;
@@ -65,7 +66,7 @@ public class VentanaInmuebleDetalle extends javax.swing.JFrame {
         private JButton guardarButton;
         private JPanel formularioPanel;
         @SuppressWarnings("unchecked")
-		private JComboBox propietarios;
+        private JComboBox propietariosComboBox;
         private int editMode=0;
         private int rowAux;
         public static ModeloTablaInmueble modelo = null;
@@ -87,31 +88,18 @@ public class VentanaInmuebleDetalle extends javax.swing.JFrame {
             super(); 
             initGUI();
         }
+        public VentanaInmuebleDetalle(Comunidad c) {
+            super();
+            this.comunidad = c; 
+            initGUI();
+        }      
         @SuppressWarnings("static-access")
         public VentanaInmuebleDetalle(ModeloTablaInmueble mod) {
                 super();
                 this.modelo=mod;
                 comunidad = modelo.comunidad; 
                 initGUI();
-        }
-        /*@SuppressWarnings("static-access")
-        public VentanaInmuebleDetalle(ModeloTablaInmueble mod,Comunidad c,Inmueble i) {
-                super();
-                this.modelo=mod;
-                initGUI();
-                comunidad=c;
-                InAux=i;
-        }
-        @SuppressWarnings("static-access")
-        public VentanaInmuebleDetalle(ModeloTablaInmueble mod,Comunidad c) {
-                super();
-                this.modelo=mod;
-                comunidad=c;
-                initGUI();
-                
-        
-        }*/
-        
+        }      
         public VentanaInmuebleDetalle(int row, Inmueble i) {
                 super();
                 editMode=1;
@@ -120,7 +108,7 @@ public class VentanaInmuebleDetalle extends javax.swing.JFrame {
                 
                 escaleraTextField.setText(i.getEscalera());             pisoTextField.setText(i.getPiso());
                 puertaTextField.setText(i.getPuerta());
-                propietarios.setSelectedIndex(i.getPropietario().getIdPropietario()-1);
+                propietariosComboBox.setSelectedIndex(i.getPropietario().getIdPropietario()-1);
                 //String idProp=i.getPropietario().getIdPropietario()+"";
                 String idCom=i.getComunidad().getIdComunidad()+"";
                 porcTextField.setText(String.valueOf(i.getPorcentaje()));         
@@ -212,11 +200,10 @@ public class VentanaInmuebleDetalle extends javax.swing.JFrame {
                                         	formularioPanel.add(PropLab, new GridBagConstraints(0, 5, 1, 1, 0.0, 0.0, GridBagConstraints.WEST, GridBagConstraints.NONE, new Insets(0, 10, 0, 0), 0, 0));
                                         	PropLab.setText("Propietario");
                                         }
-                                        {
-                                        	
+                                        {                                        	
                                         	ArrayList<String> listaPropietarios=ControladorPropietario.getControladorPropietario().GetListaNombresPropietarios();
-                                        	propietarios = new JComboBox(listaPropietarios.toArray());
-                                        	formularioPanel.add(propietarios, new GridBagConstraints(1, 5, 2, 1, 0.0, 0.0, GridBagConstraints.WEST, GridBagConstraints.HORIZONTAL, new Insets(0, 0, 0, 10), 0, 0));
+                                        	propietariosComboBox = new JComboBox(listaPropietarios.toArray());
+                                        	formularioPanel.add(propietariosComboBox, new GridBagConstraints(1, 5, 2, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.HORIZONTAL, new Insets(0, 0, 0, 10), 0, 0));                                        	
                                         }
                                 }
                                 {
@@ -272,7 +259,7 @@ public class VentanaInmuebleDetalle extends javax.swing.JFrame {
                         String Escalera = escaleraTextField.getText();  String Puerta = puertaTextField.getText();
                         String Piso = pisoTextField.getText();    
                         float Porcentaje=Float.parseFloat(porcTextField.getText());
-                        int idProp =ControladorPropietario.getControladorPropietario().getPropietarioPorPos(propietarios.getSelectedIndex()).getIdPropietario();
+                        int idProp =ControladorPropietario.getControladorPropietario().getPropietarioPorPos(propietariosComboBox.getSelectedIndex()).getIdPropietario();
                         int idCom = Integer.parseInt(ComTextField.getText());
                         
                         if(ControladorPropietario.getControladorPropietario().getPropietarioPorId(idProp)==null){
@@ -308,7 +295,7 @@ public class VentanaInmuebleDetalle extends javax.swing.JFrame {
                                         i.setComunidad(ControladorComunidad.getControladorComunidad().getComunidadPorId(
                                                         Integer.parseInt(ComTextField.getText())));
                                         i.setPropietario(ControladorPropietario.getControladorPropietario().getPropietarioPorId(
-                                        		ControladorPropietario.getControladorPropietario().getPropietarioPorPos(propietarios.getSelectedIndex()).getIdPropietario()));
+                                        		ControladorPropietario.getControladorPropietario().getPropietarioPorPos(propietariosComboBox.getSelectedIndex()).getIdPropietario()));
                                         i.setPorcentaje(Porcentaje);
                                         System.out.println(i.getPropietario().getIdPropietario());
                                         try {           
