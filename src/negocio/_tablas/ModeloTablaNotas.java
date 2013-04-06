@@ -101,7 +101,7 @@ public class ModeloTablaNotas extends DefaultTableModel {
 				numNotas--;				
 			}		
 		}
-		@SuppressWarnings("unchecked")
+		
 		public void calcularImporte(Comunidad cAux,NotaInformativa niAux) {
 			// TODO Auto-generated method stub
 			/*Calcular importe total de la nota*/

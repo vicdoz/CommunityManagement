@@ -27,7 +27,9 @@ Varios:
 		- La comunitat no deu d'existir (comprobar NOM)	
 
 ---------------------------------------------------------------------------------
-BUGS:	
+BUGS:
+	- No deixa pasar de dreta a esquerra les factures en "gestion notas"
+	- No mostra els rebuts pendents del propietari al donar a "mostrar rebuts propietari"	
 	- Carta
 	- Revisar excepciones
 

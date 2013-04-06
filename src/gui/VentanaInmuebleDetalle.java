@@ -260,7 +260,7 @@ public class VentanaInmuebleDetalle extends javax.swing.JFrame {
                         String Piso = pisoTextField.getText();    
                         float Porcentaje=Float.parseFloat(porcTextField.getText());
                         int idProp =ControladorPropietario.getControladorPropietario().getPropietarioPorPos(propietariosComboBox.getSelectedIndex()).getIdPropietario();
-                        int idCom = Integer.parseInt(ComTextField.getText());
+                        //int idCom = Integer.parseInt(ComTextField.getText());
                         
                         if(ControladorPropietario.getControladorPropietario().getPropietarioPorId(idProp)==null){
                                 javax.swing.JOptionPane.showMessageDialog(null, "Por favor introduzca un ID de Propietario correcto");

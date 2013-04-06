@@ -18,6 +18,8 @@ import javax.swing.WindowConstants;
 import javax.swing.border.LineBorder;
 import javax.swing.SwingUtilities;
 
+import reports.ReportJustificantePago;
+
 import excepciones.DAOExcepcion;
 
 import accesoAdatos._controladores.ControladorReciboInmueble;
@@ -283,6 +285,8 @@ public class VentanaPagoRecibos extends javax.swing.JFrame {
 											// TODO Auto-generated catch block
 											e.printStackTrace();
 										}
+										ReportJustificantePago report= new ReportJustificantePago();										
+										report.muestraJustificantePorIdRecibo(idRecibo);
 									}else{
 										javax.swing.JOptionPane.showMessageDialog(null, "Este recibo ya está pagado");
 									}
