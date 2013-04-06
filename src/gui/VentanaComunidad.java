@@ -613,7 +613,7 @@ public class VentanaComunidad extends javax.swing.JFrame {
 			null, "Esta a punto de borrar el "+tipo+" "+id+
 					"\n ¿Desea continuar?","Borrar "+tipo,
 			JOptionPane.YES_NO_CANCEL_OPTION,JOptionPane.QUESTION_MESSAGE,
-			null,options,options[1]);    
+			null,options,options[0]);    
 		return n;
 	}
 	
@@ -623,7 +623,7 @@ public class VentanaComunidad extends javax.swing.JFrame {
 			null, "¿Desea Salir?",
 			"Salir",
 			JOptionPane.YES_NO_CANCEL_OPTION,JOptionPane.QUESTION_MESSAGE,	null,
-			options,options[1]);
+			options,options[0]);
 			if(n == 0)		System.exit(0);
 	}
 	public static void MuestraMensaje(int tipo){

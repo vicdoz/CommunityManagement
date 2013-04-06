@@ -146,7 +146,7 @@ public class VentanaNotas extends javax.swing.JFrame {
 								public void actionPerformed(ActionEvent evt) {
 									System.out.println("addNotasButton.actionPerformed, event="+evt);
 									//TODO add your code for addNotasButton.actionPerformed
-									VentanaNotaNueva v = new VentanaNotaNueva();
+									VentanaNotaNueva v = new VentanaNotaNueva(cAux);
 									v.setVisible(true);
 								}
 							});
@@ -412,7 +412,7 @@ public class VentanaNotas extends javax.swing.JFrame {
 			null, "Esta a punto de borrar el "+tipo+" "+id+
 					"\n ¿Desea continuar?","Borrar "+tipo,
 			JOptionPane.YES_NO_CANCEL_OPTION,JOptionPane.QUESTION_MESSAGE,
-			null,options,options[1]);    
+			null,options,options[0]);    
 		return n;
 	}
 
