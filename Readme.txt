@@ -7,6 +7,7 @@ Comunidad:
 	- Una comunidad no se puede borrar si tiene inmuebles o facturas.En ese caso le
 	  ponemos estado “baja” (o “moroso” si hay algún recibo pendiente de cobro).
 Inmuebles:
+	- Porcentaje participación en tabla inmueble
 	-restriccion para hacer cambios:No estar en estado de baja o moroso la comunidad.
 	-Si se cumple, se puede:
 		-añadir inmuebles,
@@ -15,9 +16,11 @@ Inmuebles:
 		-modificar  datos antiguedad del propietario.
 		-borrar inmueble sino tiene recibos
 Factura:
-	-Si estan incluidas en una nota no se puede modificar.
-	-fecha calculo puede ser vacio.
-
+	- Actualizar tabla factura una vez añadidas las lineas
+	- Si estan incluidas en una nota no se puede modificar.
+	- Fecha calculo puede ser vacio.
+Notas:
+	- Titulo de facturas pendientes en ventana notas
 Emision de recibos:
 	-Ver comunidades cuyos estados son "alta" y sus inmublestienen la participacion cuadrada(100%).
 Varios:
@@ -29,16 +32,12 @@ Varios:
 
 ---------------------------------------------------------------------------------
 BUGS:
--opciones predeterminadas salir
--Abrir ventana factura con linea nueva
--arreglar bug linea factura al cerrar y abrir
--arreglar bug factura derecha nota
--titulo de facturas pendientes en ventana notas
--set id recibo de nota informativa
--carta
--revisar excepciones
--en tabla inmuebles mostrar porcentaje
--actualizar tabla factura una vez añadidas las lineas
+	- No carrega bé el Concepto al fer Factura->detalle. Dona error.
+	- No es pot llevar una factura de una nota (Gestión Notas)	
+	- Set id recibo de nota informativa
+	- Carta
+	- Revisar excepciones
+
 ---------------------------------------------------------------------------------
 REVISAR:
 	

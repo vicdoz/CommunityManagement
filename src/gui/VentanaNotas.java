@@ -13,6 +13,7 @@ import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
@@ -64,6 +65,8 @@ public class VentanaNotas extends javax.swing.JFrame {
 	private JMenuItem genAllNotaReport;
 	private JButton all2leftButton;
 	private JButton all2rightButton;
+	private JLabel factsAsigLabel;
+	private JLabel factsPendLabel;
 	private JButton genNotaButton;
 	private JButton right2leftButton;
 	private JButton left2rightButton;
@@ -233,15 +236,21 @@ public class VentanaNotas extends javax.swing.JFrame {
 				{
 					factsPanel = new JPanel();
 					GridBagLayout factsPanelLayout = new GridBagLayout();
-					factsPanelLayout.rowWeights = new double[] {0.1};
-					factsPanelLayout.rowHeights = new int[] {7};
+					factsPanelLayout.rowWeights = new double[] {0.0, 0.1};
+					factsPanelLayout.rowHeights = new int[] {33, 7};
 					factsPanelLayout.columnWeights = new double[] {0.0, 0.0, 0.0};
 					factsPanelLayout.columnWidths = new int[] {280, 40, 280};
 					notasTabbedPane.addTab("Facturas", null, factsPanel, null);
 					factsPanel.setLayout(factsPanelLayout);
 					{
+						factsPendLabel = new JLabel();
+						factsPanel.add(factsPendLabel, new GridBagConstraints(0, 0, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.VERTICAL, new Insets(0, 0, 0, 0), 0, 0));
+						factsPendLabel.setText("Facturas Pendientes");
+						factsPendLabel.setFont(new java.awt.Font("Tahoma",0,20));
+					}
+					{
 						factsPendPane = new JScrollPane();
-						factsPanel.add(factsPendPane, new GridBagConstraints(0, 0, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 0));
+						factsPanel.add(factsPendPane, new GridBagConstraints(0, 1, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 0));
 						{		
 							if(cAux!=null)	factsPendModel.cargaFacturasComunidadPendientes(cAux);
 							factsPendTable = new JTable(factsPendModel);
@@ -253,7 +262,7 @@ public class VentanaNotas extends javax.swing.JFrame {
 					}
 					{
 						leftOrRightPanel = new JPanel();
-						factsPanel.add(leftOrRightPanel, new GridBagConstraints(1, 0, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.VERTICAL, new Insets(0, 0, 0, 0), 0, 0));
+						factsPanel.add(leftOrRightPanel, new GridBagConstraints(1, 1, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.VERTICAL, new Insets(0, 0, 0, 0), 0, 0));
 						GridBagLayout leftOrRightPanelLayout = new GridBagLayout();
 						leftOrRightPanelLayout.rowWeights = new double[] {0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1};
 						leftOrRightPanelLayout.rowHeights = new int[] {20, 7, 7, 20, 7, 20, 7, 20};
@@ -368,7 +377,7 @@ public class VentanaNotas extends javax.swing.JFrame {
 					}
 					{
 						factsSelPane = new JScrollPane();
-						factsPanel.add(factsSelPane, new GridBagConstraints(2, 0, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 0));
+						factsPanel.add(factsSelPane, new GridBagConstraints(2, 1, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 0));
 						factsSelPane.setPreferredSize(new java.awt.Dimension(277, 307));
 						{							
 							factsSelTable = new JTable(factsSelModel);
@@ -376,6 +385,12 @@ public class VentanaNotas extends javax.swing.JFrame {
 							factsSelPane.setViewportView(factsSelTable);							
 							factsSelTable.setFillsViewportHeight(true);
 						}
+					}
+					{
+						factsAsigLabel = new JLabel();
+						factsPanel.add(factsAsigLabel, new GridBagConstraints(2, 0, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.VERTICAL, new Insets(0, 0, 0, 0), 0, 0));
+						factsAsigLabel.setText("Facturas Asignadas");
+						factsAsigLabel.setFont(new java.awt.Font("Tahoma",0,20));
 					}
 				}
 			}
