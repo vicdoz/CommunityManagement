@@ -15,7 +15,7 @@ public class ModeloTablaRecibo extends DefaultTableModel {
 		public  int numRecibos;
 		public ModeloTablaRecibo (){//example:new String[][]{{"1","Patio A","1","A"},{"2","Patio B","B","2"}} 
 			super(null,
-					new String[] {"ID","CIF", "Num Factura", "Fecha", "Importe","%IVA", "Total"});		
+					new String[] {"ID","Id Nota", "Fecha", "Total a Pagar"});		
 			numRecibos=0;
 			/*ArrayList<Factura> listaFacturas = ControladorFactura.getControladorFactura().GetListaFacturas();
 			System.out.println("Tamaño lista"+listaFacturas.size());
@@ -65,20 +65,16 @@ public class ModeloTablaRecibo extends DefaultTableModel {
 			return getReciboPorId(id) ;
 		}
 		
-		public void updateRow(int row,Factura f){			
-			this.setValueAt(f.getCIF(), row, 1);			
-			this.setValueAt(f.getidFactura(), row, 2);			
-			this.setValueAt(f.getFechaFactura(), row, 3);			
-			this.setValueAt(f.getImporteSinIva(), row, 4);			
-			this.setValueAt(f.getTipoIva(), row, 5);			
-			this.setValueAt(f.getImporteConIva(), row, 6);			
+		public void updateRow(int row,ReciboInmueble r){							
+			this.setValueAt(r.getFechaPago(), row, 2);							
 		}
 		
 		@SuppressWarnings("unchecked")
 		public void addToTabla(ReciboInmueble r){
 			Vector v=new Vector();			
-			//"ID","CIF", "Num Factura", "Fecha", "Importe","%IVA", "Total"
-		
+			//"ID","Id Nota", "Fecha", "Total a Pagar"
+			v.add(r.getIdRecibo());		v.add(r.getNotaInformativa().getIdNotaInformativa());
+			v.add(r.getFechaPago());	v.add(r.getImporte());
 			System.out.println("Recibo:"+r.getIdRecibo());
 			numRecibos++;
 			System.out.println("Fila nueva: "+v);
@@ -98,7 +94,7 @@ public class ModeloTablaRecibo extends DefaultTableModel {
 			ArrayList<ReciboInmueble> listaRecibos = ControladorReciboInmueble.getControladorReciboInmueble().GetListaReciboInmuebles();
 			System.out.println("Tamaño lista"+listaRecibos.size());
 			for(ReciboInmueble r:listaRecibos){						
-				if(r.getInmueble().getPropietario().getIdPropietario()==p.getIdPropietario()){
+				if(r.getInmueble().getPropietario().equals(p)){
 					this.addToTabla(r);
 				}
 			}

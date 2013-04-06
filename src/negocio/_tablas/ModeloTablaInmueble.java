@@ -19,11 +19,6 @@ public class ModeloTablaInmueble extends DefaultTableModel {
 			super(null,
 					new String[] {"ID","Comunidad", "Escalera", "Piso", " Puerta", "Propietario"});			
 			numInmuebles=0;
-			/*ArrayList<Inmueble> listaInmuebles = ControladorInmueble.getControladorInmueble().GetListaInmuebles();
-			System.out.println("Tamaño lista Inmuebles: "+listaInmuebles.size());
-			for(Inmueble i:listaInmuebles){						
-				this.addToTabla(i);
-			}*/
 		}
 		@Override
 	    public boolean isCellEditable(int row, int column) {
@@ -31,7 +26,7 @@ public class ModeloTablaInmueble extends DefaultTableModel {
 		       return false;
 		    }
 		public void addInmueble (Inmueble i) throws InmuebleYaExiste{									
-			this.addToTabla(i);
+			this.addToTabla(i);			
 		}
 		public int getNumInmuebles(){
 			return numInmuebles;
@@ -39,7 +34,8 @@ public class ModeloTablaInmueble extends DefaultTableModel {
 		
 		public void borraInmueblePorPos(int row){			
 			try {
-				ControladorInmueble.getControladorInmueble().borrarInmueble(getInmueblePorPos(row));
+				Inmueble i = getInmueblePorPos(row);
+				ControladorInmueble.getControladorInmueble().borrarInmueble(i);							
 				deleteFromTabla(row);
 			} catch (DAOExcepcion e) {
 				// TODO Auto-generated catch block

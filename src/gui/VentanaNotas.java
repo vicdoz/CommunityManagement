@@ -365,8 +365,7 @@ public class VentanaNotas extends javax.swing.JFrame {
 							leftOrRightPanel.add(genNotaButton, new GridBagConstraints(1, 7, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 0));
 							genNotaButton.setText("Generar");							
 							genNotaButton.addActionListener(new ActionListener() {
-								public void actionPerformed(ActionEvent evt) {
-								
+								public void actionPerformed(ActionEvent evt) {								
 									notasModel.calcularImporte(cAux,niAux);
 									notasModel.generarRecibos(cAux,niAux);
 									javax.swing.JOptionPane.showMessageDialog(null, "Recibos generados correctamente.");										

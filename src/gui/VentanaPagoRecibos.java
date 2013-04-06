@@ -6,6 +6,8 @@ import java.awt.GridLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Calendar;
+
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -16,8 +18,13 @@ import javax.swing.WindowConstants;
 import javax.swing.border.LineBorder;
 import javax.swing.SwingUtilities;
 
+import excepciones.DAOExcepcion;
+
+import accesoAdatos._controladores.ControladorReciboInmueble;
+
 import negocio.Inmueble;
 import negocio.Propietario;
+import negocio.ReciboInmueble;
 import negocio._tablas.ModeloTablaInmueble;
 import negocio._tablas.ModeloTablaPropietario;
 import negocio._tablas.ModeloTablaRecibo;
@@ -77,7 +84,7 @@ public class VentanaPagoRecibos extends javax.swing.JFrame {
 	public static void main(String[] args) {
 		SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
-				VentanaPagoRecibosAUX inst = new VentanaPagoRecibosAUX();
+				VentanaPagoRecibos inst = new VentanaPagoRecibos();
 				inst.setLocationRelativeTo(null);
 				inst.setVisible(true);
 			}
@@ -258,6 +265,28 @@ public class VentanaPagoRecibos extends javax.swing.JFrame {
 							public void actionPerformed(ActionEvent evt) {
 								System.out.println("pagarReciboButton.actionPerformed, event="+evt);
 								//TODO add your code for pagarReciboButton.actionPerformed
+								if(recibosTable.getRowCount()<1||recibosTable.getSelectedRow()==-1){
+									javax.swing.JOptionPane.showMessageDialog(null, "No hay ninguna fila seleccionada");									
+								}else{
+									int rowSel = recibosTable.getSelectedRow();
+									int idRecibo = Integer.parseInt(recibosTable.getValueAt(rowSel, 0).toString());
+									ReciboInmueble rAux = recibosModel.getReciboPorId(idRecibo);																	
+									if(rAux.getFechaPago().isEmpty()){
+										Calendar DiaSemana = Calendar.getInstance();
+										String fechaPago = DiaSemana.get(Calendar.YEAR)+"-"+DiaSemana.get(Calendar.MONTH)+"-"+DiaSemana.get(Calendar.DAY_OF_MONTH);
+										rAux.setFechaPago(fechaPago);
+										try {
+											ControladorReciboInmueble.getControladorReciboInmueble().actualizarReciboInmueble(rAux);
+											recibosModel.updateRow(rowSel, rAux);
+											recibosTable.setModel(recibosModel);
+										} catch (DAOExcepcion e) {
+											// TODO Auto-generated catch block
+											e.printStackTrace();
+										}
+									}else{
+										javax.swing.JOptionPane.showMessageDialog(null, "Este recibo ya está pagado");
+									}
+								}
 							}
 						});
 					}

@@ -304,7 +304,7 @@ public class VentanaComunidad extends javax.swing.JFrame {
 											int op=OpcionesBorra(p.getIdPropietario(),"Propietario");
 											if(op==0){
 												
-												if(!p.getListaInmuebles().isEmpty()){
+												if(p.getListaInmuebles().isEmpty()){
 													modeloProp.borraPropietarioPorPosicion(tablaProp.getSelectedRow());
 													ChangeStatusBar(IN_BORRADO,p.getIdPropietario(),null);
 												}

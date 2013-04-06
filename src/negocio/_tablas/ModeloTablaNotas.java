@@ -132,7 +132,7 @@ public class ModeloTablaNotas extends DefaultTableModel {
 						ri.setInmueble(iAux);
 						ri.setNotaInformativa(niAux);
 						ri.setImporte(niAux.getImporteNota()*(iAux.getPorcentaje()/100));
-						ri.setFechaPago(niAux.getFechaCalculo());	
+						//ri.setFechaPago();	
 						ControladorReciboInmueble.getControladorReciboInmueble().NuevoReciboInmueble(ri);
 					} catch (Exception e) {
 						// TODO Auto-generated catch block
