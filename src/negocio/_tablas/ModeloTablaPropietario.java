@@ -15,7 +15,7 @@ public class ModeloTablaPropietario extends DefaultTableModel {
 		public  int numPropietarios;
 		public ModeloTablaPropietario (){//example:new String[][]{{"1","Patio A","1","A"},{"2","Patio B","B","2"}} 
 			super(null,
-					new String[] {"ID","NIF","Nombre","E-Mail", "Direcc.","Poblacion","Telf.","Entidad","D. Banc.","Observaciones"});		
+					new String[] {"ID","NIF","Nombre","E-Mail", "Direcc.","Poblacion","Telf.","Entidad","Sucursal","DC","D. Banc.","Observaciones"});		
 			numPropietarios=0;
 			ArrayList<Propietario> listaPropietarios = ControladorPropietario.getControladorPropietario().GetListaPropietarios();
 			System.out.println("Tamaño lista Propietarios: "+listaPropietarios.size());
@@ -70,10 +70,11 @@ public class ModeloTablaPropietario extends DefaultTableModel {
 		
 		public void updateRow(int row, Propietario p){
 			this.setValueAt(p.getNif(), row, 1);			this.setValueAt(p.getNombre(), row, 2);
-			this.setValueAt(p.getEmail(), row, 3);		this.setValueAt(p.getDireccion(), row, 4);		
+			this.setValueAt(p.getEmail(), row, 3);			this.setValueAt(p.getDireccion(), row, 4);		
 			this.setValueAt(p.getPoblacion(), row, 5);		this.setValueAt(p.getTelefono(), row, 6);		
-			this.setValueAt(p.getEntidad(), row, 7);		this.setValueAt(p.getNumerocuenta(), row, 8);	
-			this.setValueAt(p.getObservaciones(), row, 9);							
+			this.setValueAt(p.getEntidad(), row, 7);		this.setValueAt(p.getSucursal(), row, 8);
+			this.setValueAt(p.getdigitocontrol(), row, 9);	this.setValueAt(p.getNumerocuenta(), row, 10);
+			this.setValueAt(p.getObservaciones(), row, 11);							
 		}
 		@SuppressWarnings("unchecked")
 		public void addToTabla(Propietario p){
@@ -81,8 +82,8 @@ public class ModeloTablaPropietario extends DefaultTableModel {
 			v.add(p.getIdPropietario());
 			v.add(p.getNif());			v.add(p.getNombre()); 		v.add(p.getEmail());	
 			v.add(p.getDireccion());	v.add(p.getPoblacion());	v.add(p.getTelefono());			
-			v.add(p.getEntidad());		v.add(p.getNumerocuenta());	v.add(p.getObservaciones());
-			
+			v.add(p.getEntidad());		v.add(p.getSucursal());		v.add(p.getdigitocontrol());
+			v.add(p.getNumerocuenta());	v.add(p.getObservaciones());
 			numPropietarios++;
 			System.out.println("Fila nueva: "+v);
 			this.addRow(v);

@@ -36,6 +36,8 @@ CREATE TABLE Propietario (
      , Observaciones CHAR(50)
      , FechaAlta CHAR(20)
      , Entidad INTEGER
+     , sucursal INTEGER
+     , digitoControl INTEGER
      , NumeroCuenta INTEGER
      , PRIMARY KEY (idPropietario)
 );

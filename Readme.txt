@@ -1,7 +1,3 @@
-
-Propietario:
-	- Un propietario no se puede borrar si tiene algun inmueble
-	- Propietario: 4 digitos entidad, 4 sucursal, 2 control y 10 cuenta.
 Comunidad:
 	- Seleccionar desde la igu uno de los 4 estados:baja moroso, sin cuadrar,cuadrado;
 	- Una comunidad no se puede borrar si tiene inmuebles o facturas.En ese caso le

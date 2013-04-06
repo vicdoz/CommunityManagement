@@ -51,6 +51,10 @@ public class VentanaPropietario extends javax.swing.JFrame {
 	private JTextField pobTextField;
 	private JTextField telefTextField;
 	private JLabel emailLabel;
+	private JTextField dcTextField;
+	private JTextField sucursalTextField;
+	private JLabel digcontrolLabel;
+	private JLabel sucursalLabel;
 	private JTextField emailTextField;
 
 	private JEditorPane obsEditorPane;
@@ -103,7 +107,8 @@ public class VentanaPropietario extends javax.swing.JFrame {
 		entidadTextField.setText(Integer.toString(pAux.getEntidad()));
 		cuentaTextField.setText(Integer.toString(pAux.getNumerocuenta()));
 		obsEditorPane.setText(Integer.toString(pAux.getEntidad()));
-		
+		sucursalTextField.setText(Integer.toString(pAux.getSucursal()));
+		dcTextField.setText(Integer.toString(pAux.getdigitocontrol()));
 	}
 	
 	private void initGUI() {
@@ -118,15 +123,16 @@ public class VentanaPropietario extends javax.swing.JFrame {
 				jContentPane.setPreferredSize(new java.awt.Dimension(437, 390));
 				{
 					formularioPanel = new JPanel();
-					GridBagLayout jPanel1Layout = new GridBagLayout();					
+					GridBagLayout jPanel1Layout = new GridBagLayout();
+								
 					
-					jPanel1Layout.columnWidths = new int[] {7, 7, 7};
+					jPanel1Layout.columnWidths = new int[] {7, 100, 128, 20};
 					jPanel1Layout.rowHeights = new int[] {7, 20, 20, 7, 7, 7, 20, 20, 20, 20};
-					jPanel1Layout.columnWeights = new double[] {0.005, 0.1, 0.1};
+					jPanel1Layout.columnWeights = new double[] {0.005, 0.0, 0.0, 0.1};
 					jPanel1Layout.rowWeights = new double[] {0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1};
 					jContentPane.add(formularioPanel, BorderLayout.CENTER);
 					formularioPanel.setLayout(jPanel1Layout);
-					formularioPanel.setPreferredSize(new java.awt.Dimension(369, 213));
+					formularioPanel.setPreferredSize(new java.awt.Dimension(439, 406));
 					{
 						nifLabel = new JLabel();
 						formularioPanel.add(nifLabel, new GridBagConstraints(0, 0, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.HORIZONTAL, new Insets(0, 10, 0, 0), 0, 0));
@@ -205,17 +211,17 @@ public class VentanaPropietario extends javax.swing.JFrame {
 					}
 					{
 						entidadTextField = new JTextField();
-						formularioPanel.add(entidadTextField, new GridBagConstraints(1, 6, 2, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.HORIZONTAL, new Insets(0, 0, 0, 10), 0, 0));
+						formularioPanel.add(entidadTextField, new GridBagConstraints(1, 6, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.HORIZONTAL, new Insets(0, 0, 0, 10), 0, 0));
 						if(pAux==null) entidadTextField.setText("");
 					}
 					{
 						cuentaLabel = new JLabel();
-						formularioPanel.add(cuentaLabel, new GridBagConstraints(0, 7, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
+						formularioPanel.add(cuentaLabel, new GridBagConstraints(2, 7, 1, 1, 0.0, 0.0, GridBagConstraints.WEST, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
 						cuentaLabel.setText("N. Cuenta");
 					}
 					{
 						cuentaTextField = new JTextField();
-						formularioPanel.add(cuentaTextField, new GridBagConstraints(1, 7, 2, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.HORIZONTAL, new Insets(0, 0, 0, 10), 0, 0));
+						formularioPanel.add(cuentaTextField, new GridBagConstraints(2, 7, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.HORIZONTAL, new Insets(0, 60, 0, 10), 0, 0));
 						cuentaTextField.setText("");
 					}
 					{
@@ -231,6 +237,24 @@ public class VentanaPropietario extends javax.swing.JFrame {
 						obsEditorPane.setMaximumSize(new java.awt.Dimension(362, 50));
 						if(pAux==null) obsEditorPane.setText("");
 						
+					}
+					{
+						sucursalTextField = new JTextField();
+						formularioPanel.add(sucursalTextField, new GridBagConstraints(2, 6, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.HORIZONTAL, new Insets(0, 60, 0, 10), 0, 0));
+					}
+					{
+						sucursalLabel = new JLabel();
+						formularioPanel.add(sucursalLabel, new GridBagConstraints(2, 6, 1, 1, 0.0, 0.0, GridBagConstraints.WEST, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
+						sucursalLabel.setText("Sucursal");
+					}
+					{
+						dcTextField = new JTextField();
+						formularioPanel.add(dcTextField, new GridBagConstraints(1, 7, 1, 1, 0.0, 0.0, GridBagConstraints.WEST, GridBagConstraints.HORIZONTAL, new Insets(0, 0, 0, 10), 0, 0));
+					}
+					{
+						digcontrolLabel = new JLabel();
+						formularioPanel.add(digcontrolLabel, new GridBagConstraints(0, 7, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.HORIZONTAL, new Insets(0, 0, 0, 0), 0, 0));
+						digcontrolLabel.setText("        DC");
 					}
 				}
 				{
@@ -272,7 +296,7 @@ public class VentanaPropietario extends javax.swing.JFrame {
 				}
 			}
 			pack();
-			this.setSize(455, 470);
+			this.setSize(455, 521);
 			//Application.getInstance().getContext().getResourceMap(getClass()).injectComponents(getContentPane());
 		} catch (Exception e) {
 		    //add your error handling code here
@@ -292,55 +316,61 @@ public class VentanaPropietario extends javax.swing.JFrame {
 		String nombre = nombreTextField.getText();	String poblacion=pobTextField.getText();
 		String telefono=telefTextField.getText(); 	String obs =obsEditorPane.getText();
 		String email = emailTextField.getText();
-		
+		String sucursal=sucursalTextField.getText();
+		String digitoControl=dcTextField.getText();
 		if(nif.isEmpty() || nombre.isEmpty()){
 		
 			javax.swing.JOptionPane.showMessageDialog(null, "Los campos NIF y Nombre son obligatorios");
 		
-		}else if ((!entidadTextField.getText().isEmpty() && !isInteger(entidadTextField.getText()))
-				||(!cuentaTextField.getText().isEmpty() &&!isInteger(cuentaTextField.getText()))){
-		
-			javax.swing.JOptionPane.showMessageDialog(null, "Los campos Entidad y Cuenta son cadenas Numéricas");
-				
+		}else if ((entidadTextField.getText().isEmpty() || !isInteger(entidadTextField.getText()))
+				||(cuentaTextField.getText().isEmpty() || !isInteger(cuentaTextField.getText()))
+				||(dcTextField.getText().isEmpty() || !isInteger(dcTextField.getText()))
+				||(sucursalTextField.getText().isEmpty() || !isInteger(sucursalTextField.getText()))){
+					javax.swing.JOptionPane.showMessageDialog(null, "Los campos Entidad,Sucursal,digito de control y Cuenta son cadenas numéricas no vacias");	
 		}else{		
 			int entidad = Integer.parseInt(entidadTextField.getText());
 			int numcuenta = Integer.parseInt(cuentaTextField.getText());
-				
 			Calendar DiaSemana= Calendar.getInstance();
 			String fechaalta=DiaSemana.get(Calendar.YEAR)+"-"+DiaSemana.get(Calendar.MONTH)+"-"+DiaSemana.get(Calendar.DAY_OF_MONTH);
-			if(editMode==1){
-				pAux.setNif(nif);					pAux.setEmail(email);
-				pAux.setDireccion(direccion); 		pAux.setEntidad(entidad);
-				pAux.setNombre(nombre); 			pAux.setPoblacion(poblacion);
-				pAux.setTelefono(telefono); 		pAux.setObservaciones(obs);
-				pAux.setNumerocuenta(numcuenta);	pAux.setFechaalta(fechaalta);
-				
-				try {
-					ControladorPropietario.getControladorPropietario().actualizarPropietario(pAux);					
-					VentanaComunidad.modeloProp.updateRow(rowAux,pAux);				
-					VentanaComunidad.tablaProp.setModel(VentanaComunidad.modeloProp);
-					VentanaComunidad.tablaProp.repaint();
-				} catch (DAOExcepcion e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}else{
-				
-				Propietario p=new Propietario(nif,nombre,poblacion,direccion,telefono,obs,entidad,numcuenta,email);				
-				try {
-					p.setFechaalta(fechaalta);
-					System.out.println("Fecha de alta asignada. Creando en controlador");
-					ControladorPropietario.getControladorPropietario().NuevoPropietario(p);
-					System.out.println("Creando en tabla");
-					VentanaComunidad.modeloProp.addPropietario(p);
+			if(ControladorPropietario.getControladorPropietario().datosBancariosCorrectos(String.valueOf(entidad),sucursal,digitoControl,String.valueOf(numcuenta))){
+				if(editMode==1){
+					pAux.setNif(nif);					pAux.setEmail(email);
+					pAux.setDireccion(direccion); 		pAux.setEntidad(entidad);
+					pAux.setNombre(nombre); 			pAux.setPoblacion(poblacion);
+					pAux.setTelefono(telefono); 		pAux.setObservaciones(obs);
+					pAux.setNumerocuenta(numcuenta);	pAux.setFechaalta(fechaalta);
+					pAux.setdigitocontrol(Integer.parseInt(digitoControl));
+					pAux.setSucursal(Integer.parseInt(sucursal));
+					try {
+						ControladorPropietario.getControladorPropietario().actualizarPropietario(pAux);					
+						VentanaComunidad.modeloProp.updateRow(rowAux,pAux);				
+						VentanaComunidad.tablaProp.setModel(VentanaComunidad.modeloProp);
+						VentanaComunidad.tablaProp.repaint();
+					} catch (DAOExcepcion e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}else{
 					
-				} catch (Exception e) {
-					// TODO Auto-generated catch block				
-					System.out.println("Error guardando el propietario");
-					e.printStackTrace();
-				}	
-			}		
+					Propietario p=new Propietario(nif,nombre,poblacion,direccion,telefono,obs,entidad,numcuenta,email,Integer.parseInt(sucursal),Integer.parseInt(digitoControl));				
+					try {
+						p.setFechaalta(fechaalta);
+						System.out.println("Fecha de alta asignada. Creando en controlador");
+						ControladorPropietario.getControladorPropietario().NuevoPropietario(p);
+						System.out.println("Creando en tabla");
+						VentanaComunidad.modeloProp.addPropietario(p);
+						
+					} catch (Exception e) {
+						// TODO Auto-generated catch block				
+						System.out.println("Error guardando el propietario");
+						e.printStackTrace();
+					}	
+			}	
 			dispose();
+		}else{
+			javax.swing.JOptionPane.showMessageDialog(null, "Error en formato datos bancaris:Entidad:4 digitos,Sucursal:4 digitos,DC:2digitos,Numero de cuenta:10 digitos.");	
+			
+		}
 		}
 	}		
 }

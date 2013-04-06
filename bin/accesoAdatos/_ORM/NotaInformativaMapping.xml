@@ -17,7 +17,7 @@
 		<one-to-many class="negocio.Factura" />
 	</set>
 	<property name="fechaCalculo" column="fechacalculo" />
-	<property name="importeNota" column="importeNota" />
+	<property name="importeNota" column="ImporteNota" />
 	<many-to-one name="Comunidad" class="negocio.Comunidad" column="idComunidad" />
 	
 

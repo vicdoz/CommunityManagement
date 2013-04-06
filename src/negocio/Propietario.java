@@ -14,6 +14,8 @@ public class Propietario {
 	private String fechaalta;
 	private String email;
 	private int entidad;
+	private int digitocontrol;
+	private int sucursal;
 	private int numerocuenta;
 	private Set<Inmueble> listaInmuebles = new HashSet<Inmueble>();
 	
@@ -35,7 +37,7 @@ public class Propietario {
 	}
 	public Propietario(String nif, String nombre, String poblacion,
 			String direccion, String telefono, String observaciones,
-			 int entidad, int numerocuenta,String email) {
+			 int entidad, int numerocuenta,String email, int sucursal, int dc) {
 		super();
 		this.nif = nif;
 		this.nombre = nombre;
@@ -46,6 +48,8 @@ public class Propietario {
 		this.email=email;
 		this.entidad = entidad;
 		this.numerocuenta = numerocuenta;
+		this.sucursal=sucursal;
+		this.digitocontrol=dc;
 	}
 	public int getIdPropietario() {
 		return idPropietario;
@@ -124,5 +128,17 @@ public class Propietario {
 	}
 	public void setListaInmuebles(Set<Inmueble> listaInmuebles) {
 		this.listaInmuebles = listaInmuebles;
+	}
+	public int getdigitocontrol() {
+		return digitocontrol;
+	}
+	public void setdigitocontrol(int digitocontrol) {
+		this.digitocontrol = digitocontrol;
+	}
+	public int getSucursal() {
+		return sucursal;
+	}
+	public void setSucursal(int sucursal) {
+		this.sucursal = sucursal;
 	}
 }
