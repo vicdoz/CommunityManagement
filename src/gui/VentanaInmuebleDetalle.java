@@ -251,7 +251,8 @@ public class VentanaInmuebleDetalle extends javax.swing.JFrame {
                         e.printStackTrace();
                 }
         }
-        private void guardarDatos() throws InmuebleYaExiste{            
+        private void guardarDatos() throws InmuebleYaExiste{   
+        		
                 if(ComTextField.getText().isEmpty() 
                                 ||escaleraTextField.getText().isEmpty() || puertaTextField.getText().isEmpty() || pisoTextField.getText().isEmpty() ){
                         javax.swing.JOptionPane.showMessageDialog(null, "Debe completar todos los campos");
@@ -260,18 +261,20 @@ public class VentanaInmuebleDetalle extends javax.swing.JFrame {
                         String Piso = pisoTextField.getText();    
                         float Porcentaje=Float.parseFloat(porcTextField.getText());
                         int idProp =ControladorPropietario.getControladorPropietario().getPropietarioPorPos(propietariosComboBox.getSelectedIndex()).getIdPropietario();
-                        //int idCom = Integer.parseInt(ComTextField.getText());
+                        
                         
                         if(ControladorPropietario.getControladorPropietario().getPropietarioPorId(idProp)==null){
                                 javax.swing.JOptionPane.showMessageDialog(null, "Por favor introduzca un ID de Propietario correcto");
                         }else{
-                        
+                        	
+                        	if(comunidad.getEstado()<=1){//comunidad no morosa ni de baja
                                 if(editMode==1){ //Editar inmoble       
                                         
                                         InAux.setEscalera(Escalera);    InAux.setPiso(Piso); 
                                         InAux.setPuerta(Puerta);                InAux.setComunidad(comunidad);                                                                  
                                         InAux.setPropietario(ControladorPropietario.getControladorPropietario().getPropietarioPorId(idProp));
                                         InAux.setPorcentaje(Porcentaje);
+                                   if(Porcentaje<=100 ||Porcentaje>0)
                                         try {                                           		
                                                 ControladorInmueble.getControladorInmueble().actualizarInmueble(InAux);                                 
                                                 VentanaComunidad.modeloInm.updateRow(rowAux,InAux);
@@ -280,7 +283,7 @@ public class VentanaInmuebleDetalle extends javax.swing.JFrame {
                                         } catch (DAOExcepcion e) {
                                                 e.printStackTrace();
                                         }
-                                        
+                                        else javax.swing.JOptionPane.showMessageDialog(null, "Porcentaje no valido"); 
                                 }
                                 else{ //Inmueble nuevo
                                         Inmueble i = new Inmueble();
@@ -289,17 +292,30 @@ public class VentanaInmuebleDetalle extends javax.swing.JFrame {
                                         Propietario p=ControladorPropietario.getControladorPropietario().getPropietarioPorId(
                                         		ControladorPropietario.getControladorPropietario().getPropietarioPorPos(propietariosComboBox.getSelectedIndex()).getIdPropietario());
                                         i.setPropietario(p);         i.setPorcentaje(Porcentaje);
-                                        System.out.println(i.getPropietario().getIdPropietario());                                		
-                                        try {   
-                                                ControladorInmueble.getControladorInmueble().nuevoInmueble(i);
-                                                VentanaComunidad.modeloInm.addInmueble(i);
-                                                VentanaComunidad.tablaInm.setModel(VentanaComunidad.modeloInm);
-                                                dispose();
-                                        } catch (DAOExcepcion e) {
-                                                e.printStackTrace();
+                                        System.out.println(i.getPropietario().getIdPropietario());  
+                                        if(Porcentaje<=100 ||Porcentaje>0){
+	                                        try {   
+	                                        	ControladorInmueble.getControladorInmueble().nuevoInmueble(i);
+	                                                VentanaComunidad.modeloInm.cargaInmueblesComunidad(comunidad);
+	                                                 
+	                                                dispose();
+	                                        } catch (DAOExcepcion e) {
+	                                                e.printStackTrace();
+	                                        }
                                         }
+	                                        else javax.swing.JOptionPane.showMessageDialog(null, "Porcentaje no valido"); 
                                 }
-                        }
+                        comunidad.calcularEstado();
+                        try {
+							ControladorComunidad.getControladorComunidad().actualizarComunidad(comunidad);
+							VentanaComunidad.modeloCom.cargaComunidades();
+						} catch (DAOExcepcion e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+                        } else javax.swing.JOptionPane.showMessageDialog(null, "Comunidad en estado de baja o morosa"); 
+                            
                 }
+            }
         }                       
 }

@@ -8,6 +8,8 @@ import accesoAdatos._interfaces.InterfaceControladorInmueble;
 
 import negocio.Comunidad;
 import negocio.Inmueble;
+import negocio.Propietario;
+import negocio.ReciboInmueble;
 
 import excepciones.DAOExcepcion;
 
@@ -90,6 +92,33 @@ public class ControladorInmueble implements InterfaceControladorInmueble  {
 		return null;		
 	}
 
+	public boolean comprobarRecibosPendientes(Inmueble i) {
+		// TODO Auto-generated method stub
+		ArrayList<ReciboInmueble>ri=ControladorReciboInmueble.getControladorReciboInmueble().GetListaReciboInmuebles();
+		Iterator<ReciboInmueble> it= ri.iterator();
+		while(it.hasNext()){
+			System.out.println("Buscando");
+			ReciboInmueble riAux=it.next();
+			if(riAux.getInmueble().getIdInmueble()==i.getIdInmueble())
+				return true;
+		}
+		return false;	
+	}
+
+	public ArrayList<Inmueble> getInmueblePorPropietario(Propietario p) {
+		
+		ArrayList<Inmueble> lista=new ArrayList<Inmueble>();
+		Iterator<Inmueble> it=this.GetListaInmuebles().iterator();
+		while(it.hasNext()){
+			System.out.println("Buscando propietario");
+			Inmueble iAux=it.next();
+
+			if(iAux.getPropietario().getIdPropietario()==(p.getIdPropietario())){
+				System.out.println("Inmueble con este propietario");
+				lista.add(iAux);}
+		}
+		return lista;
+	}
 
 
 }

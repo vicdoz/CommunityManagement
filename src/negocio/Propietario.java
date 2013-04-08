@@ -37,7 +37,7 @@ public class Propietario {
 	}
 	public Propietario(String nif, String nombre, String poblacion,
 			String direccion, String telefono, String observaciones,
-			 int entidad, int numerocuenta,String email, int sucursal, int dc) {
+			 int entidad, int numerocuenta,String email, int sucursal, int dc,String fechaalta) {
 		super();
 		this.nif = nif;
 		this.nombre = nombre;
@@ -50,6 +50,7 @@ public class Propietario {
 		this.numerocuenta = numerocuenta;
 		this.sucursal=sucursal;
 		this.digitocontrol=dc;
+		this.fechaalta=fechaalta;
 	}
 	public int getIdPropietario() {
 		return idPropietario;
@@ -140,5 +141,9 @@ public class Propietario {
 	}
 	public void setSucursal(int sucursal) {
 		this.sucursal = sucursal;
+	}
+	public boolean datosBancariosDomiciliados(){
+		if(String.valueOf(sucursal).isEmpty())return false;
+		return true;
 	}
 }

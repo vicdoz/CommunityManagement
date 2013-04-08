@@ -78,9 +78,10 @@ public class VentanaLinea extends javax.swing.JFrame {
 		this.lfAux=lF;
 		this.rowAux=row;
 		editMode=1;
-		initGUI();		
-		codTextField.setText(lfAux.getConcepto().getCodigo());		
-		importeTextField.setText(""+lfAux.getImporteLinea());
+		initGUI();
+		
+		codTextField.setText(ControladorConcepto.getControladorConcepto().getConceptoPorId(lF.getConcepto().getIdConcepto()).getCodigo());		
+		importeTextField.setText(""+lF.getImporteLinea());
 		
 	}
 	
@@ -207,6 +208,7 @@ public class VentanaLinea extends javax.swing.JFrame {
 				VentanaFacturas.modeloFactDet.updateRow(rowAux,lfAux);				
 				VentanaFacturas.tablaFactDet.setModel(VentanaFacturas.modeloFactDet);	
 				VentanaFacturas.tablaFactDet.repaint();
+				VentanaFacturas.modeloFact.cargaFacturasComunidad(lfAux.getFactura().getComunidad());
 			}else{				
 				LineaFactura lf = new LineaFactura();
 				lf.setConcepto(conc);
@@ -214,7 +216,8 @@ public class VentanaLinea extends javax.swing.JFrame {
 				VentanaFacturas.modeloFact.actualizaImporteFactura(lf);
 				try {	
 					ControladorLineaFactura.getControladorLineaFactura().nuevoLineaFactura(lf);
-					VentanaFacturas.modeloFactDet.addFactura(lf);					
+					VentanaFacturas.modeloFactDet.addFactura(lf);	
+					VentanaFacturas.modeloFact.cargaFacturasComunidad(lf.getFactura().getComunidad());
 				} catch (Exception e) {	
 					System.out.println("Error guardando la línea");
 					e.printStackTrace();

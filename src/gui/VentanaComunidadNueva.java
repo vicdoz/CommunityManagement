@@ -44,6 +44,7 @@ public class VentanaComunidadNueva extends javax.swing.JFrame {
 	private JPanel jContentPane;
 	private JPanel jPanel1;
 	private JLabel jLabel;
+	private JButton darBajaAlta;
 	private JTextField recibosMaxTextField;
 	private JLabel maxPendLabel;
 	private JTextField pobTextField;
@@ -81,13 +82,16 @@ public class VentanaComunidadNueva extends javax.swing.JFrame {
 	public VentanaComunidadNueva(ModeloTablaComunidad mod) {
 		super();
 		this.modelo=mod;
+		darBajaAlta=new JButton();
+		darBajaAlta.setEnabled(false);
 		initGUI();
 
 	}
 	@SuppressWarnings("static-access")
 	public VentanaComunidadNueva(Comunidad c,int row) {
 		super();
-
+		darBajaAlta=new JButton();
+		darBajaAlta.setEnabled(true);
 		this.comAux=c;
 		this.rowAux=row;
 		editMode=1;
@@ -211,6 +215,35 @@ public class VentanaComunidadNueva extends javax.swing.JFrame {
 								comAux=null;
 								modelo=null;
 								dispose();
+							}
+						});
+					}
+					{
+						darBajaAlta = new JButton();
+						jPanel1.add(darBajaAlta);
+						darBajaAlta.setText("Dar de Baja/Alta");
+
+						darBajaAlta.addActionListener(new ActionListener() {
+							public void actionPerformed(ActionEvent evt) {
+								VentanaComunidad.modeloCom.cargaComunidades();
+								System.out.println("darBajaAlta.actionPerformed, event="+evt);
+								if(comAux.getEstado()==2){
+									comAux.calcularEstado();
+									javax.swing.JOptionPane.showMessageDialog(null, "Comunidad dada de alta de nuevo");
+								}
+								else {
+									comAux.setEstado(2);
+									javax.swing.JOptionPane.showMessageDialog(null, "Comunidad dada de baja");
+								}
+								try {
+									
+									ControladorComunidad.getControladorComunidad().actualizarComunidad(comAux);
+									VentanaComunidad.modeloCom.cargaComunidades();
+									guardarButton.setEnabled(false);
+								} catch (DAOExcepcion e) {
+									// TODO Auto-generated catch block
+									e.printStackTrace();
+								}
 							}
 						});
 					}

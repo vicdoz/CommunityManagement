@@ -134,6 +134,7 @@ public class ModeloTablaNotas extends DefaultTableModel {
 						Inmueble iAux=f;
 						ReciboInmueble ri= new ReciboInmueble();
 						ri.setInmueble(iAux);
+						ri.setFechaPago("");
 						ri.setNotaInformativa(niAux);
 						ri.setImporte(niAux.getImporteNota()*(iAux.getPorcentaje()/100));
 						//ri.setFechaPago();	

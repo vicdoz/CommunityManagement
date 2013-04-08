@@ -1,4 +1,4 @@
-select * from propietario;
+select * from Propietario;
 select * from inmueble;
-select * from reciboInmueble;
+select * from factura;
 

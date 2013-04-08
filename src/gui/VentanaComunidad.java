@@ -14,7 +14,11 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import javax.swing.*;
 
+import excepciones.DAOExcepcion;
+
 import accesoAdatos._controladores.ControladorComunidad;
+import accesoAdatos._controladores.ControladorInmueble;
+import accesoAdatos._controladores.ControladorReciboInmueble;
 
 import java.util.*;
 
@@ -215,12 +219,26 @@ public class VentanaComunidad extends javax.swing.JFrame {
 											Comunidad  cAux=modeloCom.getComunidadPorPos(rowSel);
 											int op=OpcionesBorra(cAux.getIdComunidad(),"Comunidad");
 											if(op==0){
-												modeloCom.borraComunidadPorPosicion(tablaCom.getSelectedRow());													
-												if(cAux == modeloInm.comunidad){
-													modeloInm.limpiaTabla();
-													addInmButton.setEnabled(false);
+												if(ControladorInmueble.getControladorInmueble().GetListaInmuebles().isEmpty()){
+													modeloCom.borraComunidadPorPosicion(tablaCom.getSelectedRow());													
+													if(cAux == modeloInm.comunidad){
+														modeloInm.limpiaTabla();
+														addInmButton.setEnabled(false);
+													}
+													ChangeStatusBar(IN_BORRADO,cAux.getIdComunidad(),null);
+												}else{
+													cAux.setEstado(2);
+													javax.swing.JOptionPane.showMessageDialog(null, "Comunidad con inmuebles.Estado de baja");
+													try {
+														
+														ControladorComunidad.getControladorComunidad().actualizarComunidad(cAux);
+														VentanaComunidad.modeloCom.cargaComunidades();
+														
+													} catch (DAOExcepcion e) {
+														// TODO Auto-generated catch block
+														e.printStackTrace();
+													}
 												}
-												ChangeStatusBar(IN_BORRADO,cAux.getIdComunidad(),null);
 												
 											}
 										}
@@ -259,9 +277,10 @@ public class VentanaComunidad extends javax.swing.JFrame {
 							PropietariosPanel.add(PropietariosScrollPane, BorderLayout.CENTER);
 							{								
 								tablaProp = new JTable(modeloProp);
-								PropietariosScrollPane.setViewportView(tablaProp);
 								tablaProp.setModel(modeloProp);
+								PropietariosScrollPane.setViewportView(tablaProp);
 								tablaProp.setFillsViewportHeight(true);
+								
 							}
 						}
 						{
@@ -324,6 +343,7 @@ public class VentanaComunidad extends javax.swing.JFrame {
 								editPropButton.setText("Editar Propietario");
 								editPropButton.addActionListener(new ActionListener() {
 									public void actionPerformed(ActionEvent evt) {
+										
 										if(tablaProp.getRowCount()<1||tablaProp.getSelectedRow()==-1){
 											MuestraMensaje(NO_FILA);										
 										}else{
@@ -386,10 +406,13 @@ public class VentanaComunidad extends javax.swing.JFrame {
 											int selRow = tablaInm.getSelectedRow();
 											Inmueble i = modeloInm.getInmueblePorPos(selRow);										
 											int op=OpcionesBorra(i.getIdInmueble(),"Inmueble");
-											if(op==0){
+											
+											if(op==0 && !ControladorInmueble.getControladorInmueble().comprobarRecibosPendientes(i) ){
+												
 												modeloInm.borraInmueblePorPos(selRow);
 												ChangeStatusBar(IN_BORRADO,i.getIdInmueble(),null);
-											}
+												}else javax.swing.JOptionPane.showMessageDialog(null, "No se puede borrar,recibos pendientes");
+											
 										}
 									}
 								});
@@ -404,9 +427,12 @@ public class VentanaComunidad extends javax.swing.JFrame {
 											MuestraMensaje(NO_FILA);										
 										}else{
 											int selRow = tablaInm.getSelectedRow();
-											Inmueble i = modeloInm.getInmueblePorPos(selRow);								
-											VentanaInmuebleDetalle v=new VentanaInmuebleDetalle(selRow,i);
-											v.setVisible(true);		
+											Inmueble i = modeloInm.getInmueblePorPos(selRow);	
+											if(!ControladorInmueble.getControladorInmueble().comprobarRecibosPendientes(i)){
+												VentanaInmuebleDetalle v=new VentanaInmuebleDetalle(selRow,i);
+												v.setVisible(true);		
+											}
+											else javax.swing.JOptionPane.showMessageDialog(null, "Comunidad con recibos pendientes");										
 										}
 									}
 								});
@@ -594,8 +620,12 @@ public class VentanaComunidad extends javax.swing.JFrame {
 										int rowSel = tablaCom.getSelectedRow();
 										Comunidad  cAux=modeloCom.getComunidadPorPos(rowSel);
 										System.out.println(cAux.getIdComunidad());
-										VentanaNotas v = new VentanaNotas(cAux);
-										v.setVisible(true);
+										if(cAux.getEstado()==1){
+											VentanaNotas v = new VentanaNotas(cAux);
+											v.setVisible(true);
+										}
+										else if(cAux.getEstado()==2) javax.swing.JOptionPane.showMessageDialog(null, "Comunidad en estado de baja.");
+										else if(cAux.getEstado()==0)javax.swing.JOptionPane.showMessageDialog(null, "Comunidad en con porcentajes no cuadrados.");
 									}
 								}
 							});

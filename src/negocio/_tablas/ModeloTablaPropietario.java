@@ -16,12 +16,8 @@ public class ModeloTablaPropietario extends DefaultTableModel {
 		public ModeloTablaPropietario (){//example:new String[][]{{"1","Patio A","1","A"},{"2","Patio B","B","2"}} 
 			super(null,
 					new String[] {"ID","NIF","Nombre","E-Mail", "Direcc.","Poblacion","Telf.","Entidad","Sucursal","DC","D. Banc.","Observaciones"});		
-			numPropietarios=0;
-			ArrayList<Propietario> listaPropietarios = ControladorPropietario.getControladorPropietario().GetListaPropietarios();
-			System.out.println("Tamaño lista Propietarios: "+listaPropietarios.size());
-			for(Propietario p:listaPropietarios){						
-				this.addToTabla(p);
-			}
+			cargaTabla();
+			
 		}
 		public void limpiaTabla() {
 			// TODO Auto-generated method stub			
@@ -29,7 +25,15 @@ public class ModeloTablaPropietario extends DefaultTableModel {
 				this.removeRow(numPropietarios-1);
 				numPropietarios--;				
 			}		
-			
+		}
+		public void cargaTabla(){
+			limpiaTabla();
+			numPropietarios=0;
+			ArrayList<Propietario> listaPropietarios = ControladorPropietario.getControladorPropietario().GetListaPropietarios();
+			System.out.println("Tamaño lista Propietarios: "+listaPropietarios.size());
+			for(Propietario p:listaPropietarios){						
+				this.addToTabla(p);
+			}
 		}
 		@Override
 	    public boolean isCellEditable(int row, int column) { 
