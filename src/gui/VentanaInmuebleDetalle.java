@@ -261,10 +261,13 @@ public class VentanaInmuebleDetalle extends javax.swing.JFrame {
                         String Piso = pisoTextField.getText();    
                         float Porcentaje=Float.parseFloat(porcTextField.getText());
                         int idProp =ControladorPropietario.getControladorPropietario().getPropietarioPorPos(propietariosComboBox.getSelectedIndex()).getIdPropietario();
-                        
-                        
+                        if(ControladorInmueble.getControladorInmueble().existeInmueble( Escalera, Piso, Puerta,comunidad))
+                        	javax.swing.JOptionPane.showMessageDialog(null, "Inmueble repetido");  
+                        else{
+                    
                         if(ControladorPropietario.getControladorPropietario().getPropietarioPorId(idProp)==null){
                                 javax.swing.JOptionPane.showMessageDialog(null, "Por favor introduzca un ID de Propietario correcto");
+                        
                         }else{
                         	
                         	if(comunidad.getEstado()<=1){//comunidad no morosa ni de baja
@@ -314,7 +317,7 @@ public class VentanaInmuebleDetalle extends javax.swing.JFrame {
 							e.printStackTrace();
 						}
                         } else javax.swing.JOptionPane.showMessageDialog(null, "Comunidad en estado de baja o morosa"); 
-                            
+                        }    
                 }
             }
         }                       

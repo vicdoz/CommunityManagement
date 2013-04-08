@@ -143,7 +143,7 @@ public class Propietario {
 		this.sucursal = sucursal;
 	}
 	public boolean datosBancariosDomiciliados(){
-		if(String.valueOf(sucursal).isEmpty())return false;
-		return true;
+		if(String.valueOf(sucursal).isEmpty()||sucursal==0)return false;
+		else return true;
 	}
 }

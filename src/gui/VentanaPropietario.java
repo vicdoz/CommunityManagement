@@ -79,6 +79,7 @@ public class VentanaPropietario extends javax.swing.JFrame {
 	//public static ModeloTablaInmueble modelo = null;
 	private int editMode=0;
 	public static Propietario pAux = null;
+	boolean domiciliado;
 	/**
 	* Auto-generated main method to display this JFrame
 	*/
@@ -93,9 +94,14 @@ public class VentanaPropietario extends javax.swing.JFrame {
 	}
 	public VentanaPropietario() {
 		super();
+		entidadTextField = new JTextField();
+		sucursalTextField = new JTextField();
+		dcTextField = new JTextField();
+		cuentaTextField = new JTextField();
 		fechaAltaTextField=new JTextField();
 		cuentaBancariaCheckBox = new JCheckBox();
 		cuentaBancariaCheckBox.setVisible(true);
+		domiciliado=cuentaBancariaCheckBox.isSelected();
 		fechaAltaLabel=new JLabel();
 		fechaAltaTextField.setEnabled(false);
 		fechaAltaLabel.setVisible(true);
@@ -109,12 +115,26 @@ public class VentanaPropietario extends javax.swing.JFrame {
 		this.pAux=p;
 		this.rowAux=row;
 		editMode=1;
+		entidadTextField = new JTextField();
+		sucursalTextField = new JTextField();
+		dcTextField = new JTextField();
+		cuentaTextField = new JTextField();
+		
 		fechaAltaTextField=new JTextField();
 		fechaAltaLabel=new JLabel();
 		fechaAltaTextField.setVisible(true);
 		fechaAltaLabel.setVisible(true);
 		cuentaBancariaCheckBox=new JCheckBox();
 		cuentaBancariaCheckBox.setVisible(true);
+		
+		if(!p.datosBancariosDomiciliados()){
+			cuentaBancariaCheckBox.setSelected(true);
+			entidadTextField.setEditable(false);
+			sucursalTextField.setEditable(false);
+			dcTextField.setEditable(false);
+			cuentaTextField.setEditable(false);
+		}
+		domiciliado=cuentaBancariaCheckBox.isSelected();
 		initGUI();
 		
 
@@ -232,7 +252,7 @@ public class VentanaPropietario extends javax.swing.JFrame {
 						
 					}
 					{
-						entidadTextField = new JTextField();
+						
 						formularioPanel.add(entidadTextField, new GridBagConstraints(1, 7, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.HORIZONTAL, new Insets(0, 0, 0, 10), 0, 0));
 						if(pAux==null) entidadTextField.setText("");
 					}
@@ -242,7 +262,7 @@ public class VentanaPropietario extends javax.swing.JFrame {
 						cuentaLabel.setText("N. Cuenta");
 					}
 					{
-						cuentaTextField = new JTextField();
+						
 						formularioPanel.add(cuentaTextField, new GridBagConstraints(2, 8, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.HORIZONTAL, new Insets(0, 60, 0, 10), 0, 0));
 						cuentaTextField.setText("");
 					}
@@ -261,7 +281,7 @@ public class VentanaPropietario extends javax.swing.JFrame {
 						
 					}
 					{
-						sucursalTextField = new JTextField();
+						
 						formularioPanel.add(sucursalTextField, new GridBagConstraints(2, 7, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.HORIZONTAL, new Insets(0, 60, 0, 10), 0, 0));
 					}
 					{
@@ -270,7 +290,7 @@ public class VentanaPropietario extends javax.swing.JFrame {
 						sucursalLabel.setText("Sucursal");
 					}
 					{
-						dcTextField = new JTextField();
+						
 						formularioPanel.add(dcTextField, new GridBagConstraints(1, 8, 1, 1, 0.0, 0.0, GridBagConstraints.WEST, GridBagConstraints.HORIZONTAL, new Insets(0, 0, 0, 10), 0, 0));
 					}
 					{
@@ -299,10 +319,14 @@ public class VentanaPropietario extends javax.swing.JFrame {
 							if(cuentaBancariaCheckBox.isSelected()){
 								entidadTextField.setEditable(false);sucursalTextField.setEditable(false);
 								dcTextField.setEditable(false);cuentaTextField.setEditable(false);
+								entidadTextField.setText("");dcTextField.setText("");
+								sucursalTextField.setText("");cuentaTextField.setText("");
+								domiciliado=true;
 							}
 							else 	{
 								entidadTextField.setEditable(true);sucursalTextField.setEditable(true);
 								dcTextField.setEditable(true);cuentaTextField.setEditable(true);
+								domiciliado=false;
 							}
 						}
 					});
@@ -366,53 +390,64 @@ public class VentanaPropietario extends javax.swing.JFrame {
 		String nombre = nombreTextField.getText();	String poblacion=pobTextField.getText();
 		String telefono=telefTextField.getText(); 	String obs =obsEditorPane.getText();
 		String email = emailTextField.getText();	String fecha=fechaAltaTextField.getText();
-
+		int entidad=0,numcuenta=0, sucursal=0,digitoControl =0;
+		
 		if(nif.isEmpty() || nombre.isEmpty()){
 			javax.swing.JOptionPane.showMessageDialog(null, "Los campos NIF y Nombre son obligatorios");
-		}else if (((entidadTextField.getText().isEmpty() || !isInteger(entidadTextField.getText()))
-				||(cuentaTextField.getText().isEmpty() || !isInteger(cuentaTextField.getText()))
-				||(dcTextField.getText().isEmpty() || !isInteger(dcTextField.getText()))
-				||(sucursalTextField.getText().isEmpty() || !isInteger(sucursalTextField.getText())))
-				&& !cuentaBancariaCheckBox.isSelected()){
-					javax.swing.JOptionPane.showMessageDialog(null, "Los campos Entidad,Sucursal,digito de control y Cuenta son cadenas numéricas no vacias");	
-		}else{	
+		}else if(ControladorPropietario.getControladorPropietario().existePropitario(nif)){
+				javax.swing.JOptionPane.showMessageDialog(null, "Propietario ya existente con este NIF");
+		 }else{	
 			Calendar DiaSemana= Calendar.getInstance();
 			String fechaalta=DiaSemana.get(Calendar.YEAR)+"-"+DiaSemana.get(Calendar.MONTH)+"-"+DiaSemana.get(Calendar.DAY_OF_MONTH);
-			if(!cuentaBancariaCheckBox.isSelected()){
-				int entidad = Integer.parseInt(entidadTextField.getText());
-				int numcuenta = Integer.parseInt(cuentaTextField.getText());
-				String sucursal=sucursalTextField.getText();
-				String digitoControl=dcTextField.getText();
-			
-				if(ControladorPropietario.getControladorPropietario().datosBancariosCorrectos(String.valueOf(entidad),sucursal,digitoControl,String.valueOf(numcuenta))){
-			}
+			if(!domiciliado){
+				if (((entidadTextField.getText().isEmpty() || !isInteger(entidadTextField.getText()))
+						||(cuentaTextField.getText().isEmpty() || !isInteger(cuentaTextField.getText()))
+						||(dcTextField.getText().isEmpty() || !isInteger(dcTextField.getText()))
+						||(sucursalTextField.getText().isEmpty() || !isInteger(sucursalTextField.getText())))
+						){
+					javax.swing.JOptionPane.showMessageDialog(null, "Los campos Entidad,Sucursal,digito de control y Cuenta son cadenas numéricas no vacias");	
+				}else{
+				entidad = Integer.parseInt(entidadTextField.getText());
+				numcuenta = Integer.parseInt(cuentaTextField.getText());
+				sucursal=Integer.parseInt(sucursalTextField.getText());
+				digitoControl=Integer.parseInt(dcTextField.getText());
+				if(!ControladorPropietario.getControladorPropietario().datosBancariosCorrectos(String.valueOf(entidad),String.valueOf(sucursal),String.valueOf(digitoControl),String.valueOf(numcuenta))){
+				
+						javax.swing.JOptionPane.showMessageDialog(null, "Error en formato datos bancaris:Entidad:4 digitos,Sucursal:4 digitos,DC:2digitos,Numero de cuenta:10 digitos.");		
+					}
+				else{
 				if(editMode==1){
 					
 					pAux.setNif(nif);					pAux.setEmail(email);
 					pAux.setDireccion(direccion); 		pAux.setFechaalta(fecha);
 					pAux.setNombre(nombre); 			pAux.setPoblacion(poblacion);
 					pAux.setTelefono(telefono); 		pAux.setObservaciones(obs);
+					if(pAux.datosBancariosDomiciliados()){
+						pAux.setEntidad(entidad);
+						pAux.setNumerocuenta(numcuenta);	
+						pAux.setdigitocontrol(digitoControl);
+						pAux.setSucursal(sucursal);
 					
-					
-				if(!pAux.datosBancariosDomiciliados()){
-					pAux.setEntidad(entidad);
-					pAux.setNumerocuenta(numcuenta);	
-					pAux.setdigitocontrol(Integer.parseInt(digitoControl));
-					pAux.setSucursal(Integer.parseInt(sucursal));
 					cuentaBancariaCheckBox.setSelected(false);
-				}else cuentaBancariaCheckBox.setSelected(true);
+					domiciliado=false;
+					}else {
+						cuentaBancariaCheckBox.setSelected(true);
+						domiciliado=true;
+					}
 					try {
+						
+						
 						ControladorPropietario.getControladorPropietario().actualizarPropietario(pAux);					
 						VentanaComunidad.modeloProp.updateRow(rowAux,pAux);				
 						VentanaComunidad.tablaProp.setModel(VentanaComunidad.modeloProp);
 						VentanaComunidad.tablaProp.repaint();
 					} catch (DAOExcepcion e) {
-						// TODO Auto-generated catch block
+					// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
-				}else{
+				}else{//insercion nueva
 					
-					Propietario p=new Propietario(nif,nombre,poblacion,direccion,telefono,obs,entidad,numcuenta,email,Integer.parseInt(sucursal),Integer.parseInt(digitoControl),fechaalta);				
+					Propietario p=new Propietario(nif,nombre,poblacion,direccion,telefono,obs,entidad,numcuenta,email,sucursal,digitoControl,fechaalta);				
 					try {
 						p.setFechaalta(fechaalta);
 						System.out.println("Fecha de alta asignada. Creando en controlador");
@@ -425,12 +460,52 @@ public class VentanaPropietario extends javax.swing.JFrame {
 						System.out.println("Error guardando el propietario");
 						e.printStackTrace();
 					}	
-			}	
+			}//fin insercion nueva	
 			dispose();
-		}else if(!cuentaBancariaCheckBox.isSelected()){
-			javax.swing.JOptionPane.showMessageDialog(null, "Error en formato datos bancaris:Entidad:4 digitos,Sucursal:4 digitos,DC:2digitos,Numero de cuenta:10 digitos.");	
+			}
+				
 			
 		}
+				}
+				//DOMICILIADO 
+			else{
+				if(editMode==1){
+					System.out.println("DOMICILIADO EDITADO");
+					pAux.setNif(nif);					pAux.setEmail(email);
+					pAux.setDireccion(direccion); 		pAux.setFechaalta(fecha);
+					pAux.setNombre(nombre); 			pAux.setPoblacion(poblacion);
+					pAux.setTelefono(telefono); 		pAux.setObservaciones(obs);
+					pAux.setSucursal(0);				pAux.setNumerocuenta(0);
+					pAux.setdigitocontrol(0);			pAux.setEntidad(0);
+					try {
+						ControladorPropietario.getControladorPropietario().actualizarPropietario(pAux);	
+						
+						VentanaComunidad.modeloProp.updateRow(rowAux,pAux);				
+						VentanaComunidad.tablaProp.setModel(VentanaComunidad.modeloProp);
+						VentanaComunidad.tablaProp.repaint();
+					} catch (DAOExcepcion e) {
+					// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}else{//insercion nueva
+					
+					Propietario p=new Propietario(nif,nombre,poblacion,direccion,telefono,obs,entidad,numcuenta,email,sucursal,digitoControl,fechaalta);				
+					try {
+						p.setFechaalta(fechaalta);
+						System.out.println("Fecha de alta asignada. Creando en controlador");
+						ControladorPropietario.getControladorPropietario().NuevoPropietario(p);
+						System.out.println("Creando en tabla");
+						VentanaComunidad.modeloProp.addPropietario(p);
+						
+					} catch (Exception e) {
+						// TODO Auto-generated catch block				
+						System.out.println("Error guardando el propietario");
+						e.printStackTrace();
+					}	
+				}//fin insercion nueva	
+			dispose();
+				}
 		}
 	}		
+
 }

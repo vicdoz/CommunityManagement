@@ -143,8 +143,8 @@ public class ModeloTablaNotas extends DefaultTableModel {
 						ri.setImporte(niAux.getImporteNota()*(iAux.getPorcentaje()/100));
 						ControladorReciboInmueble.getControladorReciboInmueble().NuevoReciboInmueble(ri);
 						/*Pago de recibos domiciliados*/
-						/*
-						if(iAux.getPropietario().datosBancariosDomiciliados()){	
+						Propietario p=iAux.getPropietario();
+						if(ControladorPropietario.getControladorPropietario().getPropietarioPorId(p.getIdPropietario()).datosBancariosDomiciliados()){	
 							Calendar DiaSemana = Calendar.getInstance();
 							String fechaPago = DiaSemana.get(Calendar.YEAR)+"-"+DiaSemana.get(Calendar.MONTH)+"-"+DiaSemana.get(Calendar.DAY_OF_MONTH);
 							ri.setFechaPago(fechaPago);
@@ -154,7 +154,7 @@ public class ModeloTablaNotas extends DefaultTableModel {
 								// TODO Auto-generated catch block
 								e.printStackTrace();
 							}
-						}*/
+						}
 					} catch (Exception e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();

@@ -155,4 +155,14 @@ public class ControladorPropietario implements InterfaceControladorPropietario  
 		else return true;
 	}
 
+	public boolean existePropitario(String nif) {
+		Iterator<Propietario> it= ListaPropietarios.iterator();
+        while(it.hasNext()){
+                Propietario p=it.next();
+                if(p.getNif().trim().equals(nif.trim()))		return true;
+        }
+       return false;
+    }
+	
+
 }

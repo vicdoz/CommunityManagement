@@ -78,5 +78,18 @@ public class ControladorComunidad implements InterfaceControladorComunidad  {
 		}
 		System.out.println("Comunidad no encontrada");
 		return null;		
-	}	
+	}
+
+	public boolean existeComunidad(String nombre, String direccion,
+			String poblacion) {
+		Iterator<Comunidad> it= ListaComunidades.iterator();
+		while(it.hasNext()){
+			System.out.println("Buscando");
+			Comunidad cAux=it.next();
+			if(cAux.getCalle().trim().equals(direccion.trim())&& cAux.getNombre().trim().equals(nombre.trim())&&cAux.getPoblacion().trim().equals(poblacion.trim()))	
+				return true;
+		}
+	
+	return false;
+	}
 }
