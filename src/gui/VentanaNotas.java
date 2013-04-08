@@ -367,7 +367,8 @@ public class VentanaNotas extends javax.swing.JFrame {
 							genNotaButton.addActionListener(new ActionListener() {
 								public void actionPerformed(ActionEvent evt) {								
 									notasModel.calcularImporte(cAux,niAux);
-									notasModel.generarRecibos(cAux,niAux);
+									notasModel.generarRecibo(cAux,niAux);
+								
 									javax.swing.JOptionPane.showMessageDialog(null, "Recibos generados correctamente.");										
 									
 								}
