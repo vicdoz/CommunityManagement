@@ -148,4 +148,11 @@ public class ControladorPropietario implements InterfaceControladorPropietario  
         return null;
     }
 
+	public boolean datosBancariosCorrectos(String entidad, String sucursal,
+			String digitoControl, String numcuenta) {
+		if(digitoControl.toCharArray().length!=2 ||entidad.toCharArray().length!=4
+			||sucursal.toCharArray().length!=4 ||numcuenta.toCharArray().length!=10)return false;
+		else return true;
+	}
+
 }

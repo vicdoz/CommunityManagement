@@ -1,8 +1,11 @@
 package negocio;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
+
+import accesoAdatos._controladores.ControladorInmueble;
 
 public class Comunidad {
 
@@ -132,20 +135,26 @@ public class Comunidad {
 	}
 	public int calcularEstado(){
 		int totalPercentaje=0;
-		Iterator<Inmueble> it= listaInmuebles.iterator();
-		while(it.hasNext()){
-			System.out.println("Buscando");
-			Inmueble iAux=it.next();
-			totalPercentaje+=iAux.getPorcentaje();
-		}
-		if(totalPercentaje==100){//cuadrado
-				estado=1;
-				return 1;
-		}else{ //sin cuadrar
-			if(estado<=1){
-				estado=0;
-				return 0;
+		ArrayList<Inmueble> listaInmueble= ControladorInmueble.getControladorInmueble().GetListaInmuebles();
+	
+			for(Inmueble it:listaInmueble){
+				System.out.println("Buscando");
+				System.out.println(it.getPorcentaje());
+				totalPercentaje+=it.getPorcentaje();
 			}
+			
+			if(totalPercentaje>=99.99 &&totalPercentaje <=100  ){//cuadrado
+				System.out.println(totalPercentaje);
+					estado=1;
+					return 1;
+			}else{ //sin cuadrar
+				System.out.println(totalPercentaje);
+				if(estado<=1){
+					estado=0;
+					return 0;
+				}
+				else if(estado==2)estado=0;
+			
 		}
 		return 0;
 	}

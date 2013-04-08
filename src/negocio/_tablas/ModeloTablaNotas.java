@@ -4,12 +4,15 @@ import negocio.*;
 import accesoAdatos._controladores.ControladorFactura;
 import accesoAdatos._controladores.ControladorInmueble;
 import accesoAdatos._controladores.ControladorNotaInformativa;
+import accesoAdatos._controladores.ControladorPropietario;
 import accesoAdatos._controladores.ControladorReciboInmueble;
 import excepciones.*;
 
 import java.util.*;
 
 import javax.swing.table.DefaultTableModel;
+
+import reports.ReportJustificantePago;
 
 
 @SuppressWarnings("serial")
@@ -123,21 +126,35 @@ public class ModeloTablaNotas extends DefaultTableModel {
 			}
 			
 		}
-		public void generarRecibos(Comunidad cAux, NotaInformativa niAux) {
+		public void generarRecibo(Comunidad cAux, NotaInformativa niAux) {
 			// TODO Auto-generated method stub
 			//genera y actualiza a la vez.
 			/* Calculo por inmueble */
 			ArrayList<Inmueble> listaInmuebles = ControladorInmueble.getControladorInmueble().GetListaInmuebles();		
+
 			for(Inmueble f:listaInmuebles){						
 				if(f.getComunidad().getIdComunidad()==cAux.getIdComunidad()){
 					try {
 						Inmueble iAux=f;
 						ReciboInmueble ri= new ReciboInmueble();
 						ri.setInmueble(iAux);
+						ri.setFechaPago("");
 						ri.setNotaInformativa(niAux);
 						ri.setImporte(niAux.getImporteNota()*(iAux.getPorcentaje()/100));
-						//ri.setFechaPago();	
 						ControladorReciboInmueble.getControladorReciboInmueble().NuevoReciboInmueble(ri);
+						/*Pago de recibos domiciliados*/
+						/*
+						if(iAux.getPropietario().datosBancariosDomiciliados()){	
+							Calendar DiaSemana = Calendar.getInstance();
+							String fechaPago = DiaSemana.get(Calendar.YEAR)+"-"+DiaSemana.get(Calendar.MONTH)+"-"+DiaSemana.get(Calendar.DAY_OF_MONTH);
+							ri.setFechaPago(fechaPago);
+							try {
+								ControladorReciboInmueble.getControladorReciboInmueble().actualizarReciboInmueble(ri);
+							} catch (DAOExcepcion e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+						}*/
 					} catch (Exception e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();

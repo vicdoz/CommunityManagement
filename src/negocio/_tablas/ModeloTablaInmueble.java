@@ -7,7 +7,9 @@ import excepciones.*;
 
 import javax.swing.table.DefaultTableModel;
 
+import accesoAdatos._controladores.ControladorComunidad;
 import accesoAdatos._controladores.ControladorInmueble;
+import accesoAdatos._controladores.ControladorPropietario;
 
 
 @SuppressWarnings("serial")
@@ -17,7 +19,7 @@ public class ModeloTablaInmueble extends DefaultTableModel {
 		public Comunidad comunidad;
 		public ModeloTablaInmueble (){
 			super(null,
-					new String[] {"ID","Comunidad", "Escalera", "Piso", " Puerta","%Participacion", "Propietario"});			
+					new String[] {"ID","Comunidad", "Escalera", "Piso", " Puerta","Participacion", "Propietario"});			
 			numInmuebles=0;
 		}
 		@Override
@@ -26,9 +28,20 @@ public class ModeloTablaInmueble extends DefaultTableModel {
 		       return false;
 		    }
 		public void addInmueble (Inmueble i) throws InmuebleYaExiste{	
-			i.getComunidad().addInmuebleToList(i);  		
-			i.getPropietario().addInmuebleToList(i);
-			this.addToTabla(i);			
+			
+			try {
+				Propietario p =i.getPropietario();
+				p.addInmuebleToList(i);
+				ControladorPropietario.getControladorPropietario().actualizarPropietario(p);
+				comunidad.addInmuebleToList(i);  
+				ControladorComunidad.getControladorComunidad().actualizarComunidad(comunidad);
+
+				this.addToTabla(i);	
+			} catch (DAOExcepcion e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+					
 		}
 		public int getNumInmuebles(){
 			return numInmuebles;

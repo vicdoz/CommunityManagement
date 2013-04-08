@@ -17,6 +17,8 @@
 	<property name="fechaalta" column="fechaalta" />
 	<property name="entidad" column="entidad" />
 	<property name="numerocuenta" column="numerocuenta" />	
+	<property name="digitocontrol" column="digitoControl" />	
+	<property name="sucursal" column="sucursal" />	
 	<property name="email" column="email" />
 	<set name="listaInmuebles">
 		<key column="idPropietario"/>

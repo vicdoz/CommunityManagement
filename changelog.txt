@@ -1,3 +1,8 @@
+CHANGELOG 08/04/2013-2:00 v4
+-Molts canvis:Funciona quasi tot,excepte el tema de les domiciliacions bancaries automatiques.
+-corregits bugs
+
+
 CHANGELOG 06/04/2013-21:01 v3.11:
  - Creat Report Justificant de Pago
  - La comunitat ara demana Maxim de Rebuts pendents al crear-la

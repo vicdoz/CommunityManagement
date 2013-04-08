@@ -16,6 +16,17 @@ public class ModeloTablaComunidad extends DefaultTableModel {
 		public ModeloTablaComunidad (){//example:new String[][]{{"1","Patio A","1","A"},{"2","Patio B","B","2"}} 
 			super(null,
 					new String[] {"ID","Nombre", "Contacto", "Direccion", "Poblacion","Recibos Pend.", "Estado"});		
+			cargaComunidades();
+		}
+		public void limpiaTabla() {
+			// TODO Auto-generated method stub			
+			while(numComunidades>0){
+				this.removeRow(numComunidades-1);
+				numComunidades--;				
+			}			
+		}
+		public void cargaComunidades(){
+			limpiaTabla();
 			numComunidades=0;
 			ArrayList<Comunidad> listaComunidades = ControladorComunidad.getControladorComunidad().GetListaComunidades();
 			System.out.println("Tamaño lista"+listaComunidades.size());
@@ -67,13 +78,15 @@ public class ModeloTablaComunidad extends DefaultTableModel {
 	
 		}
 		
-		public void updateRow(int row,Comunidad c){			
-			this.setValueAt(c.getNombre(), row, 1);			
-			this.setValueAt(c.getIdPresidente(), row, 2);			
-			this.setValueAt(c.getCalle(), row, 3);			
-			this.setValueAt(c.getPoblacion(), row, 4);			
-			this.setValueAt("RECIBOS PENDIENTES", row, 5);			
-			this.setValueAt(c.getEstadoToString(), row, 6);
+		public void updateRow(int row,Comunidad c){	
+			
+				this.setValueAt(c.getNombre(), row, 1);			
+				this.setValueAt(c.getIdPresidente(), row, 2);			
+				this.setValueAt(c.getCalle(), row, 3);			
+				this.setValueAt(c.getPoblacion(), row, 4);			
+				this.setValueAt(c.getMaxRecibosPendientes(), row, 5);			
+				this.setValueAt(c.getEstadoToString(), row, 6);
+				
 			
 		}	
 		@SuppressWarnings("unchecked")
@@ -92,6 +105,7 @@ public class ModeloTablaComunidad extends DefaultTableModel {
 			System.out.println("Filas: "+VentanaComunidad.modeloCom.getRowCount());
 			VentanaComunidad.modeloCom.fireTableRowsUpdated(0, VentanaComunidad.modeloCom.getRowCount());*/
 		}
+
 
 }
 

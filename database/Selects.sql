@@ -1,4 +1,1 @@
-select * from propietario;
-select * from inmueble;
-select * from reciboInmueble;
-
+create propietario

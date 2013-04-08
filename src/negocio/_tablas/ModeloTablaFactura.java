@@ -24,8 +24,9 @@ public class ModeloTablaFactura extends DefaultTableModel {
 		       return false;
 		    }
 		public void addFactura (Factura f) throws InmuebleYaExiste{
-			f.getComunidad().addFacturaToList(f);			
-			this.addToTabla(f);
+			//System.out.println("Comunidad factura"+f.getComunidad().getIdComunidad());
+			//f.getComunidad().addFacturaToList(f);			
+			//this.addToTabla(f);
 		}
 		public int getNumFacturas(){
 			return numFacturas;
@@ -128,9 +129,11 @@ public class ModeloTablaFactura extends DefaultTableModel {
 		public void setDeNotaInformativa(Factura f, NotaInformativa niAux) {
 			// TODO Auto-generated method stub
 			if(niAux==null){
-				f.getNotainformativa().delFacturaFromList(f);
+				niAux.delFacturaFromList(f);
 			}else{
-				f.getNotainformativa().addFacturaToList(f);
+				System.out.println("id nota:"+niAux.getIdNotaInformativa());
+				System.out.println("importe factura"+f.getImporteConIva());
+				niAux.addFacturaToList(f);
 			}
 			f.setNotainformativa(niAux);
 			try {
@@ -142,7 +145,7 @@ public class ModeloTablaFactura extends DefaultTableModel {
 		}
 		public void actualizaImporteFactura(LineaFactura lfAux) {
 			// TODO Auto-generated method stub
-
+			
 			float importe=lfAux.getFactura().getImporteSinIva();
 			importe+=lfAux.getImporteLinea();
 			lfAux.getFactura().setImporteSinIva(importe);

@@ -17,12 +17,20 @@
 		 whenNoDataType="NoPages"
 		 isTitleNewPage="false"
 		 isSummaryNewPage="false">
-	<property name="ireport.scriptlethandling" value="2" />
+	<property name="ireport.scriptlethandling" value="0" />
 	<property name="ireport.encoding" value="UTF-8" />
 	<import value="java.util.*" />
 	<import value="net.sf.jasperreports.engine.*" />
 	<import value="net.sf.jasperreports.engine.data.*" />
 
+	<parameter name="IDNOTA" isForPrompting="true" class="java.lang.Integer">
+		<defaultValueExpression ><![CDATA[new Integer(1)]]></defaultValueExpression>
+	</parameter>
+	<queryString language="hql"><![CDATA[From NotaInformativa n where n.idNotaInformativa = $P!{IDNOTA}]]></queryString>
+
+	<field name="comunidad" class="negocio.Comunidad"/>
+	<field name="fechaCalculo" class="java.lang.String"/>
+	<field name="importeNota" class="java.lang.Float"/>
 
 		<background>
 			<band height="0"  isSplitAllowed="true" >
@@ -84,14 +92,14 @@
 					<textElement textAlignment="Center" verticalAlignment="Middle">
 						<font size="12"/>
 					</textElement>
-				<textFieldExpression   class="java.lang.String"><![CDATA[$F{Field}]]></textFieldExpression>
+				<textFieldExpression   class="java.lang.String"><![CDATA[""+$F{comunidad}.getNombre().trim()]]></textFieldExpression>
 				</textField>
 				<staticText>
 					<reportElement
 						x="358"
 						y="0"
 						width="177"
-						height="17"
+						height="18"
 						key="staticText-4"/>
 					<box></box>
 					<textElement textAlignment="Center" verticalAlignment="Middle">
@@ -102,15 +110,15 @@
 				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
 						x="358"
-						y="17"
+						y="18"
 						width="177"
-						height="23"
+						height="22"
 						key="textField-2"/>
 					<box></box>
 					<textElement textAlignment="Center" verticalAlignment="Middle">
 						<font size="12"/>
 					</textElement>
-				<textFieldExpression   class="java.lang.String"><![CDATA[$F{Field}]]></textFieldExpression>
+				<textFieldExpression   class="java.lang.String"><![CDATA[""+$F{fechaCalculo}.trim()]]></textFieldExpression>
 				</textField>
 			</band>
 		</pageHeader>
@@ -182,44 +190,43 @@
 		</columnHeader>
 		<detail>
 			<band height="100"  isSplitAllowed="true" >
-				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+				<rectangle>
 					<reportElement
+						mode="Transparent"
 						x="1"
-						y="0"
-						width="178"
-						height="21"
-						key="textField-3"/>
-					<box></box>
-					<textElement textAlignment="Left" verticalAlignment="Middle">
-						<font size="12"/>
-					</textElement>
-				<textFieldExpression   class="java.lang.String"><![CDATA[$F{Field}]]></textFieldExpression>
-				</textField>
-				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+						y="37"
+						width="534"
+						height="24"
+						key="rectangle-2"/>
+					<graphicElement stretchType="NoStretch">
+					<pen lineWidth="2.0" lineStyle="Solid"/>
+</graphicElement>
+				</rectangle>
+				<staticText>
 					<reportElement
-						x="179"
-						y="-1"
-						width="178"
-						height="38"
-						key="textField-4"/>
-					<box></box>
-					<textElement verticalAlignment="Top">
-						<font/>
-					</textElement>
-				<textFieldExpression   class="java.lang.String"><![CDATA[$F{Field}]]></textFieldExpression>
-				</textField>
-				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
-					<reportElement
-						x="357"
-						y="-1"
-						width="178"
+						x="214"
+						y="37"
+						width="139"
 						height="21"
-						key="textField-5"/>
+						key="staticText-9"/>
 					<box></box>
 					<textElement textAlignment="Right" verticalAlignment="Middle">
-						<font size="14"/>
+						<font pdfFontName="Helvetica-Bold" size="14" isBold="true"/>
 					</textElement>
-				<textFieldExpression   class="java.lang.String"><![CDATA[$F{Field}]]></textFieldExpression>
+				<text><![CDATA[Importe Total]]></text>
+				</staticText>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="358"
+						y="38"
+						width="172"
+						height="22"
+						key="textField-6"/>
+					<box></box>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font size="12"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[""+$F{importeNota}+"€"]]></textFieldExpression>
 				</textField>
 			</band>
 		</detail>

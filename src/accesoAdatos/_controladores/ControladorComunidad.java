@@ -36,8 +36,6 @@ public class ControladorComunidad implements InterfaceControladorComunidad  {
 		this.miDaoComunidad = new ComunidadDAOHibernateImp();
 		try {
 			miDaoComunidad.actualizarComunidad(c);
-			int indexC = this.ListaComunidades.indexOf(c);
-			this.ListaComunidades.set(indexC, c);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

@@ -25,7 +25,7 @@ public class ModeloTablaFacturaDetalle extends DefaultTableModel {
 		       return false;
 		    }
 		public void addFactura (LineaFactura lF) throws InmuebleYaExiste{	
-			lF.getFactura().addLineaToList(lF);
+			//lF.getFactura().addLineaToList(lF);
 			this.addToTabla(lF);
 		}
 		public int getNumFacturas(){

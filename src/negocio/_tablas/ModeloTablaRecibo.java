@@ -1,6 +1,7 @@
 package negocio._tablas;
 
 import negocio.*;
+import accesoAdatos._controladores.ControladorInmueble;
 import accesoAdatos._controladores.ControladorReciboInmueble;
 import excepciones.*;
 
@@ -94,10 +95,13 @@ public class ModeloTablaRecibo extends DefaultTableModel {
 		public void cargaRecibosPropietario(Propietario p){
 			limpiaTabla();
 			ArrayList<ReciboInmueble> listaRecibos = ControladorReciboInmueble.getControladorReciboInmueble().GetListaReciboInmuebles();
-			System.out.println("Tamaño lista"+listaRecibos.size());
-			for(ReciboInmueble r:listaRecibos){						
-				if(r.getInmueble().getPropietario().equals(p)){
+			ArrayList<Inmueble> listaInmuebles = ControladorInmueble.getControladorInmueble().getInmueblePorPropietario(p);
+			for(ReciboInmueble r:listaRecibos){	
+				for(Inmueble i:listaInmuebles){
+				if(r.getInmueble().getIdInmueble()==i.getIdInmueble() ){
+					System.out.println("Se añade a la tabla");
 					this.addToTabla(r);
+				}
 				}
 			}
 		}

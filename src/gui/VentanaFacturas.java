@@ -15,6 +15,7 @@ import java.awt.event.WindowEvent;
 import javax.swing.*;
 
 import accesoAdatos._controladores.ControladorFactura;
+import accesoAdatos._controladores.ControladorNotaInformativa;
 
 import java.util.*;
 
@@ -190,9 +191,12 @@ public class VentanaFacturas extends javax.swing.JFrame {
 											MuestraMensaje(NO_FILA);										
 										}else{
 											int rowSel = tablaFact.getSelectedRow();
-											Factura fAux = modeloFact.getFacturaPorPos(rowSel); 												
-											VentanaFacturaNueva v = new VentanaFacturaNueva(rowSel,fAux);
-											v.setVisible(true);
+											Factura fAux = modeloFact.getFacturaPorPos(rowSel); 
+											if(fAux.getNotainformativa()==null){
+												VentanaFacturaNueva v = new VentanaFacturaNueva(rowSel,fAux);
+												v.setVisible(true);
+											}
+											else javax.swing.JOptionPane.showMessageDialog(null, "Factura asociada a una nota informativa.No se puede moficar");
 										}
 									}
 								});
