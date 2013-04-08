@@ -276,6 +276,11 @@ public class VentanaComunidadNueva extends javax.swing.JFrame {
 		String nombre = nombreTextField.getText();		String direccion = direccionTextField.getText();
 		String poblacion = pobTextField.getText();		String auxCont = String.valueOf(ControladorPropietario.getControladorPropietario().getPropietarioPorPos(propietarios.getSelectedIndex()).getIdPropietario());
 		int maxRecibosPendientes = Integer.parseInt(recibosMaxTextField.getText());
+		
+		if(ControladorComunidad.getControladorComunidad().existeComunidad(nombre,direccion,poblacion)){
+			javax.swing.JOptionPane.showMessageDialog(null, "Comunidad ya existente");
+		}
+		else{
 		if(isInteger(auxCont))	idCont = Integer.parseInt(auxCont);
 		else	idCont=-1;
 		System.out.println("idCont="+idCont);
@@ -327,6 +332,7 @@ public class VentanaComunidadNueva extends javax.swing.JFrame {
 				} catch (DAOExcepcion e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
+				}
 				}
 			}	
 		}			

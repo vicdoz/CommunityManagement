@@ -120,5 +120,22 @@ public class ControladorInmueble implements InterfaceControladorInmueble  {
 		return lista;
 	}
 
+	public boolean existeInmueble(String escalera, String piso, String puerta,
+			Comunidad com) {
+		ArrayList<Inmueble> lista=new ArrayList<Inmueble>();
+		Iterator<Inmueble> it=this.GetListaInmuebles().iterator();
+		System.out.println(".--->"+escalera+","+piso+","+puerta);
+		while(it.hasNext()){
+			Inmueble iAux=it.next();System.out.println("Inmueble buscando");
+			System.out.println(iAux.getEscalera().trim()+","+iAux.getPiso()+iAux.getPuerta());
+			if(iAux.getEscalera().toString().trim().equals(escalera.trim())&&iAux.getPiso().toString().trim().equals(piso.trim())&&iAux.getPuerta().toString().trim().equals(puerta.trim()) &&iAux.getComunidad().getIdComunidad()==com.getIdComunidad()){
+				return true;
+				}
+		}
+		return false;
+	
+
+	}
+
 
 }

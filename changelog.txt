@@ -1,3 +1,7 @@
+CHANGELOG 08/04/2013-18:00 v4
+-Domiciliacions bancaries funcionals
+-Integrades les restricciones generals
+
 CHANGELOG 08/04/2013-2:00 v4
 -Molts canvis:Funciona quasi tot,excepte el tema de les domiciliacions bancaries automatiques.
 -corregits bugs

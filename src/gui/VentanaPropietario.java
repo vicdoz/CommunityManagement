@@ -394,6 +394,8 @@ public class VentanaPropietario extends javax.swing.JFrame {
 		
 		if(nif.isEmpty() || nombre.isEmpty()){
 			javax.swing.JOptionPane.showMessageDialog(null, "Los campos NIF y Nombre son obligatorios");
+		}else if(ControladorPropietario.getControladorPropietario().existePropitario(nif)){
+				javax.swing.JOptionPane.showMessageDialog(null, "Propietario ya existente con este NIF");
 		 }else{	
 			Calendar DiaSemana= Calendar.getInstance();
 			String fechaalta=DiaSemana.get(Calendar.YEAR)+"-"+DiaSemana.get(Calendar.MONTH)+"-"+DiaSemana.get(Calendar.DAY_OF_MONTH);
@@ -505,4 +507,5 @@ public class VentanaPropietario extends javax.swing.JFrame {
 				}
 		}
 	}		
+
 }
