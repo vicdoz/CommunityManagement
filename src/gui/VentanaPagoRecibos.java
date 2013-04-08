@@ -272,8 +272,9 @@ public class VentanaPagoRecibos extends javax.swing.JFrame {
 								}else{
 									int rowSel = recibosTable.getSelectedRow();
 									int idRecibo = Integer.parseInt(recibosTable.getValueAt(rowSel, 0).toString());
-									ReciboInmueble rAux = recibosModel.getReciboPorId(idRecibo);																	
-									if(rAux.getFechaPago().isEmpty()){
+									ReciboInmueble rAux = recibosModel.getReciboPorId(idRecibo);	
+									System.out.println(rAux.getIdRecibo()+","+rAux.getImporte()+","+rAux.getFechaPago()+".");
+									if(rAux.getFechaPago().isEmpty() ||rAux.getFechaPago().trim().equals("")){
 										Calendar DiaSemana = Calendar.getInstance();
 										String fechaPago = DiaSemana.get(Calendar.YEAR)+"-"+DiaSemana.get(Calendar.MONTH)+"-"+DiaSemana.get(Calendar.DAY_OF_MONTH);
 										rAux.setFechaPago(fechaPago);
@@ -287,6 +288,8 @@ public class VentanaPagoRecibos extends javax.swing.JFrame {
 										}
 										ReportJustificantePago report= new ReportJustificantePago();										
 										report.muestraJustificantePorIdRecibo(idRecibo);
+										/*Repintar tabla*/
+										inmModel.cargaInmueblesTodos();
 									}else{
 										javax.swing.JOptionPane.showMessageDialog(null, "Este recibo ya está pagado");
 									}

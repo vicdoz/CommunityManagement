@@ -1,1 +1,1 @@
-create propietario
+select * from ReciboInmueble;
