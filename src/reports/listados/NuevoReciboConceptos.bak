@@ -17,7 +17,7 @@
 		 whenNoDataType="NoPages"
 		 isTitleNewPage="false"
 		 isSummaryNewPage="false">
-	<property name="ireport.scriptlethandling" value="2" />
+	<property name="ireport.scriptlethandling" value="0" />
 	<property name="ireport.encoding" value="UTF-8" />
 	<import value="java.util.*" />
 	<import value="net.sf.jasperreports.engine.*" />
@@ -27,8 +27,8 @@
 
 	<field name="concepto" class="negocio.Concepto"/>
 	<field name="factura" class="negocio.Factura"/>
-	<field name="idLineaFactura" class="int"/>
-	<field name="importeLinea" class="float"/>
+	<field name="idLineaFactura" class="java.lang.Integer"/>
+	<field name="importeLinea" class="java.lang.Float"/>
 	<field name="observacion" class="java.lang.String"/>
 
 		<background>

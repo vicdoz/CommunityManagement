@@ -17,16 +17,16 @@
 		 whenNoDataType="NoPages"
 		 isTitleNewPage="false"
 		 isSummaryNewPage="false">
-	<property name="ireport.scriptlethandling" value="2" />
+	<property name="ireport.scriptlethandling" value="0" />
 	<property name="ireport.encoding" value="UTF-8" />
 	<import value="java.util.*" />
 	<import value="net.sf.jasperreports.engine.*" />
 	<import value="net.sf.jasperreports.engine.data.*" />
 
-	<parameter name="IDNOTA" isForPrompting="true" class="java.lang.Integer">
+	<parameter name="IDREC" isForPrompting="true" class="java.lang.Integer">
 		<defaultValueExpression ><![CDATA[new Integer(1)]]></defaultValueExpression>
 	</parameter>
-	<queryString language="hql"><![CDATA[From ReciboInmueble ]]></queryString>
+	<queryString language="hql"><![CDATA[From ReciboInmueble r where r.idRecibo = $P!{IDREC}]]></queryString>
 
 	<field name="carta" class="negocio.Carta"/>
 	<field name="fechaPago" class="java.lang.String"/>
@@ -34,17 +34,14 @@
 	<field name="importe" class="java.lang.Float"/>
 	<field name="inmueble" class="negocio.Inmueble"/>
 	<field name="notaInformativa" class="negocio.NotaInformativa"/>
-	<field name="propietario" class="negocio.Propietario">
-		<fieldDescription><![CDATA[inmueble.propietario]]></fieldDescription>
+	<field name="porcentaje" class="java.lang.Float">
+		<fieldDescription><![CDATA[inmueble.porcentaje]]></fieldDescription>
 	</field>
 	<field name="nif" class="java.lang.String">
 		<fieldDescription><![CDATA[inmueble.propietario.nif]]></fieldDescription>
 	</field>
 	<field name="nombre" class="java.lang.String">
 		<fieldDescription><![CDATA[inmueble.propietario.nombre]]></fieldDescription>
-	</field>
-	<field name="porcentaje" class="java.lang.Float">
-		<fieldDescription><![CDATA[inmueble.porcentaje]]></fieldDescription>
 	</field>
 
 		<background>
@@ -205,18 +202,18 @@
 					</textElement>
 				<textFieldExpression   class="java.lang.String"><![CDATA[$F{nombre}]]></textFieldExpression>
 				</textField>
-				<textField isStretchWithOverflow="false" pattern="##0.00" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
 						x="322"
 						y="0"
 						width="100"
 						height="18"
-						key="textField"/>
+						key="textField-1"/>
 					<box></box>
 					<textElement verticalAlignment="Middle">
 						<font size="12"/>
 					</textElement>
-				<textFieldExpression   class="java.lang.Float"><![CDATA[$F{porcentaje}]]></textFieldExpression>
+				<textFieldExpression   class="java.lang.String"><![CDATA[""+$F{porcentaje}]]></textFieldExpression>
 				</textField>
 			</band>
 		</detail>

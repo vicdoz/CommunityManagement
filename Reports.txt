@@ -1,0 +1,41 @@
+iReports:
+
+==================
+No funcionan:
+==================
+- ReportRecibo:
+		- El importe es correcto.
+		- No sale el desglose de conceptos debe hacerse con un subreport.
+	- NuevoReciboConceptos
+		- No funciona.
+	- NuevoReciboInmuebles: 
+		- Funciona OK. (Le dices el recibo y muestra los inmuebles asociados).
+- ReportPropietario:
+	- Muestra solo los propietarios, no se pueden calcular los importes adeudados.
+
+==================
+Funcionan OK:
+==================
+- ReportComunidades:
+	- Muestra todas las comunidades creadas en el sistema.
+	
+- ReportConceptos:
+	- Muestra todos los conceptos creados en el sistema.
+	
+- ReportFacturas:
+		- Muestra todas las facturas creadas en el sistema.
+	- FacturasDeComunidad
+		- Muestra las facturas creadas en el sistema de la Comunidad indicada.
+			
+- ReportInmuebles:
+		- Muestra todos los inmuebles creados en el sistema.
+	- InmueblesDeComunidad
+		- Muestra los inmuebles creados en el sistema de la Comunidad indicada.
+	- InmueblesDePropietario
+		- Muestra los inmuebles creados en el sistema que pertenecen al Propietario indicado.
+		
+- ReportJustificantePago:
+	- Muestra el justificante de un pago de factura.
+	
+- ReportPropietarios:
+	- Muestra los propietarios creados en el sistema

@@ -26,10 +26,14 @@
 	<parameter name="IDNOTA" isForPrompting="true" class="java.lang.Integer">
 		<defaultValueExpression ><![CDATA[new Integer(1)]]></defaultValueExpression>
 	</parameter>
-	<queryString language="hql"><![CDATA[From NotaInformativa n where n.idNotaInformativa = $P!{IDNOTA}]]></queryString>
+	<parameter name="SUBREPORT_DIR" isForPrompting="false" class="java.lang.String">
+		<defaultValueExpression ><![CDATA["D:\\EclipseProjects\\IDP\\workspace\\gestion_inmuebles_project\\src\\reports\\listados\\"]]></defaultValueExpression>
+	</parameter>
+	<queryString language="hql"><![CDATA[From NotaInformativa n where n.idNotaInformativa = $P!{IDNOTA} ]]></queryString>
 
 	<field name="comunidad" class="negocio.Comunidad"/>
 	<field name="fechaCalculo" class="java.lang.String"/>
+	<field name="idRecibo" class="java.lang.Integer"/>
 	<field name="importeNota" class="java.lang.Float"/>
 
 		<background>
@@ -228,6 +232,19 @@
 					</textElement>
 				<textFieldExpression   class="java.lang.String"><![CDATA[""+$F{importeNota}+"€"]]></textFieldExpression>
 				</textField>
+				<subreport  isUsingCache="true">
+					<reportElement
+						x="1"
+						y="60"
+						width="534"
+						height="35"
+						key="subreport-1"/>
+					<subreportParameter  name="IDREC">
+						<subreportParameterExpression><![CDATA[$F{idRecibo}]]></subreportParameterExpression>
+					</subreportParameter>
+					<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					<subreportExpression  class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR} + "NuevoReciboInmuebles.jasper"]]></subreportExpression>
+				</subreport>
 			</band>
 		</detail>
 		<columnFooter>
