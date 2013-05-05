@@ -36,7 +36,7 @@ public class ReportRecibo {
 		JasperViewer.viewReport(informe,false);
 	}
 	@SuppressWarnings("unchecked")	
-	public void muestraPorPropietario() {
+	public void muestraPorPropietario() { //Muestra todos los propietarios adeudados
 		JasperPrint informe = null;
 
 		Session sesion= UtilidadHibernate.getSessionFactory().openSession();

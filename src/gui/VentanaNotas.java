@@ -26,6 +26,9 @@ import javax.swing.JTable;
 import javax.swing.WindowConstants;
 import javax.swing.SwingUtilities;
 
+import reports.ReportFacturas;
+import reports.ReportRecibo;
+
 import accesoAdatos._controladores.ControladorNotaInformativa;
 
 
@@ -371,6 +374,8 @@ public class VentanaNotas extends javax.swing.JFrame {
 								
 									javax.swing.JOptionPane.showMessageDialog(null, "Recibos generados correctamente.");										
 									
+									ReportRecibo report = new ReportRecibo();
+									report.muestraPorIdNota(niAux.getIdNotaInformativa());
 								}
 							});
 						}
@@ -409,6 +414,16 @@ public class VentanaNotas extends javax.swing.JFrame {
 							public void actionPerformed(ActionEvent evt) {
 								System.out.println("genSelNotaReport.actionPerformed, event="+evt);
 								//TODO add your code for genSelNotaReport.actionPerformed
+								if(notasTable.getRowCount()<1||notasTable.getSelectedRow()==-1){
+									javax.swing.JOptionPane.showMessageDialog(null, "No hay ninguna fila seleccionada");										
+								}else{
+									int rowSel = notasTable.getSelectedRow();
+									NotaInformativa nAux = notasModel.getNotaInformativaPorPos(rowSel);
+									System.out.println(nAux.getIdNotaInformativa());
+									
+									ReportRecibo report = new ReportRecibo();
+									report.muestraPorIdNota(nAux.getIdNotaInformativa());
+								}
 							}
 						});
 					}
@@ -420,6 +435,14 @@ public class VentanaNotas extends javax.swing.JFrame {
 							public void actionPerformed(ActionEvent evt) {
 								System.out.println("genAllNotaReport.actionPerformed, event="+evt);
 								//TODO add your code for genAllNotaReport.actionPerformed
+								int n = 0;
+								while(notasTable.getRowCount()>n){
+									NotaInformativa nAux = notasModel.getNotaInformativaPorPos(n);
+									System.out.println(nAux.getIdNotaInformativa());									
+									ReportRecibo report = new ReportRecibo();
+									report.muestraPorIdNota(nAux.getIdNotaInformativa());
+									n++;
+								}
 							}
 						});
 					}

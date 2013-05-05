@@ -1,8 +1,14 @@
-El presidente debe pertenecer a la comunidad
+- El presidente debe pertenecer a la comunidad
+
+- Falta funció que calcule les 3 últimes columnes de Listado de Recibos 
+por propietarios per a acabar tots els reports.
+
+- Falta incloure Carta Propietari a algún trigger per a que quan se cree un rebut 
+que supere el màxim de rebuts sense pagar se genere.
+
 ---------------------------------------------------------------------------------
 BUGS:
 
 ---------------------------------------------------------------------------------
 REVISAR:
-	- Carta
 	- excepciones	

@@ -3,12 +3,12 @@
 <!DOCTYPE jasperReport PUBLIC "//JasperReports//DTD Report Design//EN" "http://jasperreports.sourceforge.net/dtds/jasperreport.dtd">
 <jasperReport
 		 name="CartaPropietario"
-		 columnCount="4"
+		 columnCount="1"
 		 printOrder="Vertical"
 		 orientation="Portrait"
 		 pageWidth="595"
 		 pageHeight="842"
-		 columnWidth="133"
+		 columnWidth="535"
 		 columnSpacing="0"
 		 leftMargin="30"
 		 rightMargin="30"
@@ -17,7 +17,7 @@
 		 whenNoDataType="NoPages"
 		 isTitleNewPage="false"
 		 isSummaryNewPage="false">
-	<property name="ireport.scriptlethandling" value="2" />
+	<property name="ireport.scriptlethandling" value="0" />
 	<property name="ireport.encoding" value="UTF-8" />
 	<import value="java.util.*" />
 	<import value="net.sf.jasperreports.engine.*" />
@@ -25,6 +25,9 @@
 
 	<parameter name="IDPROP" isForPrompting="true" class="java.lang.Integer">
 		<defaultValueExpression ><![CDATA[new Integer(1)]]></defaultValueExpression>
+	</parameter>
+	<parameter name="SUBREPORT_DIR" isForPrompting="false" class="java.lang.String">
+		<defaultValueExpression ><![CDATA["D:\\EclipseProjects\\IDP\\workspace\\gestion_inmuebles_project\\src\\reports\\listados\\"]]></defaultValueExpression>
 	</parameter>
 	<queryString language="hql"><![CDATA[From Propietario p where p.idPropietario = $P!{IDPROP}]]></queryString>
 
@@ -35,6 +38,8 @@
 	<field name="nombre" class="java.lang.String"/>
 	<field name="poblacion" class="java.lang.String"/>
 
+	<variable name="Fecha" class="java.util.Date" resetType="Report" calculation="Nothing">
+	</variable>
 		<background>
 			<band height="0"  isSplitAllowed="true" >
 			</band>
@@ -67,6 +72,19 @@
 					</textElement>
 				<text><![CDATA[Fecha]]></text>
 				</staticText>
+				<textField isStretchWithOverflow="false" pattern="dd/MM/yyyy" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="407"
+						y="27"
+						width="128"
+						height="23"
+						key="textField-4"/>
+					<box></box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font pdfFontName="Helvetica-Bold" size="12" isBold="true"/>
+					</textElement>
+				<textFieldExpression   class="java.util.Date"><![CDATA[new Date()]]></textFieldExpression>
+				</textField>
 			</band>
 		</title>
 		<pageHeader>
@@ -87,7 +105,7 @@
 				<staticText>
 					<reportElement
 						x="2"
-						y="73"
+						y="56"
 						width="518"
 						height="32"
 						key="staticText-4"/>
@@ -140,100 +158,36 @@
 		</pageHeader>
 		<columnHeader>
 			<band height="30"  isSplitAllowed="true" >
-				<staticText>
-					<reportElement
-						x="2"
-						y="3"
-						width="131"
-						height="23"
-						key="staticText-6"/>
-					<box></box>
-					<textElement textAlignment="Center" verticalAlignment="Middle">
-						<font pdfFontName="Helvetica-Bold" size="12" isBold="true"/>
-					</textElement>
-				<text><![CDATA[Comunidad]]></text>
-				</staticText>
-				<staticText>
-					<reportElement
-						x="400"
-						y="3"
-						width="131"
-						height="23"
-						key="staticText-7"/>
-					<box></box>
-					<textElement textAlignment="Center" verticalAlignment="Middle">
-						<font pdfFontName="Helvetica-Bold" size="12" isBold="true"/>
-					</textElement>
-				<text><![CDATA[Importe]]></text>
-				</staticText>
-				<staticText>
-					<reportElement
-						x="133"
-						y="3"
-						width="131"
-						height="23"
-						key="staticText-8"/>
-					<box></box>
-					<textElement textAlignment="Center" verticalAlignment="Middle">
-						<font pdfFontName="Helvetica-Bold" size="12" isBold="true"/>
-					</textElement>
-				<text><![CDATA[Inmueble]]></text>
-				</staticText>
-				<staticText>
-					<reportElement
-						x="269"
-						y="3"
-						width="131"
-						height="23"
-						key="staticText-9"/>
-					<box></box>
-					<textElement textAlignment="Center" verticalAlignment="Middle">
-						<font pdfFontName="Helvetica-Bold" size="12" isBold="true"/>
-					</textElement>
-				<text><![CDATA[Fecha Cálculo]]></text>
-				</staticText>
 			</band>
 		</columnHeader>
 		<detail>
-			<band height="100"  isSplitAllowed="true" >
+			<band height="36"  isSplitAllowed="true" >
+				<subreport  isUsingCache="true">
+					<reportElement
+						x="-31"
+						y="0"
+						width="592"
+						height="30"
+						key="subreport-1"/>
+					<parametersMapExpression><![CDATA[new HashMap($P{REPORT_PARAMETERS_MAP})]]></parametersMapExpression>
+					<subreportParameter  name="IDPROP">
+						<subreportParameterExpression><![CDATA[$P{IDPROP}]]></subreportParameterExpression>
+					</subreportParameter>
+					<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					<subreportExpression  class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR} + "CartaPropietarioSubReport.jasper"]]></subreportExpression>
+				</subreport>
 			</band>
 		</detail>
 		<columnFooter>
-			<band height="30"  isSplitAllowed="true" >
-				<staticText>
-					<reportElement
-						x="269"
-						y="0"
-						width="131"
-						height="23"
-						key="staticText-10"/>
-					<box></box>
-					<textElement textAlignment="Right" verticalAlignment="Middle">
-						<font pdfFontName="Helvetica-Bold" size="12" isBold="true"/>
-					</textElement>
-				<text><![CDATA[Total: ]]></text>
-				</staticText>
+			<band height="7"  isSplitAllowed="true" >
 			</band>
 		</columnFooter>
 		<pageFooter>
-			<band height="11"  isSplitAllowed="true" >
+			<band height="5"  isSplitAllowed="true" >
 			</band>
 		</pageFooter>
 		<lastPageFooter>
 			<band height="50"  isSplitAllowed="true" >
-				<staticText>
-					<reportElement
-						x="17"
-						y="0"
-						width="369"
-						height="50"
-						key="staticText-5"/>
-					<box></box>
-					<textElement>
-						<font/>
-					</textElement>
-				<text><![CDATA[Agredecemos se pase por estas oficinas a liquidar la deuda lo antes posible.  			Atentamente,                                                                                                   			Los Administradores.                                                                       ]]></text>
-				</staticText>
 			</band>
 		</lastPageFooter>
 		<summary>

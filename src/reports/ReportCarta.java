@@ -15,26 +15,6 @@ import net.sf.jasperreports.view.JasperViewer;
 public class ReportCarta {
 	
 	@SuppressWarnings("unchecked")	
-	public void crearCartaTodos() {
-		JasperPrint informe = null;
-
-		Session sesion= UtilidadHibernate.getSessionFactory().openSession();
-		HashMap parametros = new HashMap();
-
-		parametros.put(JRHibernateQueryExecuterFactory.
-				   		          PARAMETER_HIBERNATE_SESSION,sesion);		
-		try {
-			String fileName= "src/reports/listados/CartaPropietario.jasper";
-			System.out.println("Fichero encontrado!");
-			 informe= JasperFillManager.fillReport(fileName, parametros);
-		   
-		}
-		catch (JRException e){e.printStackTrace();}
-
-		JasperViewer.viewReport(informe,false);
-	}
-	
-	@SuppressWarnings("unchecked")	
 	public void crearCartaPropietario(int idProp) {
 		JasperPrint informe = null;
 
@@ -55,5 +35,5 @@ public class ReportCarta {
 		catch (JRException e){e.printStackTrace();}
 
 		JasperViewer.viewReport(informe,false);
-	}
+	}	
 }

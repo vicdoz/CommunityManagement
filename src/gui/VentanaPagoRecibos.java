@@ -18,12 +18,15 @@ import javax.swing.WindowConstants;
 import javax.swing.border.LineBorder;
 import javax.swing.SwingUtilities;
 
+import reports.ReportCarta;
+import reports.ReportFacturas;
 import reports.ReportJustificantePago;
 
 import excepciones.DAOExcepcion;
 
 import accesoAdatos._controladores.ControladorReciboInmueble;
 
+import negocio.Factura;
 import negocio.Inmueble;
 import negocio.Propietario;
 import negocio.ReciboInmueble;
@@ -63,6 +66,7 @@ public class VentanaPagoRecibos extends javax.swing.JFrame {
 	private JScrollPane recibosScrollPane;
 	private JPanel recibosButtonsPanel;
 	private JTabbedPane propInmTabbedPane;
+	private JButton enviarCartaButton;
 	private JPanel propPanel;
 	private JButton mostrarRecibosInmButton;
 	private JButton mostrarListaInmueblesButton;
@@ -159,7 +163,7 @@ public class VentanaPagoRecibos extends javax.swing.JFrame {
                                         int rowSel = propTable.getSelectedRow();
                                         Propietario pAux = propModel.getPropietarioPorPosicion(rowSel); 
                                         recibosModel.cargaRecibosPropietario(pAux);
-                                        recibosTable.setModel(recibosModel);                                                                                                                            
+                                        recibosTable.setModel(recibosModel);                                          
                                     }
 								}
 							});
@@ -253,8 +257,8 @@ public class VentanaPagoRecibos extends javax.swing.JFrame {
 				{
 					recibosButtonsPanel = new JPanel();
 					GridBagLayout recibosButtonsPanelLayout = new GridBagLayout();
-					recibosButtonsPanelLayout.rowWeights = new double[] {0.1};
-					recibosButtonsPanelLayout.rowHeights = new int[] {7};
+					recibosButtonsPanelLayout.rowWeights = new double[] {0.1, 0.1};
+					recibosButtonsPanelLayout.rowHeights = new int[] {7, 7};
 					recibosButtonsPanelLayout.columnWeights = new double[] {0.1};
 					recibosButtonsPanelLayout.columnWidths = new int[] {7};
 					recibosPanel.add(recibosButtonsPanel, BorderLayout.SOUTH);
@@ -297,10 +301,30 @@ public class VentanaPagoRecibos extends javax.swing.JFrame {
 							}
 						});
 					}
+					{
+						enviarCartaButton = new JButton();
+						recibosButtonsPanel.add(enviarCartaButton, new GridBagConstraints(0, 1, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(5, 10, 5, 10), 0, 0));
+						enviarCartaButton.setText("Enviar Carta");
+						enviarCartaButton.addActionListener(new ActionListener() {
+							public void actionPerformed(ActionEvent evt) {
+								System.out.println("enviarCartaButton.actionPerformed, event="+evt);
+								//TODO add your code for enviarCartaButton.actionPerformed
+								if(recibosTable.getRowCount() > 0){
+									ReportCarta report= new ReportCarta();
+									int idRecibo = Integer.parseInt(recibosTable.getValueAt(0, 0).toString());
+									ReciboInmueble rAux = recibosModel.getReciboPorId(idRecibo);	
+									report.crearCartaPropietario(rAux.getInmueble().getPropietario().getIdPropietario());
+								}else{
+									javax.swing.JOptionPane.showMessageDialog(null, "No se ha seleccionado ningún Propietario previamente");
+								}								
+							}
+						});
+					}
 				}
 				{
 					recibosScrollPane = new JScrollPane();
 					recibosPanel.add(recibosScrollPane, BorderLayout.CENTER);
+					recibosScrollPane.setPreferredSize(new java.awt.Dimension(342, 276));
 					{
 						recibosTable = new JTable(recibosModel);                                                
                         recibosTable.setModel(recibosModel);

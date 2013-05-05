@@ -23,10 +23,10 @@
 	<import value="net.sf.jasperreports.engine.*" />
 	<import value="net.sf.jasperreports.engine.data.*" />
 
-	<parameter name="IDREC" isForPrompting="true" class="java.lang.Integer">
+	<parameter name="IDNOTA" isForPrompting="true" class="java.lang.Integer">
 		<defaultValueExpression ><![CDATA[new Integer(1)]]></defaultValueExpression>
 	</parameter>
-	<queryString language="hql"><![CDATA[From ReciboInmueble r where r.idRecibo = $P!{IDREC}]]></queryString>
+	<queryString language="hql"><![CDATA[From ReciboInmueble r where r.NotaInformativa.idNotaInformativa = $P!{IDNOTA} ]]></queryString>
 
 	<field name="carta" class="negocio.Carta"/>
 	<field name="fechaPago" class="java.lang.String"/>
@@ -34,15 +34,6 @@
 	<field name="importe" class="java.lang.Float"/>
 	<field name="inmueble" class="negocio.Inmueble"/>
 	<field name="notaInformativa" class="negocio.NotaInformativa"/>
-	<field name="porcentaje" class="java.lang.Float">
-		<fieldDescription><![CDATA[inmueble.porcentaje]]></fieldDescription>
-	</field>
-	<field name="nif" class="java.lang.String">
-		<fieldDescription><![CDATA[inmueble.propietario.nif]]></fieldDescription>
-	</field>
-	<field name="nombre" class="java.lang.String">
-		<fieldDescription><![CDATA[inmueble.propietario.nombre]]></fieldDescription>
-	</field>
 
 		<background>
 			<band height="0"  isSplitAllowed="true" >
@@ -187,7 +178,7 @@
 					<textElement verticalAlignment="Middle">
 						<font size="12"/>
 					</textElement>
-				<textFieldExpression   class="java.lang.String"><![CDATA[$F{nif}]]></textFieldExpression>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{inmueble}.getPropietario().getNif().trim()]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
@@ -200,7 +191,7 @@
 					<textElement verticalAlignment="Middle">
 						<font size="12"/>
 					</textElement>
-				<textFieldExpression   class="java.lang.String"><![CDATA[$F{nombre}]]></textFieldExpression>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{inmueble}.getPropietario().getNombre().trim()]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
@@ -213,7 +204,7 @@
 					<textElement verticalAlignment="Middle">
 						<font size="12"/>
 					</textElement>
-				<textFieldExpression   class="java.lang.String"><![CDATA[""+$F{porcentaje}]]></textFieldExpression>
+				<textFieldExpression   class="java.lang.String"><![CDATA[""+$F{inmueble}.getPorcentaje()]]></textFieldExpression>
 				</textField>
 			</band>
 		</detail>

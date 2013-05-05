@@ -29,7 +29,7 @@
 	<parameter name="SUBREPORT_DIR" isForPrompting="false" class="java.lang.String">
 		<defaultValueExpression ><![CDATA["D:\\EclipseProjects\\IDP\\workspace\\gestion_inmuebles_project\\src\\reports\\listados\\"]]></defaultValueExpression>
 	</parameter>
-	<queryString language="hql"><![CDATA[From NotaInformativa n where n.idNotaInformativa = $P!{IDNOTA} ]]></queryString>
+	<queryString language="hql"><![CDATA[From NotaInformativa n where n.idNotaInformativa = $P!{IDNOTA}]]></queryString>
 
 	<field name="comunidad" class="negocio.Comunidad"/>
 	<field name="fechaCalculo" class="java.lang.String"/>
@@ -128,119 +128,34 @@
 		</pageHeader>
 		<columnHeader>
 			<band height="39"  isSplitAllowed="true" >
-				<rectangle>
+				<subreport  isUsingCache="true">
 					<reportElement
-						x="1"
-						y="1"
-						width="534"
-						height="18"
-						backcolor="#CCCCCC"
-						key="rectangle-1"/>
-					<graphicElement stretchType="NoStretch"/>
-				</rectangle>
-				<staticText>
-					<reportElement
-						x="1"
+						x="-30"
 						y="0"
-						width="178"
-						height="19"
-						key="staticText-5"/>
-					<box></box>
-					<textElement textAlignment="Center" verticalAlignment="Middle">
-						<font pdfFontName="Helvetica-Bold" size="14" isBold="true"/>
-					</textElement>
-				<text><![CDATA[Conceptos]]></text>
-				</staticText>
-				<staticText>
-					<reportElement
-						x="1"
-						y="18"
-						width="178"
-						height="20"
-						key="staticText-6"/>
-					<box></box>
-					<textElement textAlignment="Center" verticalAlignment="Middle">
-						<font pdfFontName="Helvetica-Bold" size="14" isBold="true"/>
-					</textElement>
-				<text><![CDATA[Código]]></text>
-				</staticText>
-				<staticText>
-					<reportElement
-						x="179"
-						y="19"
-						width="178"
-						height="20"
-						key="staticText-7"/>
-					<box></box>
-					<textElement textAlignment="Center" verticalAlignment="Middle">
-						<font pdfFontName="Helvetica-Bold" size="14" isBold="true"/>
-					</textElement>
-				<text><![CDATA[Descripción]]></text>
-				</staticText>
-				<staticText>
-					<reportElement
-						x="358"
-						y="19"
-						width="177"
-						height="20"
-						key="staticText-8"/>
-					<box></box>
-					<textElement textAlignment="Center" verticalAlignment="Middle">
-						<font pdfFontName="Helvetica-Bold" size="14" isBold="true"/>
-					</textElement>
-				<text><![CDATA[Importe]]></text>
-				</staticText>
+						width="595"
+						height="39"
+						key="subreport-2"/>
+					<parametersMapExpression><![CDATA[new HashMap($P{REPORT_PARAMETERS_MAP})]]></parametersMapExpression>
+					<subreportParameter  name="IDNOTA">
+						<subreportParameterExpression><![CDATA[$P{IDNOTA}]]></subreportParameterExpression>
+					</subreportParameter>
+					<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					<subreportExpression  class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR} + "NuevoReciboConceptos.jasper"]]></subreportExpression>
+				</subreport>
 			</band>
 		</columnHeader>
 		<detail>
 			<band height="100"  isSplitAllowed="true" >
-				<rectangle>
-					<reportElement
-						mode="Transparent"
-						x="1"
-						y="37"
-						width="534"
-						height="24"
-						key="rectangle-2"/>
-					<graphicElement stretchType="NoStretch">
-					<pen lineWidth="2.0" lineStyle="Solid"/>
-</graphicElement>
-				</rectangle>
-				<staticText>
-					<reportElement
-						x="214"
-						y="37"
-						width="139"
-						height="21"
-						key="staticText-9"/>
-					<box></box>
-					<textElement textAlignment="Right" verticalAlignment="Middle">
-						<font pdfFontName="Helvetica-Bold" size="14" isBold="true"/>
-					</textElement>
-				<text><![CDATA[Importe Total]]></text>
-				</staticText>
-				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
-					<reportElement
-						x="358"
-						y="38"
-						width="172"
-						height="22"
-						key="textField-6"/>
-					<box></box>
-					<textElement textAlignment="Right" verticalAlignment="Middle">
-						<font size="12"/>
-					</textElement>
-				<textFieldExpression   class="java.lang.String"><![CDATA[""+$F{importeNota}+"€"]]></textFieldExpression>
-				</textField>
 				<subreport  isUsingCache="true">
 					<reportElement
-						x="1"
-						y="60"
-						width="534"
+						x="-30"
+						y="0"
+						width="594"
 						height="35"
 						key="subreport-1"/>
+					<parametersMapExpression><![CDATA[new HashMap($P{REPORT_PARAMETERS_MAP})]]></parametersMapExpression>
 					<subreportParameter  name="IDREC">
-						<subreportParameterExpression><![CDATA[$F{idRecibo}]]></subreportParameterExpression>
+						<subreportParameterExpression><![CDATA[$P{IDNOTA}]]></subreportParameterExpression>
 					</subreportParameter>
 					<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
 					<subreportExpression  class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR} + "NuevoReciboInmuebles.jasper"]]></subreportExpression>

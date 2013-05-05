@@ -8,14 +8,15 @@ No funcionan:
 		- No sale el desglose de conceptos debe hacerse con un subreport.
 	- NuevoReciboConceptos
 		- No funciona.
-	- NuevoReciboInmuebles: 
-		- Funciona OK. (Le dices el recibo y muestra los inmuebles asociados).
+
 - ReportPropietario:
 	- Muestra solo los propietarios, no se pueden calcular los importes adeudados.
 
 ==================
 Funcionan OK:
 ==================
+- ReportCarta:
+	- Muestra las facturas pendientes de pago de un moroso.
 - ReportComunidades:
 	- Muestra todas las comunidades creadas en el sistema.
 	

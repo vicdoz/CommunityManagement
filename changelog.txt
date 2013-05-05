@@ -1,4 +1,9 @@
 CHANGELOG 08/04/2013-18:00 v4
+- Botó de crear cartes quan te done la gana en Finestra PagoRecibos
+- Les notes informatives se generen.
+- Afegits canvis als reports ( ja estàn quasi tots funcionals 100%).
+
+CHANGELOG 08/04/2013-18:00 v4
 -Domiciliacions bancaries funcionals
 -Integrades les restricciones generals
 
