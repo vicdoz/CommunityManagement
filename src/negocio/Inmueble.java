@@ -1,7 +1,10 @@
 package negocio;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
+
+import accesoAdatos._controladores.ControladorReciboInmueble;
 
 public class Inmueble {
 	private int idInmueble;
@@ -79,5 +82,32 @@ public class Inmueble {
 		this.porcentaje = porcentaje;
 	}
 
+	public int calculaPendientes(int pi)
+	{						
+		ArrayList<ReciboInmueble> listaRecibos = ControladorReciboInmueble.getControladorReciboInmueble().GetListaReciboInmuebles();
+		System.out.println("Tamaño lista"+listaRecibos.size());
+		int pagados = 0, impagados = 0;			
+		for(ReciboInmueble r:listaRecibos){						
+			if(r.getInmueble().getIdInmueble()==this.idInmueble)
+			{
+				if(r.getFechaPago()=="")	impagados += 1;
+				else	pagados += 1;
+			}
+		}
+		if(pi==0)	return pagados;
+		return impagados;
+	}
+	public float calculaAdeudado()
+	{						
+		ArrayList<ReciboInmueble> listaRecibos = ControladorReciboInmueble.getControladorReciboInmueble().GetListaReciboInmuebles();
+		float total=0;			
+		for(ReciboInmueble r:listaRecibos){						
+			if(r.getInmueble().getIdInmueble()==this.idInmueble)
+			{
+				if(r.getFechaPago()=="")	total += r.getImporte();					
+			}
+		}
+		return total;
+	}
 
 }

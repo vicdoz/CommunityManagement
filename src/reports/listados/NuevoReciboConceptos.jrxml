@@ -42,42 +42,19 @@
 			</band>
 		</background>
 		<title>
-			<band height="50"  isSplitAllowed="true" >
+			<band height="0"  isSplitAllowed="true" >
 			</band>
 		</title>
 		<pageHeader>
-			<band height="50"  isSplitAllowed="true" >
+			<band height="0"  isSplitAllowed="true" >
 			</band>
 		</pageHeader>
 		<columnHeader>
-			<band height="39"  isSplitAllowed="true" >
-				<rectangle>
-					<reportElement
-						x="0"
-						y="0"
-						width="534"
-						height="18"
-						backcolor="#CCCCCC"
-						key="rectangle-1"/>
-					<graphicElement stretchType="NoStretch"/>
-				</rectangle>
+			<band height="45"  isSplitAllowed="true" >
 				<staticText>
 					<reportElement
 						x="0"
-						y="-1"
-						width="178"
-						height="19"
-						key="staticText-1"/>
-					<box></box>
-					<textElement textAlignment="Center" verticalAlignment="Middle">
-						<font pdfFontName="Helvetica-Bold" size="14" isBold="true"/>
-					</textElement>
-				<text><![CDATA[Conceptos]]></text>
-				</staticText>
-				<staticText>
-					<reportElement
-						x="0"
-						y="18"
+						y="23"
 						width="178"
 						height="20"
 						key="staticText-2"/>
@@ -90,7 +67,7 @@
 				<staticText>
 					<reportElement
 						x="178"
-						y="18"
+						y="23"
 						width="178"
 						height="20"
 						key="staticText-3"/>
@@ -103,7 +80,7 @@
 				<staticText>
 					<reportElement
 						x="356"
-						y="18"
+						y="23"
 						width="177"
 						height="20"
 						key="staticText-4"/>
@@ -113,10 +90,34 @@
 					</textElement>
 				<text><![CDATA[Importe]]></text>
 				</staticText>
+				<rectangle>
+					<reportElement
+						x="0"
+						y="0"
+						width="534"
+						height="23"
+						backcolor="#CCCCCC"
+						key="rectangle-3"/>
+					<graphicElement stretchType="NoStretch"/>
+				</rectangle>
+				<staticText>
+					<reportElement
+						mode="Transparent"
+						x="0"
+						y="0"
+						width="534"
+						height="23"
+						key="staticText-6"/>
+					<box></box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font pdfFontName="Helvetica-Bold" size="14" isBold="true"/>
+					</textElement>
+				<text><![CDATA[Conceptos]]></text>
+				</staticText>
 			</band>
 		</columnHeader>
 		<detail>
-			<band height="100"  isSplitAllowed="true" >
+			<band height="50"  isSplitAllowed="true" >
 				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
 						x="0"
@@ -133,7 +134,7 @@
 				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
 						x="356"
-						y="-1"
+						y="0"
 						width="178"
 						height="22"
 						key="textField"/>
@@ -146,7 +147,7 @@
 				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
 						x="178"
-						y="-1"
+						y="0"
 						width="178"
 						height="22"
 						key="textField"/>
@@ -195,19 +196,15 @@
 			</band>
 		</detail>
 		<columnFooter>
-			<band height="30"  isSplitAllowed="true" >
+			<band height="0"  isSplitAllowed="true" >
 			</band>
 		</columnFooter>
 		<pageFooter>
-			<band height="50"  isSplitAllowed="true" >
+			<band height="0"  isSplitAllowed="true" >
 			</band>
 		</pageFooter>
-		<lastPageFooter>
-			<band height="50"  isSplitAllowed="true" >
-			</band>
-		</lastPageFooter>
 		<summary>
-			<band height="50"  isSplitAllowed="true" >
+			<band height="0"  isSplitAllowed="true" >
 			</band>
 		</summary>
 </jasperReport>

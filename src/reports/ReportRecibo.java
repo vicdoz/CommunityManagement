@@ -36,7 +36,7 @@ public class ReportRecibo {
 		JasperViewer.viewReport(informe,false);
 	}
 	@SuppressWarnings("unchecked")	
-	public void muestraPorPropietario() { //Muestra todos los propietarios adeudados
+	public void muestraPorInmueble() { //Muestra todos los inmuebles y sus recibos pendientes
 		JasperPrint informe = null;
 
 		Session sesion= UtilidadHibernate.getSessionFactory().openSession();
@@ -45,7 +45,7 @@ public class ReportRecibo {
 		parametros.put(JRHibernateQueryExecuterFactory.
 				   		          PARAMETER_HIBERNATE_SESSION,sesion);	
 		try {
-			String fileName= "src/reports/listados/ReciboPropietario.jasper";
+			String fileName= "src/reports/listados/ReciboInmueble.jasper";
 			System.out.println("Fichero encontrado!");
 			 informe= JasperFillManager.fillReport(fileName, parametros);
 		   

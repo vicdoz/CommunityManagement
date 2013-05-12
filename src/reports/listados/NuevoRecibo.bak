@@ -127,30 +127,16 @@
 			</band>
 		</pageHeader>
 		<columnHeader>
-			<band height="39"  isSplitAllowed="true" >
-				<subreport  isUsingCache="true">
-					<reportElement
-						x="-30"
-						y="0"
-						width="594"
-						height="35"
-						key="subreport-1"/>
-					<parametersMapExpression><![CDATA[new HashMap($P{REPORT_PARAMETERS_MAP})]]></parametersMapExpression>
-					<subreportParameter  name="IDREC">
-						<subreportParameterExpression><![CDATA[$P{IDNOTA}]]></subreportParameterExpression>
-					</subreportParameter>
-					<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
-					<subreportExpression  class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR} + "NuevoReciboInmuebles.jasper"]]></subreportExpression>
-				</subreport>
+			<band height="0"  isSplitAllowed="true" >
 			</band>
 		</columnHeader>
 		<detail>
-			<band height="100"  isSplitAllowed="true" >
+			<band height="133"  isSplitAllowed="true" >
 				<subreport  isUsingCache="true">
 					<reportElement
-						x="-30"
-						y="-4"
-						width="595"
+						x="-32"
+						y="0"
+						width="178"
 						height="39"
 						key="subreport-2"/>
 					<parametersMapExpression><![CDATA[new HashMap($P{REPORT_PARAMETERS_MAP})]]></parametersMapExpression>
@@ -160,10 +146,25 @@
 					<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
 					<subreportExpression  class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR} + "NuevoReciboConceptos.jasper"]]></subreportExpression>
 				</subreport>
+				<subreport  isUsingCache="true">
+					<reportElement
+						x="-32"
+						y="39"
+						width="178"
+						height="35"
+						key="subreport-1"
+						positionType="Float"/>
+					<parametersMapExpression><![CDATA[new HashMap($P{REPORT_PARAMETERS_MAP})]]></parametersMapExpression>
+					<subreportParameter  name="IDREC">
+						<subreportParameterExpression><![CDATA[$P{IDNOTA}]]></subreportParameterExpression>
+					</subreportParameter>
+					<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					<subreportExpression  class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR} + "NuevoReciboInmuebles.jasper"]]></subreportExpression>
+				</subreport>
 			</band>
 		</detail>
 		<columnFooter>
-			<band height="30"  isSplitAllowed="true" >
+			<band height="0"  isSplitAllowed="true" >
 			</band>
 		</columnFooter>
 		<pageFooter>

@@ -60,6 +60,8 @@ public class VentanaComunidad extends javax.swing.JFrame {
 	public static int IN_BORRADO=0, NO_FILA=0;
 	public static int IN_EXIS=1;
 	public static int GUARDA=4;
+	private JMenuItem listadoRecibosPendientes;
+	private JSeparator jSeparator2;
 	private JMenuItem ventanaNotas;
 	private JSeparator jSeparator1;
 	private JMenuItem ventanaPagos;
@@ -627,6 +629,23 @@ public class VentanaComunidad extends javax.swing.JFrame {
 										else if(cAux.getEstado()==2) javax.swing.JOptionPane.showMessageDialog(null, "Comunidad en estado de baja.");
 										else if(cAux.getEstado()==0)javax.swing.JOptionPane.showMessageDialog(null, "Comunidad en con porcentajes no cuadrados.");
 									}
+								}
+							});
+						}
+						{
+							jSeparator2 = new JSeparator();
+							facturaMenu.add(jSeparator2);
+						}
+						{
+							listadoRecibosPendientes = new JMenuItem();
+							facturaMenu.add(listadoRecibosPendientes);
+							listadoRecibosPendientes.setText("Listado Morosidad");
+							listadoRecibosPendientes.addActionListener(new ActionListener() {
+								public void actionPerformed(ActionEvent evt) {
+									System.out.println("listadoRecibosPendientes.actionPerformed, event="+evt);
+									//TODO add your code for listadoRecibosPendientes.actionPerformed									
+									ReportRecibo report = new ReportRecibo();
+									report.muestraPorInmueble();
 								}
 							});
 						}

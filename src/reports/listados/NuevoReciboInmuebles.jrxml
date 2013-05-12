@@ -26,7 +26,7 @@
 	<parameter name="IDNOTA" isForPrompting="true" class="java.lang.Integer">
 		<defaultValueExpression ><![CDATA[new Integer(1)]]></defaultValueExpression>
 	</parameter>
-	<queryString language="hql"><![CDATA[From ReciboInmueble r where r.NotaInformativa.idNotaInformativa = $P!{IDNOTA} ]]></queryString>
+	<queryString language="hql"><![CDATA[From ReciboInmueble r where r.NotaInformativa.idNotaInformativa = $P!{IDNOTA}]]></queryString>
 
 	<field name="carta" class="negocio.Carta"/>
 	<field name="fechaPago" class="java.lang.String"/>
@@ -40,31 +40,32 @@
 			</band>
 		</background>
 		<title>
-			<band height="50"  isSplitAllowed="true" >
+			<band height="0"  isSplitAllowed="true" >
 			</band>
 		</title>
 		<pageHeader>
-			<band height="50"  isSplitAllowed="true" >
+			<band height="0"  isSplitAllowed="true" >
 			</band>
 		</pageHeader>
 		<columnHeader>
-			<band height="40"  isSplitAllowed="true" >
+			<band height="45"  isSplitAllowed="true" >
 				<rectangle>
 					<reportElement
 						x="0"
 						y="0"
 						width="534"
-						height="18"
+						height="23"
 						backcolor="#CCCCCC"
 						key="rectangle-1"/>
 					<graphicElement stretchType="NoStretch"/>
 				</rectangle>
 				<staticText>
 					<reportElement
+						mode="Transparent"
 						x="0"
-						y="-1"
-						width="178"
-						height="19"
+						y="0"
+						width="534"
+						height="23"
 						key="staticText-1"/>
 					<box></box>
 					<textElement textAlignment="Center" verticalAlignment="Middle">
@@ -74,8 +75,8 @@
 				</staticText>
 				<staticText>
 					<reportElement
-						x="215"
-						y="18"
+						x="216"
+						y="23"
 						width="107"
 						height="20"
 						key="staticText-2"/>
@@ -88,7 +89,7 @@
 				<staticText>
 					<reportElement
 						x="0"
-						y="18"
+						y="23"
 						width="109"
 						height="20"
 						key="staticText-3"/>
@@ -101,7 +102,7 @@
 				<staticText>
 					<reportElement
 						x="430"
-						y="18"
+						y="23"
 						width="104"
 						height="20"
 						key="staticText-4"/>
@@ -114,7 +115,7 @@
 				<staticText>
 					<reportElement
 						x="109"
-						y="18"
+						y="23"
 						width="107"
 						height="20"
 						key="staticText-5"/>
@@ -126,8 +127,8 @@
 				</staticText>
 				<staticText>
 					<reportElement
-						x="322"
-						y="18"
+						x="323"
+						y="23"
 						width="107"
 						height="20"
 						key="staticText-6"/>
@@ -140,7 +141,7 @@
 			</band>
 		</columnHeader>
 		<detail>
-			<band height="100"  isSplitAllowed="true" >
+			<band height="55"  isSplitAllowed="true" >
 				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
 						x="0"
@@ -206,22 +207,54 @@
 					</textElement>
 				<textFieldExpression   class="java.lang.String"><![CDATA[""+$F{inmueble}.getPorcentaje()]]></textFieldExpression>
 				</textField>
+				<staticText>
+					<reportElement
+						x="323"
+						y="31"
+						width="104"
+						height="20"
+						key="staticText-7"/>
+					<box></box>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font pdfFontName="Helvetica-Bold" size="14" isBold="true"/>
+					</textElement>
+				<text><![CDATA[Total]]></text>
+				</staticText>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="430"
+						y="31"
+						width="100"
+						height="20"
+						key="textField-2"/>
+					<box></box>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font size="12"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[""+$F{notaInformativa}.getImporteNota()+"€"]]></textFieldExpression>
+				</textField>
+				<rectangle>
+					<reportElement
+						mode="Transparent"
+						x="0"
+						y="31"
+						width="534"
+						height="24"
+						key="rectangle-2"/>
+					<graphicElement stretchType="NoStretch"/>
+				</rectangle>
 			</band>
 		</detail>
 		<columnFooter>
-			<band height="30"  isSplitAllowed="true" >
+			<band height="0"  isSplitAllowed="true" >
 			</band>
 		</columnFooter>
 		<pageFooter>
-			<band height="50"  isSplitAllowed="true" >
+			<band height="0"  isSplitAllowed="true" >
 			</band>
 		</pageFooter>
-		<lastPageFooter>
-			<band height="50"  isSplitAllowed="true" >
-			</band>
-		</lastPageFooter>
 		<summary>
-			<band height="50"  isSplitAllowed="true" >
+			<band height="0"  isSplitAllowed="true" >
 			</band>
 		</summary>
 </jasperReport>

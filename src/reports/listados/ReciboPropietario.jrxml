@@ -23,16 +23,20 @@
 	<import value="net.sf.jasperreports.engine.*" />
 	<import value="net.sf.jasperreports.engine.data.*" />
 
-	<queryString language="hql"><![CDATA[From Inmueble]]></queryString>
+	<queryString language="hql"><![CDATA[From ReciboInmueble]]></queryString>
 
-	<field name="comunidad" class="negocio.Comunidad"/>
-	<field name="escalera" class="java.lang.String"/>
-	<field name="idInmueble" class="java.lang.Integer"/>
-	<field name="listaRecibos" class="java.util.Set"/>
-	<field name="piso" class="java.lang.String"/>
-	<field name="porcentaje" class="java.lang.Float"/>
-	<field name="propietario" class="negocio.Propietario"/>
-	<field name="puerta" class="java.lang.String"/>
+	<field name="carta" class="negocio.Carta"/>
+	<field name="fechaPago" class="java.lang.String"/>
+	<field name="idRecibo" class="java.lang.Integer"/>
+	<field name="importe" class="java.lang.Float"/>
+	<field name="inmueble" class="negocio.Inmueble"/>
+	<field name="notaInformativa" class="negocio.NotaInformativa"/>
+	<field name="propietario" class="negocio.Propietario">
+		<fieldDescription><![CDATA[inmueble.propietario]]></fieldDescription>
+	</field>
+	<field name="comunidad" class="negocio.Comunidad">
+		<fieldDescription><![CDATA[inmueble.comunidad]]></fieldDescription>
+	</field>
 
 		<background>
 			<band height="0"  isSplitAllowed="true" >
@@ -82,7 +86,7 @@
 			</band>
 		</title>
 		<pageHeader>
-			<band height="34"  isSplitAllowed="true" >
+			<band height="0"  isSplitAllowed="true" >
 			</band>
 		</pageHeader>
 		<columnHeader>
@@ -96,7 +100,7 @@
 						key="staticText-2"/>
 					<box></box>
 					<textElement textAlignment="Center" verticalAlignment="Middle">
-						<font size="12"/>
+						<font pdfFontName="Helvetica-Bold" size="12" isBold="true"/>
 					</textElement>
 				<text><![CDATA[Nombre]]></text>
 				</staticText>
@@ -109,7 +113,7 @@
 						key="staticText-3"/>
 					<box></box>
 					<textElement textAlignment="Center" verticalAlignment="Middle">
-						<font size="12"/>
+						<font pdfFontName="Helvetica-Bold" size="12" isBold="true"/>
 					</textElement>
 				<text><![CDATA[Inmueble]]></text>
 				</staticText>
@@ -122,7 +126,7 @@
 						key="staticText-4"/>
 					<box></box>
 					<textElement textAlignment="Center" verticalAlignment="Middle">
-						<font size="12"/>
+						<font pdfFontName="Helvetica-Bold" size="12" isBold="true"/>
 					</textElement>
 				<text><![CDATA[Comunidad]]></text>
 				</staticText>
@@ -135,7 +139,7 @@
 						key="staticText-5"/>
 					<box></box>
 					<textElement textAlignment="Center" verticalAlignment="Middle">
-						<font size="12"/>
+						<font pdfFontName="Helvetica-Bold" size="12" isBold="true"/>
 					</textElement>
 				<text><![CDATA[Pagados]]></text>
 				</staticText>
@@ -148,7 +152,7 @@
 						key="staticText-6"/>
 					<box></box>
 					<textElement textAlignment="Center" verticalAlignment="Middle">
-						<font size="12"/>
+						<font pdfFontName="Helvetica-Bold" size="12" isBold="true"/>
 					</textElement>
 				<text><![CDATA[Impagados]]></text>
 				</staticText>
@@ -161,7 +165,7 @@
 						key="staticText-7"/>
 					<box></box>
 					<textElement textAlignment="Center" verticalAlignment="Middle">
-						<font size="12"/>
+						<font pdfFontName="Helvetica-Bold" size="12" isBold="true"/>
 					</textElement>
 				<text><![CDATA[Importe Adeudado]]></text>
 				</staticText>
@@ -174,7 +178,7 @@
 						key="staticText-8"/>
 					<box></box>
 					<textElement textAlignment="Center" verticalAlignment="Middle">
-						<font size="14"/>
+						<font pdfFontName="Helvetica-Bold" size="14" isBold="true"/>
 					</textElement>
 				<text><![CDATA[Recibos]]></text>
 				</staticText>
@@ -190,7 +194,7 @@
 						height="18"
 						key="textField-1"/>
 					<box></box>
-					<textElement>
+					<textElement verticalAlignment="Middle">
 						<font/>
 					</textElement>
 				<textFieldExpression   class="java.lang.String"><![CDATA[$F{propietario}.getNombre().trim()]]></textFieldExpression>
@@ -203,7 +207,7 @@
 						height="18"
 						key="textField-2"/>
 					<box></box>
-					<textElement>
+					<textElement verticalAlignment="Middle">
 						<font/>
 					</textElement>
 				<textFieldExpression   class="java.lang.String"><![CDATA[$F{comunidad}.getNombre().trim()]]></textFieldExpression>
@@ -216,10 +220,49 @@
 						height="18"
 						key="textField-3"/>
 					<box></box>
-					<textElement>
+					<textElement verticalAlignment="Middle">
 						<font/>
 					</textElement>
-				<textFieldExpression   class="java.lang.String"><![CDATA[$F{escalera}.trim()+"-"+$F{piso}.trim()+"-"+$F{puerta}.trim()]]></textFieldExpression>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{inmueble}.getEscalera().trim()+"-"+$F{inmueble}.getPiso().trim()+"-"+$F{inmueble}.getPuerta().trim()]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="273"
+						y="1"
+						width="82"
+						height="18"
+						key="textField-5"/>
+					<box></box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[""+$F{inmueble}.calculaPendientes(0)]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="355"
+						y="1"
+						width="82"
+						height="18"
+						key="textField-6"/>
+					<box></box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[""+$F{inmueble}.calculaPendientes(1)]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="449"
+						y="1"
+						width="82"
+						height="18"
+						key="textField-7"/>
+					<box></box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[""+$F{inmueble}.calculaAdeudado()+" €"]]></textFieldExpression>
 				</textField>
 			</band>
 		</detail>
@@ -228,15 +271,11 @@
 			</band>
 		</columnFooter>
 		<pageFooter>
-			<band height="50"  isSplitAllowed="true" >
+			<band height="0"  isSplitAllowed="true" >
 			</band>
 		</pageFooter>
-		<lastPageFooter>
-			<band height="50"  isSplitAllowed="true" >
-			</band>
-		</lastPageFooter>
 		<summary>
-			<band height="50"  isSplitAllowed="true" >
+			<band height="0"  isSplitAllowed="true" >
 			</band>
 		</summary>
 </jasperReport>

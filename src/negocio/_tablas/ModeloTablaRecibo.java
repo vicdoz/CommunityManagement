@@ -111,6 +111,7 @@ public class ModeloTablaRecibo extends DefaultTableModel {
 				this.removeRow(numRecibos-1);
 				numRecibos--;				
 			}		
-		}			
+		}
+
 }
 
