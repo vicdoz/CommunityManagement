@@ -133,8 +133,8 @@ public class ModeloTablaInmueble extends DefaultTableModel {
 				if(i.getPropietario().getIdPropietario()==pAux.getIdPropietario()){
 					this.addToTabla(i);
 				}
-			}
-			
+			}			
 		}
+		
 }
 

@@ -60,6 +60,7 @@ public class VentanaComunidad extends javax.swing.JFrame {
 	public static int IN_BORRADO=0, NO_FILA=0;
 	public static int IN_EXIS=1;
 	public static int GUARDA=4;
+	private JMenuItem cartaMorosos;
 	private JMenuItem listadoRecibosPendientes;
 	private JSeparator jSeparator2;
 	private JMenuItem ventanaNotas;
@@ -669,6 +670,26 @@ public class VentanaComunidad extends javax.swing.JFrame {
 									//TODO add your code for listadoRecibosPendientes.actionPerformed									
 									ReportRecibo report = new ReportRecibo();
 									report.muestraPorInmueble();
+								}
+							});
+						}
+						{
+							cartaMorosos = new JMenuItem();
+							facturaMenu.add(cartaMorosos);
+							cartaMorosos.setText("Enviar Cartas");
+							cartaMorosos.addActionListener(new ActionListener() {
+								public void actionPerformed(ActionEvent evt) {
+									System.out.println("cartaMorosos.actionPerformed, event="+evt);
+									//TODO add your code for cartaMorosos.actionPerformed
+									int nprop = tablaProp.getRowCount();									
+									for(int i=0; i<nprop; i++){	
+										Propietario pAux = modeloProp.getPropietarioPorPosicion(i);
+										if(pAux.enviarCarta()==1){
+											ReportCarta report = new ReportCarta();
+											report.crearCartaPropietario(pAux.getIdPropietario());	
+										}										
+									}
+									
 								}
 							});
 						}

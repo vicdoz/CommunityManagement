@@ -3,7 +3,10 @@ package negocio;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
+import negocio.*;
 
+import accesoAdatos._controladores.ControladorInmueble;
+import accesoAdatos._controladores.ControladorComunidad;
 import accesoAdatos._controladores.ControladorReciboInmueble;
 
 public class Propietario {
@@ -165,6 +168,33 @@ public class Propietario {
 		if(pi==0)	return pagados;
 		return impagados;
 	}
+	public int enviarCarta()
+	{
+		ArrayList<Inmueble> listaInmuebles = ControladorInmueble.getControladorInmueble().GetListaInmuebles();
+		for(Inmueble i: listaInmuebles){
+			if(calculaCartaInmueble(i)==1){
+				return 1;
+			}
+		}
+		return 0;
+	}
+	public int calculaCartaInmueble(Inmueble i)
+	{						
+		ArrayList<ReciboInmueble> listaRecibos = ControladorReciboInmueble.getControladorReciboInmueble().GetListaReciboInmuebles();
+		System.out.println("Tamaño lista"+listaRecibos.size());
+		int impagados = 0;			
+		for(ReciboInmueble r:listaRecibos){
+			if(r.getInmueble()== i){
+				if(r.getInmueble().getPropietario().getIdPropietario()==this.getIdPropietario())
+				{
+					if(r.getFechaPago()=="")	impagados += 1;					
+				}	
+			}
+		}
+		if(i.getComunidad().getMaxRecibosPendientes() <= impagados)		return 1;
+		else	return 0;
+	}
+	
 	public float calculaAdeudado()
 	{						
 		ArrayList<ReciboInmueble> listaRecibos = ControladorReciboInmueble.getControladorReciboInmueble().GetListaReciboInmuebles();
