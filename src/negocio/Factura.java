@@ -42,6 +42,8 @@ public class Factura {
 	public void setComunidad(Comunidad comunidad) {
 		this.comunidad = comunidad;
 	}
+
+	
 	public NotaInformativa getNotainformativa() {
 		return notainformativa;
 	}

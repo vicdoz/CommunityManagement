@@ -228,7 +228,8 @@ public class VentanaComunidad extends javax.swing.JFrame {
 														addInmButton.setEnabled(false);
 													}
 													ChangeStatusBar(IN_BORRADO,cAux.getIdComunidad(),null);
-												}else{
+												}
+												if(!ControladorInmueble.getControladorInmueble().GetListaInmuebles().isEmpty()){
 													cAux.setEstado(2);
 													javax.swing.JOptionPane.showMessageDialog(null, "Comunidad con inmuebles.Estado de baja");
 													try {
@@ -241,6 +242,28 @@ public class VentanaComunidad extends javax.swing.JFrame {
 														e.printStackTrace();
 													}
 												}
+												if(ControladorComunidad.getControladorComunidad().getListaFacturas(cAux).isEmpty()){
+													modeloCom.borraComunidadPorPosicion(tablaCom.getSelectedRow());													
+													if(cAux == modeloInm.comunidad){
+														modeloInm.limpiaTabla();
+														addInmButton.setEnabled(false);
+													}
+													ChangeStatusBar(IN_BORRADO,cAux.getIdComunidad(),null);
+												}
+												if(!ControladorComunidad.getControladorComunidad().getListaFacturas(cAux).isEmpty()){
+													cAux.setEstado(2);
+													javax.swing.JOptionPane.showMessageDialog(null, "Comunidad con facturas pendientes de pago");
+													try {
+														
+														ControladorComunidad.getControladorComunidad().actualizarComunidad(cAux);
+														VentanaComunidad.modeloCom.cargaComunidades();
+														
+													} catch (DAOExcepcion e) {
+														// TODO Auto-generated catch block
+														e.printStackTrace();
+													}
+												}
+												
 												
 											}
 										}
@@ -325,7 +348,7 @@ public class VentanaComunidad extends javax.swing.JFrame {
 											int op=OpcionesBorra(p.getIdPropietario(),"Propietario");
 											if(op==0){
 												
-												if(p.getListaInmuebles().isEmpty()){
+												if(ControladorInmueble.getControladorInmueble().getInmueblePorPropietario(p).isEmpty()){
 													modeloProp.borraPropietarioPorPosicion(tablaProp.getSelectedRow());
 													ChangeStatusBar(IN_BORRADO,p.getIdPropietario(),null);
 												}

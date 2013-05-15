@@ -50,8 +50,9 @@ public class ModeloTablaInmueble extends DefaultTableModel {
 		public void borraInmueblePorPos(int row){			
 			try {
 				Inmueble i = getInmueblePorPos(row);
-				i.getPropietario().delInmuebleFromList(i);
-				i.getComunidad().delInmuebleFromList(i);				
+				//OJO!.
+				//i.getPropietario().delInmuebleFromList(i);
+				//i.getComunidad().delInmuebleFromList(i);				
 				ControladorInmueble.getControladorInmueble().borrarInmueble(i);
 				deleteFromTabla(row);
 			} catch (DAOExcepcion e) {

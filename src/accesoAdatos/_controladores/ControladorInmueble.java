@@ -97,7 +97,7 @@ public class ControladorInmueble implements InterfaceControladorInmueble  {
 		ArrayList<ReciboInmueble>ri=ControladorReciboInmueble.getControladorReciboInmueble().GetListaReciboInmuebles();
 		Iterator<ReciboInmueble> it= ri.iterator();
 		while(it.hasNext()){
-			System.out.println("Buscando");
+			System.out.println("Buscando recibos pendientes");
 			ReciboInmueble riAux=it.next();
 			if(riAux.getInmueble().getIdInmueble()==i.getIdInmueble())
 				return true;
@@ -136,6 +136,7 @@ public class ControladorInmueble implements InterfaceControladorInmueble  {
 	
 
 	}
+
 
 
 }

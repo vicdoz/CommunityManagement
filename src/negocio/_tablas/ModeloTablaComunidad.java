@@ -95,7 +95,7 @@ public class ModeloTablaComunidad extends DefaultTableModel {
 			//"ID","Nombre", "Contacto", "Direccion", "Poblacion","Recibos Pend.", "Estado"});
 			v.add(c.getIdComunidad());			v.add(c.getNombre());	v.add(c.getIdPresidente());
 			v.add(c.getCalle());    v.add(c.getPoblacion());
-			v.add("Recibos maximos");			v.add(c.getEstadoToString());			
+			v.add(c.getMaxRecibosPendientes());			v.add(c.getEstadoToString());			
 			
 			System.out.println("Comunidad:"+c.getIdComunidad());
 			numComunidades++;

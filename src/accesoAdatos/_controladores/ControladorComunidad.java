@@ -6,6 +6,8 @@ import java.util.Iterator;
 import accesoAdatos._ORM.ComunidadDAOHibernateImp;
 import accesoAdatos._interfaces.InterfaceControladorComunidad;
 import negocio.Comunidad;
+import negocio.Factura;
+import negocio.ReciboInmueble;
 import excepciones.DAOExcepcion;
 
 public class ControladorComunidad implements InterfaceControladorComunidad  {
@@ -91,5 +93,18 @@ public class ControladorComunidad implements InterfaceControladorComunidad  {
 		}
 	
 	return false;
+	}
+
+	public  ArrayList<Factura>  getListaFacturas(Comunidad c) {
+		ArrayList<Factura>f=ControladorFactura.getControladorFactura().GetListaFacturas();
+		ArrayList<Factura>lista=new ArrayList<Factura>();
+		Iterator<Factura> it= f.iterator();
+		while(it.hasNext()){
+			System.out.println("Buscando facturas");
+			Factura fAux=it.next();
+			if(fAux.getComunidad()==c )
+				lista.add(fAux);
+		}
+		return lista;
 	}
 }
