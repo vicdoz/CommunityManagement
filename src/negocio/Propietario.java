@@ -171,11 +171,15 @@ public class Propietario {
 	public int enviarCarta()
 	{
 		ArrayList<Inmueble> listaInmuebles = ControladorInmueble.getControladorInmueble().GetListaInmuebles();
-		for(Inmueble i: listaInmuebles){
-			if(calculaCartaInmueble(i)==1){
+		for(Inmueble i: listaInmuebles){			
+			int max = ControladorComunidad.getControladorComunidad().getComunidadPorId(i.getComunidad().getIdComunidad()).getMaxRecibosPendientes();
+			System.out.println("Maximos recibos para la comunidad: "+max);
+			if(calculaCartaInmueble(i) >= max){
+				System.out.println("Se han superado el máximo de recibos pendientes permitidos");
 				return 1;
 			}
 		}
+		System.out.println("Maximo de recibos pendientes no superado");
 		return 0;
 	}
 	public int calculaCartaInmueble(Inmueble i)
@@ -191,8 +195,7 @@ public class Propietario {
 				}	
 			}
 		}
-		if(i.getComunidad().getMaxRecibosPendientes() <= impagados)		return 1;
-		else	return 0;
+		return impagados;
 	}
 	
 	public float calculaAdeudado()
